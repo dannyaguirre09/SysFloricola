@@ -1,0 +1,391 @@
+﻿
+@{
+	ViewBag.Title = "Crear Control FlorNacional";
+}
+
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+
+<div class="row  pb-4">
+	<div class=" pl-5 pr-5 col-md-5 text-center">
+		<div hidden id="creado" class="alert alert-success">Registro Creado Correctamente</div>
+		<div hidden id="error" class="alert alert-danger">Ocurrió un problema al crear el registro</div>
+		<div hidden id="advertencia" class="alert alert-warning">El registro no ha sido creado. Ya existe un registro con la fecha Actual</div>
+	</div> <br />
+	<br />
+	<div class="col-md-12 pl-4">
+		<div class="col-md-6" style="text-align:left">
+			<a href="~/ControlFlorNacional/Index" style="cursor: pointer;" class="action-item text-black-50 " data-toggle="tooltip" title="Regresar">
+				<i class="fa fa-arrow-circle-left text-black-50" style="font-size: 16px;"></i> Regresar
+			</a>
+		</div>
+		<div class="col-md-6 pr-5" style="text-align:right">
+			<label hidden class="control-label">Fecha: @ViewBag.Fecha</label>
+			<input hidden value=" @ViewBag.Fecha" id="fechaRegistro" />
+			<input hidden value=" @ViewBag.idProceso" id="idProceso" />
+		</div>
+	</div>
+</div>
+
+<form id="formulario">
+	<div class="row pt-2">
+
+		<div class="col-md-4 pl-5 pr-5">
+			<label class="control-label">Ingrese la fecha del control</label>
+			<input type="date" onchange="llenarTabla()" required class="form-control" name="fechaControl" id="fechaControl" />
+		</div>
+		<div class="col-md-4 pl-5 pr-5">
+			<label class="control-label">Seleccione la causa</label>
+			@Html.DropDownList("CAUCODIGOI", null, htmlAttributes: new { @class = "form-control", @id = "cmbCausa" })
+		</div>
+		<div class="col-md-4 pl-5 pr-5">
+			<label class="control-label">Observación</label>
+			<input type="text" class="form-control" name="observacion" id="observacion" />
+		</div>
+
+		<div class="col-md-12 pl-5 pr-5 pt-4" style="text-align:center">
+			<table class="table table-responsive-lg table-bordered" id="tabla">
+				<thead style="background-color: #2A3F54" class="text-white" id="cabecera"></thead>
+				<tbody id="contenido"></tbody>
+			</table>
+		</div>
+
+		<div class="col-md-12 pl-5 pr-5 " style="text-align:right">
+			<input type="submit" value="Guardar" id="btnGuardar" hidden class="btn btn-success" />
+		</div>
+
+	</div>
+</form>
+
+@section Scripts {
+	<script src="~/Scripts/jquery.dataTables.js"></script>
+	<script>
+
+		let cmbCausa = document.getElementById("cmbCausa");
+		let cmbTipoCausa = document.getElementById("cmbTipoCausa");
+		var listaContenido, listaVariedades, listaDetalle;
+		cmbCausa.addEventListener("change", llenarTabla);
+		let indice = 0;
+		let indiceNombre = 0;
+		let nuevo = true;
+		var aumento = false;
+		var cabecera = document.getElementById('cabecera');
+		var contenido = document.getElementById('contenido');
+		var fechaInput;
+		llenarTabla();
+
+		$(document).ready(function () {
+			var idProceso = document.getElementById('idProceso').value
+			if (idProceso.trim() === '0') {
+				var now = new Date();
+				var day = ("0" + now.getDate()).slice(-2);
+				var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+				var today = now.getFullYear() + "-" + (month) + "-" + (day);
+				$("#fechaControl").val(today);
+
+			} else {
+				var fechaActual = document.getElementById('fechaRegistro').value
+				var newdate = fechaActual.split("/").reverse().join("-");
+				$("#fechaControl").val(newdate);
+			}
+			
+		});
+
+		async function llenarTabla() {
+			limpiarCabecera();
+			await $.get("/ControlFlorNacional/listatipoCausa?id=" + cmbCausa.value)
+				.done(function (response) {
+					if (response.estado) {
+						let opt = document.createElement("tr");
+						var columna = document.createElement("td");
+						columna.append('Variedades');
+						opt.appendChild(columna);
+						listaContenido = response.lista;
+						response.lista.forEach(function (element) {
+							columna = document.createElement("td");
+							columna.append(element.TPCDESCRIPCION);
+							opt.appendChild(columna);
+						});
+						cabecera.append(opt);
+					} else {
+						alert(response.mensaje);
+					}
+
+				});
+			await llenarContenido();
+		}
+
+		async function llenarContenido() {
+			indice = 0;
+			nuevo = true;
+			aumento = false;
+			var idProceso = document.getElementById('idProceso').value;
+			var fecha = document.getElementById('fechaControl').value;
+			await $.get(`/ControlFlorNacional/listaVariedades?CAUCODIGOI=${cmbCausa.value}&fecha=${fecha} `)
+				.done(function (response) {
+					if (response.estado) {
+						var puestos = [];
+						var bandera = 0;
+						listaDetalle = response.listaDetalle;
+						if (listaDetalle.length > 0) {
+							listaDetalle.forEach(function (detalle) {
+								listaContenido.forEach(function (item) {
+									if (detalle.TPCCODIGOI === item.TPCCODIGOI) {
+										puestos.push(bandera);
+									}
+								})
+								bandera++;
+							})
+						}
+
+						listaVariedades = response.lista;
+						var l1 = listaVariedades.length;
+						var l2 = listaContenido.length;
+						var l3 = listaDetalle.length;
+						var listaCompleta = (l1 * l2);
+						var bandera2 = 0;
+						if ((l3 / l2) == l1) {
+
+						}
+						if (l3 !== 0) {
+							if (((l1 * l2) - l1) === l3) {
+								if (listaCompleta > l3) {
+									puestos = [];
+									aumento = true;
+									for (var i = 0; i < l1; i++) {
+										for (var j = 0; j < l2; j++) {
+											if (j != (l2 - 1)) {
+												puestos.push(bandera2);
+											}
+											bandera2++;
+										}
+									}
+								}
+							}
+
+						}
+
+						indice = 0;
+						if (aumento) {
+							console.log('¡entró aumento')
+							var indiceMatriz = 0;
+							for (var i = 0; i < l1; i++) {
+								let opt = document.createElement("tr");
+								var columna = document.createElement("td");
+								columna.setAttribute("class", "numero");
+								columna.append(response.lista[i].VRDNOMBREC);
+								opt.appendChild(columna);
+								var codigo = 1;
+								for (var j = 0; j < l2; j++) {
+									nuevo = false;
+									columna = document.createElement("td");
+									var input = document.createElement('input');
+									input.setAttribute("style", "width: 50px; text-align:right;");
+									if (j != (l2 - 1)) {
+										var cantidad = listaDetalle[indiceMatriz].CFNCANTIDAD
+										input.setAttribute("value", "" + cantidad);
+										input.setAttribute("name", "" + listaDetalle[indiceMatriz].CFNCODIGOI);
+										input.setAttribute("id", listaContenido[j].TPCCODIGOI + "" + codigo + "" + response.lista[i].VRDCODIGOI);
+										codigo++;
+										indice++;
+										indiceMatriz++;
+										columna.append(input);
+										opt.append(columna);
+									} else {
+										input.setAttribute("value", "0");
+										input.setAttribute("id", listaContenido[j].TPCCODIGOI + "" + codigo + "" + response.lista[i].VRDCODIGOI);
+										codigo++;
+										indice++;
+										columna.append(input);
+										opt.append(columna);
+									}
+								}
+								contenido.append(opt);
+									var btn = document.getElementById('btnGuardar');
+									btn.hidden = false;
+							}
+
+						} else {
+							response.lista.forEach(function (element) {
+									let opt = document.createElement("tr");
+									var columna = document.createElement("td");
+									columna.setAttribute("class", "numero");
+									columna.append(element.VRDNOMBREC);
+									opt.appendChild(columna);
+									var codigo = 1;
+									if (listaDetalle.length > 0) {									
+										nuevo = false;
+										listaContenido.forEach(function (unidad) {
+										columna = document.createElement("td");
+										var input = document.createElement('input');
+										input.setAttribute("style", "width: 50px; text-align:right;");
+
+										try {
+											var cantidad = listaDetalle[puestos[indice]].CFNCANTIDAD
+											input.setAttribute("value", "" + cantidad);
+											input.setAttribute("name", "" + listaDetalle[indice].DTECODIGOI);
+											input.setAttribute("id", unidad.TPCCODIGOI + "" + codigo + "" + element.VRDCODIGOI);
+											codigo++;
+											indice++;
+											columna.append(input);
+											opt.append(columna);
+										} catch (e) {
+											input.setAttribute("value", "0");
+											input.setAttribute("id", unidad.TPCCODIGOI + "" + codigo + "" + element.VRDCODIGOI);
+											codigo++;
+											indice++;
+											columna.append(input);
+											opt.append(columna);
+										}
+
+									});
+								}
+								else {
+									listaContenido.forEach(function (unidad) {
+										columna = document.createElement("td");
+										var input = document.createElement('input');
+										input.setAttribute("style", "width: 50px; text-align:right;");
+										input.setAttribute("value", "0");
+										input.setAttribute("type", "number");
+										input.setAttribute("required", "required")
+										input.setAttribute("id", unidad.TPCCODIGOI + "" + codigo + "" + element.VRDCODIGOI);
+										codigo++;
+										columna.append(input);
+										opt.append(columna);
+									});
+								}
+
+								contenido.append(opt);
+								var btn = document.getElementById('btnGuardar');
+								btn.hidden = false;
+							});
+						}
+
+
+					} else {
+						//alert(response.mensaje);
+					}
+				});
+
+		}
+
+		async function limpiarCabecera() {
+			cabecera.innerHTML = '';
+			contenido.innerHTML = '';
+			var btn = document.getElementById('btnGuardar');
+			btn.hidden = true;
+		}
+
+		async function enviar() {
+			var listaDatos = []
+			await listaVariedades.forEach(function (element) {
+				var codigo = 1;
+				listaContenido.forEach(function (valor) {
+					var datos = {};					
+					var id = valor.TPCCODIGOI + '' + codigo + '' + element.VRDCODIGOI;
+					var elemento = document.getElementById(id)
+					datos.TPCCODIGOI = valor.TPCCODIGOI
+					datos.VRDCODIGOI = element.VRDCODIGOI;
+					datos.CFNCANTIDAD = elemento.value;
+					listaDatos.push(datos);
+					codigo++;
+				})
+			})
+
+			var observacion = document.getElementById('observacion').value;
+			await $.post('/ControlFlorNacional/CrearControlFlorNaciona', {
+				listaDetalle: listaDatos,
+				fecha: document.getElementById('fechaControl').value,
+				observacion: observacion
+			}, function (data, status) {
+					if (data.res == 1) {
+						var creado = document.getElementById('creado');
+						creado.hidden = false;
+					} else if (data.res == 2) {
+						var advertencia = document.getElementById('advertencia');
+						advertencia.hidden = false;
+					} else {
+						var error = document.getElementById('error');
+						error.hidden = false;
+					}
+				});
+			await llenarTabla();
+			return true;
+		}
+
+		async function editarRegistro() {
+			indiceNombre = 0;
+			var listaDatos = []
+
+			await listaVariedades.forEach(function (element) {
+				var codigo = 1;
+				listaContenido.forEach(function (valor) {
+					try {
+						var datos = {};
+						var id = valor.TPCCODIGOI + '' + codigo + '' + element.VRDCODIGOI;
+						var elemento = document.getElementById(id)
+						datos.TPCCODIGOI = valor.TPCCODIGOI
+						datos.VRDCODIGOI = element.VRDCODIGOI;
+						datos.CFNCANTIDAD = elemento.value;
+						datos.CFNCODIGOI = listaDetalle[indiceNombre].CFNCODIGOI
+						listaDatos.push(datos);
+						codigo++;
+						indiceNombre++;
+					} catch (e) {
+						datos.CFNCODIGOI = 0
+						listaDatos.push(datos);
+						codigo++;
+						indiceNombre++;
+					}
+
+				})
+			})
+
+			var observacion = document.getElementById('observacion').value;
+			var fecha = document.getElementById('fechaRegistro').value;
+			await $.post('/ControlFlorNacional/CrearControlFlorNaciona', {
+				listaDetalle: listaDatos,
+				fecha: document.getElementById('fechaControl').value,
+				observacion: observacion
+			}, function (data, status) {
+					if (data.res == 1) {
+						var creado = document.getElementById('creado');
+						creado.textContent = 'Registro Editado Correctamente'
+						creado.hidden = false;
+					} else {
+						var error = document.getElementById('error');
+						error.hidden = false;
+					}
+				});
+			await llenarTabla();
+			return true;
+		}
+
+		$("#formulario").submit(async function (event) {
+			if (nuevo) {
+				if (enviar()) {
+					timer();
+				}
+			} else {
+				if (editarRegistro()) {
+					timer();
+				}
+
+			}
+			listaVariedades = [];
+			listaDetalle = [];
+			listaContenido = [];
+			event.preventDefault();
+		});
+
+		function timer() {
+			$('.alert').fadeIn();
+                setTimeout(function () {
+                $(".alert").fadeOut();
+			}, 5000);
+		}
+		
+	</script>
+}
+
+

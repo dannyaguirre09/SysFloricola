@@ -1,0 +1,93 @@
+﻿@model IEnumerable<SysFloricola.Models.PROCESO_CLASIFICACION>
+@{
+	ViewBag.Title = "Control Flor Nacional";
+}
+
+<link href="~/Content/css/EstilosModal.css" rel="stylesheet" />
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+<h2 class="text-center">Control Flor Nacional</h2>
+
+<div class="row pt-2 pb-4">
+	<div class=" pl-5 pr-5 col-md-5 text-center">@Html.Partial("~/Views/Shared/_Flash.cshtml")</div> <br />
+	<div class="col-md-12 pr-5" style="text-align:right">
+		<a href="~/ControlFlorNacional/CrearControlFlorNacional?proceso=0" style="cursor: pointer;" class="action-item text-black-50 " data-toggle="tooltip" title="Crear Registro">
+			<i class="fa fa-plus text-success" style="font-size: 16px;"></i> Crear Registro
+		</a>
+	</div>
+</div>
+
+<div class="row pt-2">
+	<div class="col-md-12 pl-5 pr-5" style="text-align:center">
+		<table class="table table-cards" id="tabla">
+			<thead style="background-color: #2A3F54" class="text-white">
+				<tr>
+					<th scope="col">
+						Fecha
+					</th>
+					<th scope="col">
+						Observación
+					</th>
+					<th scope="col">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@item.PRCFECHA.ToLongDateString()
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.PRCOBSERVACION)
+						</td>
+						<td class="text-center">
+							<div class="actions ml-3">
+								<a href="~/ControlFlorNacional/CrearControlFlorNacional?proceso=@item.PRCCODIGOI" font-size:14px;" class="action-item mr-2 text-info" data-toggle="tooltip" title="Editar Registro">
+									<i class="fa fa-edit"></i>
+								</a>
+								<a onclick="abrirModalEliminar(@item.PRCCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item text-danger mr-2" data-toggle="tooltip" title="Eliminar Registro">
+									<i class="fa fa-trash"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="myModal" id="modalEliminar" name="modalEliminar"></div>
+
+@section Scripts {
+	<script src="~/Scripts/jquery.dataTables.js"></script>
+	<script>
+		modalEliminar = document.getElementById('modalEliminar');
+		$(document).ready(function () {
+			$('.alert').fadeIn();
+			setTimeout(function () {
+				$(".alert").fadeOut();
+			}, 5000);
+
+			$('#tabla').DataTable({
+				"ordering": false,
+				"bInfo": false,
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ por página",
+					"zeroRecords": "No hay registros",
+					"infoEmpty": "No hay registros disponibles",
+					"search": "Buscar:",
+					"paginate": {
+						"previous": "Anterior",
+						"next": "Siguiente",
+					}
+				}
+			});
+
+		});
+
+
+	</script>
+}
+
+

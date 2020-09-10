@@ -1,0 +1,154 @@
+﻿@model IEnumerable<SysFloricola.Models.TIPO_CAUSAS>
+
+@{
+	ViewBag.Title = "Tipo Causas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/EstilosModal.css" rel="stylesheet" />
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+<h2 class="text-center">Administración de Tipo Causas</h2>
+
+<div class="row pt-2 pb-4">
+	<div class=" pl-5 pr-5 col-md-5 text-center">@Html.Partial("~/Views/Shared/_Flash.cshtml")</div> <br />
+	<div class="col-md-12 pr-5" style="text-align:right">
+		<a onclick="abrirModal(0)" style="cursor: pointer;" class="action-item text-black-50 " data-toggle="tooltip" title="Crear Tipo Causa">
+			<i class="fa fa-plus text-success" style="font-size: 16px;"></i> Crear Tipo Causa
+		</a>
+	</div>
+</div>
+
+<div class="row pt-2">
+	<div class="col-md-12 pl-5 pr-5" style="text-align:center">
+		<table class="table table-cards" id="tabla">
+			<thead style="background-color: #2A3F54" class="text-white">
+				<tr>
+					<th scope="col">
+						Descripción
+					</th>
+					<th scope="col">
+						Causa
+					</th>
+					<th scope="col">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.TPCDESCRIPCION)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.CAUSAS.CAUDESCRIPCION)
+						</td>
+						<td class="text-center">
+							<div class="actions ml-3">
+								<a onclick="abrirModal(@item.TPCCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item mr-2 text-info" data-toggle="tooltip" title="Editar Tipo Causa">
+									<i class="fa fa-edit"></i>
+								</a>
+								<a onclick="abrirModalEliminar(@item.TPCCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item text-danger mr-2" data-toggle="tooltip" title="Eliminar Tipo Causa">
+									<i class="fa fa-trash"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="myModal" id="modalCrear" name="modalCrear"></div>
+<div class="myModal" id="modalEliminar" name="modalEliminar"></div>
+
+@section Scripts {
+	<script src="~/Scripts/jquery.dataTables.js"></script>
+	<script>
+		modalCrear = document.getElementById('modalCrear');
+		modalEliminar = document.getElementById('modalEliminar');
+
+		$(document).ready(function () {
+			$('.alert').fadeIn();
+                setTimeout(function () {
+                $(".alert").fadeOut();
+			}, 5000);
+
+			$('#tabla').DataTable({
+				"ordering": false,
+				"bInfo": false,
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ por página",
+					"zeroRecords": "No hay registros",
+					"infoEmpty": "No hay registros disponibles",
+					"search": "Buscar:",
+					 "paginate": {
+						 "previous": "Anterior",
+						 "next": "Siguiente",
+					}
+				}
+			});
+
+		});
+
+	    function abrirModal(id) {
+			var url = '/TipoCausas/CrearTipoCausa?id=' + id;
+            $.get(url, function (url) {
+                $("#modalCrear").html(url);
+                modalCrear.style.display = 'block';
+				var tituloModal = document.getElementById('tituloModalCrear');
+				var btnFormulario = document.getElementById('btnFormulario');
+				if (id == 0) {
+					tituloModal.textContent = "Crear Tipo Causa";
+					btnFormulario.value = "Crear Tipo Causa";
+				}
+				else {
+					tituloModal.textContent = "Editar Tipo Causa"
+					btnFormulario.value = "Editar Tipo Causa";
+				}
+                bloquearBarraDesplazamiento();
+            });
+		}
+
+		function cerrarModal() {
+            modalCrear.style.display = 'none';
+            activarBarraDesplazamiento();
+		}
+
+		function cerrarModalConfirmacion() {
+            modalEliminar.style.display = 'none';
+            activarBarraDesplazamiento();
+		}
+
+		function bloquearBarraDesplazamiento() {
+            $('body').css({ 'overflow': 'hidden' });
+            $(document).bind('scroll', function () {
+                window.scrollTo(0, 0);
+            });
+        }
+
+        function activarBarraDesplazamiento() {
+            $(document).unbind('scroll');
+            $('body').css({ 'overflow': 'visible' });
+			}
+
+		function validar() {
+			var descripcion = $('#txtDescripcion').val();
+			if (descripcion.trim() == "") {
+				var elemento = document.getElementById("descripcion");
+				elemento.hidden = false;
+				return false;
+			}
+		}
+
+		function abrirModalEliminar(id) {
+			var url = '/TipoCausas/Confirmacion?id=' + id;
+			$.get(url, function (url) {
+				$("#modalEliminar").html(url);
+				modalEliminar.style.display = 'block'
+				bloquearBarraDesplazamiento();
+			});
+		}
+
+	</script>
+}
+
+

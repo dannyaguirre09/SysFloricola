@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BDFloricolaModelStoreContainer" CdmEntityContainer="BDFloricolaContext">
+    <EntitySetMapping Name="BLOQUES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.BLOQUES">
+        <MappingFragment StoreEntitySet="BLOQUES">
+          <ScalarProperty Name="BLQCODIGOI" ColumnName="BLQCODIGOI" />
+          <ScalarProperty Name="FNCCODIGOI" ColumnName="FNCCODIGOI" />
+          <ScalarProperty Name="BLQIDENTIFIC" ColumnName="BLQIDENTIFIC" />
+          <ScalarProperty Name="BLQNUMCAMAS" ColumnName="BLQNUMCAMAS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAUSAS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.CAUSAS">
+        <MappingFragment StoreEntitySet="CAUSAS">
+          <ScalarProperty Name="CAUCODIGOI" ColumnName="CAUCODIGOI" />
+          <ScalarProperty Name="CAUDESCRIPCION" ColumnName="CAUDESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPLEADOS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.EMPLEADOS">
+        <MappingFragment StoreEntitySet="EMPLEADOS">
+          <ScalarProperty Name="EPLCODIGOI" ColumnName="EPLCODIGOI" />
+          <ScalarProperty Name="EMPCODIGOI" ColumnName="EMPCODIGOI" />
+          <ScalarProperty Name="EPLCEDULA" ColumnName="EPLCEDULA" />
+          <ScalarProperty Name="EPLAPELLIDOP" ColumnName="EPLAPELLIDOP" />
+          <ScalarProperty Name="EPLAPELLIDOM" ColumnName="EPLAPELLIDOM" />
+          <ScalarProperty Name="EPLNOMBRES" ColumnName="EPLNOMBRES" />
+          <ScalarProperty Name="EPLDIRECCION" ColumnName="EPLDIRECCION" />
+          <ScalarProperty Name="EPLTELEFONO" ColumnName="EPLTELEFONO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FINCAS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.FINCAS">
+        <MappingFragment StoreEntitySet="FINCAS">
+          <ScalarProperty Name="FNCCODIGOI" ColumnName="FNCCODIGOI" />
+          <ScalarProperty Name="EMPCODIGOI" ColumnName="EMPCODIGOI" />
+          <ScalarProperty Name="FNCNOMBREC" ColumnName="FNCNOMBREC" />
+          <ScalarProperty Name="FNCDIRECCION" ColumnName="FNCDIRECCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MODULOS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.MODULOS">
+        <MappingFragment StoreEntitySet="MODULOS">
+          <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
+          <ScalarProperty Name="MODDESCRIPCION" ColumnName="MODDESCRIPCION" />
+          <ScalarProperty Name="MODURL" ColumnName="MODURL" />
+          <ScalarProperty Name="MODNIVEL" ColumnName="MODNIVEL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MODULOS_PERFILES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.MODULOS_PERFILES">
+        <MappingFragment StoreEntitySet="MODULOS_PERFILES">
+          <ScalarProperty Name="MOPCODIGOI" ColumnName="MOPCODIGOI" />
+          <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
+          <ScalarProperty Name="PERCODIGOI" ColumnName="PERCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PAICES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.PAICES">
+        <MappingFragment StoreEntitySet="PAICES">
+          <ScalarProperty Name="PAICODIGOI" ColumnName="PAICODIGOI" />
+          <ScalarProperty Name="PAINOMBRE" ColumnName="PAINOMBRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PERFILES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.PERFILES">
+        <MappingFragment StoreEntitySet="PERFILES">
+          <ScalarProperty Name="PERCODIGOI" ColumnName="PERCODIGOI" />
+          <ScalarProperty Name="PERDESCRIPCION" ColumnName="PERDESCRIPCION" />
+          <ScalarProperty Name="PERESTADO" ColumnName="PERESTADO" />
+          <ScalarProperty Name="PEROBSERVACION" ColumnName="PEROBSERVACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PREENVIOS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.PREENVIOS">
+        <MappingFragment StoreEntitySet="PREENVIOS">
+          <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+          <ScalarProperty Name="CLNCODIGOI" ColumnName="CLNCODIGOI" />
+          <ScalarProperty Name="PREFECHA" ColumnName="PREFECHA" />
+          <ScalarProperty Name="PRENUMERO" ColumnName="PRENUMERO" />
+          <ScalarProperty Name="PREAWB" ColumnName="PREAWB" />
+          <ScalarProperty Name="PREHAWB" ColumnName="PREHAWB" />
+          <ScalarProperty Name="PRENUMPIEZAS" ColumnName="PRENUMPIEZAS" />
+          <ScalarProperty Name="PREIDCAJAS" ColumnName="PREIDCAJAS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPO_CAUSAS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.TIPO_CAUSAS">
+        <MappingFragment StoreEntitySet="TIPO_CAUSAS">
+          <ScalarProperty Name="TPCCODIGOI" ColumnName="TPCCODIGOI" />
+          <ScalarProperty Name="CAUCODIGOI" ColumnName="CAUCODIGOI" />
+          <ScalarProperty Name="TPCDESCRIPCION" ColumnName="TPCDESCRIPCION" />
+          <ScalarProperty Name="TPCESTADO" ColumnName="TPCESTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.USUARIOS">
+        <MappingFragment StoreEntitySet="USUARIOS">
+          <ScalarProperty Name="USRCODIGOI" ColumnName="USRCODIGOI" />
+          <ScalarProperty Name="EPLCODIGOI" ColumnName="EPLCODIGOI" />
+          <ScalarProperty Name="USRLOGIN" ColumnName="USRLOGIN" />
+          <ScalarProperty Name="USRPASSWORD" ColumnName="USRPASSWORD" />
+          <ScalarProperty Name="USRESTADO" ColumnName="USRESTADO" />
+          <ScalarProperty Name="USRESTADOCAMBIO" ColumnName="USRESTADOCAMBIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOS_PERFILES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.USUARIOS_PERFILES">
+        <MappingFragment StoreEntitySet="USUARIOS_PERFILES">
+          <ScalarProperty Name="USPCODIGOI" ColumnName="USPCODIGOI" />
+          <ScalarProperty Name="USRCODIGOI" ColumnName="USRCODIGOI" />
+          <ScalarProperty Name="PERCODIGOI" ColumnName="PERCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VARIEDADES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.VARIEDADES">
+        <MappingFragment StoreEntitySet="VARIEDADES">
+          <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+          <ScalarProperty Name="VRDIDENTIFIC" ColumnName="VRDIDENTIFIC" />
+          <ScalarProperty Name="VRDNOMBREC" ColumnName="VRDNOMBREC" />
+          <ScalarProperty Name="VRDCOLOR" ColumnName="VRDCOLOR" />
+          <ScalarProperty Name="VRDESTADO" ColumnName="VRDESTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPRESAS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.EMPRESAS">
+        <MappingFragment StoreEntitySet="EMPRESAS">
+          <ScalarProperty Name="EMPTELEFOC" ColumnName="EMPTELEFOC" />
+          <ScalarProperty Name="EMPDIRECCION" ColumnName="EMPDIRECCION" />
+          <ScalarProperty Name="EMPNOMBREC" ColumnName="EMPNOMBREC" />
+          <ScalarProperty Name="EMPRUC" ColumnName="EMPRUC" />
+          <ScalarProperty Name="EMPCODIGOI" ColumnName="EMPCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLIENTES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.CLIENTES">
+        <MappingFragment StoreEntitySet="CLIENTES">
+          <ScalarProperty Name="CLNTELEFONO" ColumnName="CLNTELEFONO" />
+          <ScalarProperty Name="CLNCONSIGNATARIO" ColumnName="CLNCONSIGNATARIO" />
+          <ScalarProperty Name="CLNDIRECCION" ColumnName="CLNDIRECCION" />
+          <ScalarProperty Name="CLNRAZONSOCIAL" ColumnName="CLNRAZONSOCIAL" />
+          <ScalarProperty Name="CLNRUC" ColumnName="CLNRUC" />
+          <ScalarProperty Name="ESTCODIGOI" ColumnName="ESTCODIGOI" />
+          <ScalarProperty Name="CLNCODIGOI" ColumnName="CLNCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONCILIACION">
+      <EntityTypeMapping TypeName="BDFloricolaModel.CONCILIACION">
+        <MappingFragment StoreEntitySet="CONCILIACION">
+          <ScalarProperty Name="CNCOBSERVACION" ColumnName="CNCOBSERVACION" />
+          <ScalarProperty Name="CNCESTADO" ColumnName="CNCESTADO" />
+          <ScalarProperty Name="CNCFECHA" ColumnName="CNCFECHA" />
+          <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+          <ScalarProperty Name="CNCCODIGOI" ColumnName="CNCCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTROLES_FLOR_NACIONAL">
+      <EntityTypeMapping TypeName="BDFloricolaModel.CONTROLES_FLOR_NACIONAL">
+        <MappingFragment StoreEntitySet="CONTROLES_FLOR_NACIONAL">
+          <ScalarProperty Name="CFNOBSERVACION" ColumnName="CFNOBSERVACION" />
+          <ScalarProperty Name="CFNCANTIDAD" ColumnName="CFNCANTIDAD" />
+          <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+          <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+          <ScalarProperty Name="TPCCODIGOI" ColumnName="TPCCODIGOI" />
+          <ScalarProperty Name="CFNCODIGOI" ColumnName="CFNCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOS_FLORES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.TIPOS_FLORES">
+        <MappingFragment StoreEntitySet="TIPOS_FLORES">
+          <ScalarProperty Name="TPFDESCRIPCION" ColumnName="TPFDESCRIPCION" />
+          <ScalarProperty Name="TPFCODIGOI" ColumnName="TPFCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADOS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.ESTADOS">
+        <MappingFragment StoreEntitySet="ESTADOS">
+          <ScalarProperty Name="ESTNOMBRE" ColumnName="ESTNOMBRE" />
+          <ScalarProperty Name="PAICODIGOI" ColumnName="PAICODIGOI" />
+          <ScalarProperty Name="ESTCODIGOI" ColumnName="ESTCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BLOQUES_VARIEDADES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.BLOQUES_VARIEDADES">
+        <MappingFragment StoreEntitySet="BLOQUES_VARIEDADES">
+          <ScalarProperty Name="BLVFECHA" ColumnName="BLVFECHA" />
+          <ScalarProperty Name="BLVOBSERVACION" ColumnName="BLVOBSERVACION" />
+          <ScalarProperty Name="BLVCANTIDAD" ColumnName="BLVCANTIDAD" />
+          <ScalarProperty Name="BLVNUMEROCAMA" ColumnName="BLVNUMEROCAMA" />
+          <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+          <ScalarProperty Name="BLQCODIGOI" ColumnName="BLQCODIGOI" />
+          <ScalarProperty Name="BLVCODIGOI" ColumnName="BLVCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INGRESO_PRODUCCION">
+      <EntityTypeMapping TypeName="BDFloricolaModel.INGRESO_PRODUCCION">
+        <MappingFragment StoreEntitySet="INGRESO_PRODUCCION">
+          <ScalarProperty Name="INPCANTIDADTALLOS" ColumnName="INPCANTIDADTALLOS" />
+          <ScalarProperty Name="INPFECHA" ColumnName="INPFECHA" />
+          <ScalarProperty Name="INPNUMMALLAS" ColumnName="INPNUMMALLAS" />
+          <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
+          <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+          <ScalarProperty Name="BLCCODIGOI" ColumnName="BLCCODIGOI" />
+          <ScalarProperty Name="INPCODIGOI" ColumnName="INPCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spSelect_flor_numerotallos" FunctionName="BDFloricolaModel.Store.spSelect_flor_numerotallos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_flor_numerotallos_Result">
+          <ScalarProperty Name="TPFDESCRIPCION" ColumnName="TPFDESCRIPCION" />
+          <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+          <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spSelect_tallos_unidad" FunctionName="BDFloricolaModel.Store.spSelect_tallos_unidad">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_tallos_unidad_Result">
+          <ScalarProperty Name="TPFDESCRIPCION" ColumnName="TPFDESCRIPCION" />
+          <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+          <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+          <ScalarProperty Name="TMTDESCRIPC" ColumnName="TMTDESCRIPC" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spSelect_tallos_unidad_tam" FunctionName="BDFloricolaModel.Store.spSelect_tallos_unidad_tam">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_tallos_unidad_tam_Result">
+          <ScalarProperty Name="TPFDESCRIPCION" ColumnName="TPFDESCRIPCION" />
+          <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+          <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+          <ScalarProperty Name="TMTDESCRIPC" ColumnName="TMTDESCRIPC" />
+          <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spInsert_detalle_flor_clasificada" FunctionName="BDFloricolaModel.Store.spInsert_detalle_flor_clasificada" />
+    <FunctionImportMapping FunctionImportName="spVerificar_detalle_flor" FunctionName="BDFloricolaModel.Store.spVerificar_detalle_flor">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDFloricolaModel.spVerificar_detalle_flor_Result">
+          <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+          <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+          <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+          <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+          <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+          <ScalarProperty Name="DTEFECHAINGRESO" ColumnName="DTEFECHAINGRESO" />
+          <ScalarProperty Name="DTECANTIDAD" ColumnName="DTECANTIDAD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="CONTROL_PRODUCCION">
+      <EntityTypeMapping TypeName="BDFloricolaModel.CONTROL_PRODUCCION">
+        <MappingFragment StoreEntitySet="CONTROL_PRODUCCION">
+          <ScalarProperty Name="CNPOBSERVACION" ColumnName="CNPOBSERVACION" />
+          <ScalarProperty Name="CNPFECHA" ColumnName="CNPFECHA" />
+          <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLE_FLOR_CLASIFICADA">
+      <EntityTypeMapping TypeName="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA">
+        <MappingFragment StoreEntitySet="DETALLE_FLOR_CLASIFICADA">
+          <ScalarProperty Name="DTEOBSERVACION" ColumnName="DTEOBSERVACION" />
+          <ScalarProperty Name="DTECANTIDAD" ColumnName="DTECANTIDAD" />
+          <ScalarProperty Name="DTEFECHAINGRESO" ColumnName="DTEFECHAINGRESO" />
+          <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+          <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+          <ScalarProperty Name="TPFCODIGOI" ColumnName="TPFCODIGOI" />
+          <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+          <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+          <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLES_PREENVIOS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.DETALLES_PREENVIOS">
+        <MappingFragment StoreEntitySet="DETALLES_PREENVIOS">
+          <ScalarProperty Name="DTPCANTIDAD" ColumnName="DTPCANTIDAD" />
+          <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+          <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+          <ScalarProperty Name="DTPCODIGOI" ColumnName="DTPCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROCESO_CLASIFICACION">
+      <EntityTypeMapping TypeName="BDFloricolaModel.PROCESO_CLASIFICACION">
+        <MappingFragment StoreEntitySet="PROCESO_CLASIFICACION">
+          <ScalarProperty Name="PCRIDENTIFICADOR" ColumnName="PCRIDENTIFICADOR" />
+          <ScalarProperty Name="PRCESTADO" ColumnName="PRCESTADO" />
+          <ScalarProperty Name="PRCFECHA" ColumnName="PRCFECHA" />
+          <ScalarProperty Name="PRCOBSERVACION" ColumnName="PRCOBSERVACION" />
+          <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TAMANO_TALLOS">
+      <EntityTypeMapping TypeName="BDFloricolaModel.TAMANO_TALLOS">
+        <MappingFragment StoreEntitySet="TAMANO_TALLOS">
+          <ScalarProperty Name="TMTDESCRIPC" ColumnName="TMTDESCRIPC" />
+          <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UNIDADES">
+      <EntityTypeMapping TypeName="BDFloricolaModel.UNIDADES">
+        <MappingFragment StoreEntitySet="UNIDADES">
+          <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+          <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UNIDADES_TAMANIO_TIPO">
+      <EntityTypeMapping TypeName="BDFloricolaModel.UNIDADES_TAMANIO_TIPO">
+        <MappingFragment StoreEntitySet="UNIDADES_TAMANIO_TIPO">
+          <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+          <ScalarProperty Name="TPFCODIGOI" ColumnName="TPFCODIGOI" />
+          <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+          <ScalarProperty Name="UTTCODIGOI" ColumnName="UTTCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spVerificar_proceso_diario" FunctionName="BDFloricolaModel.Store.spVerificar_proceso_diario" />
+    <FunctionImportMapping FunctionImportName="spVerificar_proceso" FunctionName="BDFloricolaModel.Store.spVerificar_proceso" />
+    <FunctionImportMapping FunctionImportName="spUpdate_detalle_flor_clasificada" FunctionName="BDFloricolaModel.Store.spUpdate_detalle_flor_clasificada" />
+    <FunctionImportMapping FunctionImportName="spInsert_control_flor_nacional" FunctionName="BDFloricolaModel.Store.spInsert_control_flor_nacional" />
+    <FunctionImportMapping FunctionImportName="spVerificar_control_flor_nacional" FunctionName="BDFloricolaModel.Store.spVerificar_control_flor_nacional">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDFloricolaModel.spVerificar_control_flor_nacional_Result">
+          <ScalarProperty Name="CFNCODIGOI" ColumnName="CFNCODIGOI" />
+          <ScalarProperty Name="TPCCODIGOI" ColumnName="TPCCODIGOI" />
+          <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+          <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+          <ScalarProperty Name="CFNCANTIDAD" ColumnName="CFNCANTIDAD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spUpdate_control_flor_nacional" FunctionName="BDFloricolaModel.Store.spUpdate_control_flor_nacional" />
+  </EntityContainerMapping>
+</Mapping>

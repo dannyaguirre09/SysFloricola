@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8302ea3ad777412aa4123addd37d8808" Name="Diagram1" ZoomLevel="81" ShowGrid="false">
+        <EntityTypeShape EntityType="BDFloricolaModel.BLOQUES" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.CAUSAS" Width="1.5" PointX="9.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.EMPLEADOS" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.FINCAS" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.MODULOS" Width="1.5" PointX="7.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.MODULOS_PERFILES" Width="1.5" PointX="10" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.PAICES" Width="1.5" PointX="10.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.PERFILES" Width="1.5" PointX="6.375" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.PREENVIOS" Width="1.5" PointX="17.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.TIPO_CAUSAS" Width="1.5" PointX="12" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.USUARIOS" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.USUARIOS_PERFILES" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDFloricolaModel.VARIEDADES" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="BDFloricolaModel.FK_BLOQUES_RELATIONS_FINCAS" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFloricolaModel.FK_TIPO_CAU_RELATIONS_CAUSAS" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFloricolaModel.FK_USUARIOS_EMPLEADOS" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFloricolaModel.FK_MODULOS_MODULOS" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFloricolaModel.FK_MODULOS_PERFILES_MODULOS" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFloricolaModel.FK_MODULOS_PERFILES_PERFILES" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFloricolaModel.FK_USUARIOS_PERFILES_PERFILES" ManuallyRouted="false" />
+        <AssociationConnector Association="BDFloricolaModel.FK_USUARIOS_PERFILES_USUARIOS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDFloricolaModel.EMPRESAS" Width="1.5" PointX="0.75" PointY="6.25" />
+        <AssociationConnector Association="BDFloricolaModel.FK_EMPLEADO_RELATIONS_EMPRESAS" />
+        <AssociationConnector Association="BDFloricolaModel.FK_FINCAS_RELATIONS_EMPRESAS" />
+        <EntityTypeShape EntityType="BDFloricolaModel.CLIENTES" Width="1.5" PointX="15" PointY="1.5" />
+        <AssociationConnector Association="BDFloricolaModel.FK_PREENVIO_RELATIONS_CLIENTES" />
+        <EntityTypeShape EntityType="BDFloricolaModel.CONCILIACION" Width="1.5" PointX="19.5" PointY="1.25" />
+        <EntityTypeShape EntityType="BDFloricolaModel.CONTROLES_FLOR_NACIONAL" Width="1.5" PointX="14.25" PointY="8.125" />
+        <EntityTypeShape EntityType="BDFloricolaModel.TIPOS_FLORES" Width="1.5" PointX="5.25" PointY="20.125" />
+        <AssociationConnector Association="BDFloricolaModel.FK_CONCILIACION_PREENVIOS" />
+        <AssociationConnector Association="BDFloricolaModel.FK_CONTROLE_RELATIONS_TIPO_CAU" />
+        <AssociationConnector Association="BDFloricolaModel.FK_CONTROLES_FLOR_NACIONAL_VARIEDADES" />
+        <EntityTypeShape EntityType="BDFloricolaModel.ESTADOS" Width="1.5" PointX="13.125" PointY="1.75" />
+        <AssociationConnector Association="BDFloricolaModel.FK_CLIENTES_RELATIONS_ESTADOS" />
+        <AssociationConnector Association="BDFloricolaModel.FK_ESTADOS_RELATIONS_PAICES" />
+        <EntityTypeShape EntityType="BDFloricolaModel.BLOQUES_VARIEDADES" Width="1.5" PointX="7.5" PointY="7.625" />
+        <AssociationConnector Association="BDFloricolaModel.FK_BLOQUES_VARIEDADES_BLOQUES" />
+        <AssociationConnector Association="BDFloricolaModel.FK_BLOQUES_VARIEDADES_VARIEDADES" />
+        <EntityTypeShape EntityType="BDFloricolaModel.INGRESO_PRODUCCION" Width="1.5" PointX="12.5" PointY="14" />
+        <AssociationConnector Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_BLOQUES" />
+        <AssociationConnector Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1" />
+        <EntityTypeShape EntityType="BDFloricolaModel.CONTROL_PRODUCCION" Width="1.5" PointX="10.25" PointY="14.625" />
+        <EntityTypeShape EntityType="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA" Width="1.5" PointX="7.5" PointY="15.625" />
+        <EntityTypeShape EntityType="BDFloricolaModel.DETALLES_PREENVIOS" Width="1.5" PointX="19.5" PointY="9" />
+        <EntityTypeShape EntityType="BDFloricolaModel.PROCESO_CLASIFICACION" Width="1.5" PointX="12" PointY="8.375" />
+        <EntityTypeShape EntityType="BDFloricolaModel.TAMANO_TALLOS" Width="1.5" PointX="5.25" PointY="22.875" />
+        <EntityTypeShape EntityType="BDFloricolaModel.UNIDADES" Width="1.5" PointX="5.25" PointY="15.375" />
+        <EntityTypeShape EntityType="BDFloricolaModel.UNIDADES_TAMANIO_TIPO" Width="1.5" PointX="7.5" PointY="20.875" />
+        <AssociationConnector Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" />
+        <AssociationConnector Association="BDFloricolaModel.FK_CONTROLE_RELATIONS_PROCESO_" />
+        <AssociationConnector Association="BDFloricolaModel.FK_DETALLE__RELATIONS_PROCESO_" />
+        <AssociationConnector Association="BDFloricolaModel.FK_DETALLE__RELATIONS_TAMANO_T" />
+        <AssociationConnector Association="BDFloricolaModel.FK_DETALLE__RELATIONS_TIPOS_FL" />
+        <AssociationConnector Association="BDFloricolaModel.FK_DETALLE__RELATIONS_UNIDADES" />
+        <AssociationConnector Association="BDFloricolaModel.FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES" />
+        <AssociationConnector Association="BDFloricolaModel.FK_DETALLES_RELATIONS_DETALLE_" />
+        <AssociationConnector Association="BDFloricolaModel.FK_DETALLES_RELATIONS_PREENVIO" />
+        <AssociationConnector Association="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS" />
+        <AssociationConnector Association="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES" />
+        <AssociationConnector Association="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_UNIDADES" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

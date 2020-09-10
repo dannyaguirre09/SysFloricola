@@ -1,0 +1,45 @@
+﻿@model SysFloricola.Models.TIPO_CAUSAS
+@{
+	Layout = null;
+}
+
+<div class="flex" id="flex">
+	<div class="contenido-modal" style="width: 650px; height:280px;">
+		<div class="modal-Titulo flex">
+			<h6 id="tituloModalCrear" class="text-white pt-2"></h6>
+			<span class="cerrarModal" onclick="cerrarModal()" id="cerrarModal">&times;</span>
+		</div>
+		<div class="modal-Cuerpo">
+			@using (Html.BeginForm("CrearTipoCausa", "TipoCausas", FormMethod.Post, new { onsubmit = "return validar()" }))
+			{
+				@Html.AntiForgeryToken()
+
+				<div class="form-horizontal pl-3 pr-3">
+					<div style="display:block; position:relative; height:120px; overflow-y:auto; overflow-x:hidden">
+						@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+						@Html.HiddenFor(model => model.TPCCODIGOI)
+						@Html.HiddenFor(model => model.TPCESTADO)
+						<div class="row">
+							<div class="col-md-6">
+								<label class="control-label">Ingrese una descripción</label>
+								@Html.EditorFor(model => model.TPCDESCRIPCION, new { htmlAttributes = new { @class = "form-control", @id = "txtDescripcion" } })
+								<label id="descripcion" hidden class="text-danger control-label">Ingrese una descripción</label>
+							</div>
+							<div class="col-md-6 form-group">
+								<label class="control-label">Seleccione la causa</label>
+								@Html.DropDownList("CAUCODIGOI", null, htmlAttributes: new { @class = "form-control" })
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-md-12" style="text-align:right">
+							<input id="btnFormulario" type="submit" value="Guardar" class="btn btn-success" />
+							<input onclick="cerrarModal()" type="button" value="Cancelar" class="btn btn-info" />
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</div>

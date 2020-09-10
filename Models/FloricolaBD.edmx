@@ -1,0 +1,2252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BDFloricolaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BLOQUES">
+          <Key>
+            <PropertyRef Name="BLQCODIGOI" />
+          </Key>
+          <Property Name="BLQCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FNCCODIGOI" Type="int" Nullable="false" />
+          <Property Name="BLQIDENTIFIC" Type="int" Nullable="false" />
+          <Property Name="BLQNUMCAMAS" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BLOQUES_VARIEDADES">
+          <Key>
+            <PropertyRef Name="BLVCODIGOI" />
+          </Key>
+          <Property Name="BLVCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BLQCODIGOI" Type="int" Nullable="false" />
+          <Property Name="VRDCODIGOI" Type="int" Nullable="false" />
+          <Property Name="BLVNUMEROCAMA" Type="int" />
+          <Property Name="BLVCANTIDAD" Type="int" />
+          <Property Name="BLVOBSERVACION" Type="varchar" MaxLength="150" />
+          <Property Name="BLVFECHA" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CAUSAS">
+          <Key>
+            <PropertyRef Name="CAUCODIGOI" />
+          </Key>
+          <Property Name="CAUCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CAUDESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="CLNCODIGOI" />
+          </Key>
+          <Property Name="CLNCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ESTCODIGOI" Type="int" Nullable="false" />
+          <Property Name="CLNRUC" Type="varchar" MaxLength="13" />
+          <Property Name="CLNRAZONSOCIAL" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="CLNDIRECCION" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="CLNCONSIGNATARIO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CLNTELEFONO" Type="char" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONCILIACION">
+          <Key>
+            <PropertyRef Name="CNCCODIGOI" />
+          </Key>
+          <Property Name="CNCCODIGOI" Type="int" Nullable="false" />
+          <Property Name="PRECODIGOI" Type="int" />
+          <Property Name="CNCFECHA" Type="datetime" />
+          <Property Name="CNCESTADO" Type="bit" />
+          <Property Name="CNCOBSERVACION" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="CONTROL_PRODUCCION">
+          <Key>
+            <PropertyRef Name="CNPCODIGOI" />
+          </Key>
+          <Property Name="CNPCODIGOI" Type="int" Nullable="false" />
+          <Property Name="CNPFECHA" Type="datetime" Nullable="false" />
+          <Property Name="CNPOBSERVACION" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="CONTROLES_FLOR_NACIONAL">
+          <Key>
+            <PropertyRef Name="CFNCODIGOI" />
+          </Key>
+          <Property Name="CFNCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TPCCODIGOI" Type="int" Nullable="false" />
+          <Property Name="PRCCODIGOI" Type="int" Nullable="false" />
+          <Property Name="VRDCODIGOI" Type="int" />
+          <Property Name="CFNCANTIDAD" Type="int" Nullable="false" />
+          <Property Name="CFNOBSERVACION" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="DETALLE_FLOR_CLASIFICADA">
+          <Key>
+            <PropertyRef Name="DTECODIGOI" />
+          </Key>
+          <Property Name="DTECODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TMTCODIGOI" Type="int" Nullable="false" />
+          <Property Name="UNDCODIGOI" Type="int" Nullable="false" />
+          <Property Name="TPFCODIGOI" Type="int" Nullable="false" />
+          <Property Name="PRCCODIGOI" Type="int" Nullable="false" />
+          <Property Name="VRDCODIGOI" Type="int" Nullable="false" />
+          <Property Name="DTEFECHAINGRESO" Type="datetime" Nullable="false" />
+          <Property Name="DTECANTIDAD" Type="int" Nullable="false" />
+          <Property Name="DTEOBSERVACION" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="DETALLES_PREENVIOS">
+          <Key>
+            <PropertyRef Name="DTPCODIGOI" />
+          </Key>
+          <Property Name="DTPCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DTECODIGOI" Type="int" Nullable="false" />
+          <Property Name="PRECODIGOI" Type="int" Nullable="false" />
+          <Property Name="DTPCANTIDAD" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADOS">
+          <Key>
+            <PropertyRef Name="EPLCODIGOI" />
+          </Key>
+          <Property Name="EPLCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMPCODIGOI" Type="int" Nullable="false" />
+          <Property Name="EPLCEDULA" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EPLAPELLIDOP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EPLAPELLIDOM" Type="varchar" MaxLength="50" />
+          <Property Name="EPLNOMBRES" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EPLDIRECCION" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="EPLTELEFONO" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="EMPRESAS">
+          <Key>
+            <PropertyRef Name="EMPCODIGOI" />
+          </Key>
+          <Property Name="EMPCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMPRUC" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="EMPNOMBREC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMPDIRECCION" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="EMPTELEFOC" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADOS">
+          <Key>
+            <PropertyRef Name="ESTCODIGOI" />
+          </Key>
+          <Property Name="ESTCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PAICODIGOI" Type="int" Nullable="false" />
+          <Property Name="ESTNOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FINCAS">
+          <Key>
+            <PropertyRef Name="FNCCODIGOI" />
+          </Key>
+          <Property Name="FNCCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMPCODIGOI" Type="int" Nullable="false" />
+          <Property Name="FNCNOMBREC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FNCDIRECCION" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INGRESO_PRODUCCION">
+          <Key>
+            <PropertyRef Name="INPCODIGOI" />
+          </Key>
+          <Property Name="INPCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BLCCODIGOI" Type="int" Nullable="false" />
+          <Property Name="VRDCODIGOI" Type="int" />
+          <Property Name="CNPCODIGOI" Type="int" />
+          <Property Name="INPNUMMALLAS" Type="int" Nullable="false" />
+          <Property Name="INPFECHA" Type="datetime" />
+          <Property Name="INPCANTIDADTALLOS" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MODULOS">
+          <Key>
+            <PropertyRef Name="MODCODIGOI" />
+          </Key>
+          <Property Name="MODCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MODDESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MODURL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MODNIVEL" Type="int" />
+        </EntityType>
+        <EntityType Name="MODULOS_PERFILES">
+          <Key>
+            <PropertyRef Name="MOPCODIGOI" />
+          </Key>
+          <Property Name="MOPCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MODCODIGOI" Type="int" Nullable="false" />
+          <Property Name="PERCODIGOI" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAICES">
+          <Key>
+            <PropertyRef Name="PAICODIGOI" />
+          </Key>
+          <Property Name="PAICODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PAINOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERFILES">
+          <Key>
+            <PropertyRef Name="PERCODIGOI" />
+          </Key>
+          <Property Name="PERCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PERDESCRIPCION" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="PERESTADO" Type="bit" Nullable="false" />
+          <Property Name="PEROBSERVACION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="PREENVIOS">
+          <Key>
+            <PropertyRef Name="PRECODIGOI" />
+          </Key>
+          <Property Name="PRECODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLNCODIGOI" Type="int" Nullable="false" />
+          <Property Name="PREFECHA" Type="datetime" Nullable="false" />
+          <Property Name="PRENUMERO" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="PREAWB" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="PREHAWB" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="PRENUMPIEZAS" Type="int" Nullable="false" />
+          <Property Name="PREIDCAJAS" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROCESO_CLASIFICACION">
+          <Key>
+            <PropertyRef Name="PRCCODIGOI" />
+          </Key>
+          <Property Name="PRCCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRCOBSERVACION" Type="varchar" MaxLength="150" />
+          <Property Name="PRCFECHA" Type="datetime" Nullable="false" />
+          <Property Name="PRCESTADO" Type="bit" />
+          <Property Name="PCRIDENTIFICADOR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAMANO_TALLOS">
+          <Key>
+            <PropertyRef Name="TMTCODIGOI" />
+          </Key>
+          <Property Name="TMTCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TMTDESCRIPC" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_CAUSAS">
+          <Key>
+            <PropertyRef Name="TPCCODIGOI" />
+          </Key>
+          <Property Name="TPCCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CAUCODIGOI" Type="int" Nullable="false" />
+          <Property Name="TPCDESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TPCESTADO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPOS_FLORES">
+          <Key>
+            <PropertyRef Name="TPFCODIGOI" />
+          </Key>
+          <Property Name="TPFCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TPFDESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UNIDADES">
+          <Key>
+            <PropertyRef Name="UNDCODIGOI" />
+          </Key>
+          <Property Name="UNDCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UNDDESCRIPCION" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UNIDADES_TAMANIO_TIPO">
+          <Key>
+            <PropertyRef Name="UTTCODIGOI" />
+          </Key>
+          <Property Name="UTTCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UNDCODIGOI" Type="int" Nullable="false" />
+          <Property Name="TPFCODIGOI" Type="int" Nullable="false" />
+          <Property Name="TMTCODIGOI" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="USRCODIGOI" />
+          </Key>
+          <Property Name="USRCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EPLCODIGOI" Type="int" Nullable="false" />
+          <Property Name="USRLOGIN" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="USRPASSWORD" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="USRESTADO" Type="bit" Nullable="false" />
+          <Property Name="USRESTADOCAMBIO" Type="bit" />
+        </EntityType>
+        <EntityType Name="USUARIOS_PERFILES">
+          <Key>
+            <PropertyRef Name="USPCODIGOI" />
+          </Key>
+          <Property Name="USPCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USRCODIGOI" Type="int" Nullable="false" />
+          <Property Name="PERCODIGOI" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VARIEDADES">
+          <Key>
+            <PropertyRef Name="VRDCODIGOI" />
+          </Key>
+          <Property Name="VRDCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VRDIDENTIFIC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="VRDNOMBREC" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="VRDCOLOR" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="VRDESTADO" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BLOQUES_RELATIONS_FINCAS">
+          <End Role="FINCAS" Type="Self.FINCAS" Multiplicity="1" />
+          <End Role="BLOQUES" Type="Self.BLOQUES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FINCAS">
+              <PropertyRef Name="FNCCODIGOI" />
+            </Principal>
+            <Dependent Role="BLOQUES">
+              <PropertyRef Name="FNCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BLOQUES_VARIEDADES_BLOQUES">
+          <End Role="BLOQUES" Type="Self.BLOQUES" Multiplicity="1" />
+          <End Role="BLOQUES_VARIEDADES" Type="Self.BLOQUES_VARIEDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BLOQUES">
+              <PropertyRef Name="BLQCODIGOI" />
+            </Principal>
+            <Dependent Role="BLOQUES_VARIEDADES">
+              <PropertyRef Name="BLQCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BLOQUES_VARIEDADES_VARIEDADES">
+          <End Role="VARIEDADES" Type="Self.VARIEDADES" Multiplicity="1" />
+          <End Role="BLOQUES_VARIEDADES" Type="Self.BLOQUES_VARIEDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Principal>
+            <Dependent Role="BLOQUES_VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTES_RELATIONS_ESTADOS">
+          <End Role="ESTADOS" Type="Self.ESTADOS" Multiplicity="1" />
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOS">
+              <PropertyRef Name="ESTCODIGOI" />
+            </Principal>
+            <Dependent Role="CLIENTES">
+              <PropertyRef Name="ESTCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONCILIACION_PREENVIOS">
+          <End Role="PREENVIOS" Type="Self.PREENVIOS" Multiplicity="0..1" />
+          <End Role="CONCILIACION" Type="Self.CONCILIACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREENVIOS">
+              <PropertyRef Name="PRECODIGOI" />
+            </Principal>
+            <Dependent Role="CONCILIACION">
+              <PropertyRef Name="PRECODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLE_RELATIONS_PROCESO_">
+          <End Role="PROCESO_CLASIFICACION" Type="Self.PROCESO_CLASIFICACION" Multiplicity="1" />
+          <End Role="CONTROLES_FLOR_NACIONAL" Type="Self.CONTROLES_FLOR_NACIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCESO_CLASIFICACION">
+              <PropertyRef Name="PRCCODIGOI" />
+            </Principal>
+            <Dependent Role="CONTROLES_FLOR_NACIONAL">
+              <PropertyRef Name="PRCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLE_RELATIONS_TIPO_CAU">
+          <End Role="TIPO_CAUSAS" Type="Self.TIPO_CAUSAS" Multiplicity="1" />
+          <End Role="CONTROLES_FLOR_NACIONAL" Type="Self.CONTROLES_FLOR_NACIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CAUSAS">
+              <PropertyRef Name="TPCCODIGOI" />
+            </Principal>
+            <Dependent Role="CONTROLES_FLOR_NACIONAL">
+              <PropertyRef Name="TPCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLES_FLOR_NACIONAL_VARIEDADES">
+          <End Role="VARIEDADES" Type="Self.VARIEDADES" Multiplicity="0..1" />
+          <End Role="CONTROLES_FLOR_NACIONAL" Type="Self.CONTROLES_FLOR_NACIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Principal>
+            <Dependent Role="CONTROLES_FLOR_NACIONAL">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE__RELATIONS_PROCESO_">
+          <End Role="PROCESO_CLASIFICACION" Type="Self.PROCESO_CLASIFICACION" Multiplicity="1" />
+          <End Role="DETALLE_FLOR_CLASIFICADA" Type="Self.DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCESO_CLASIFICACION">
+              <PropertyRef Name="PRCCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="PRCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE__RELATIONS_TAMANO_T">
+          <End Role="TAMANO_TALLOS" Type="Self.TAMANO_TALLOS" Multiplicity="1" />
+          <End Role="DETALLE_FLOR_CLASIFICADA" Type="Self.DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAMANO_TALLOS">
+              <PropertyRef Name="TMTCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="TMTCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE__RELATIONS_TIPOS_FL">
+          <End Role="TIPOS_FLORES" Type="Self.TIPOS_FLORES" Multiplicity="1" />
+          <End Role="DETALLE_FLOR_CLASIFICADA" Type="Self.DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOS_FLORES">
+              <PropertyRef Name="TPFCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="TPFCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE__RELATIONS_UNIDADES">
+          <End Role="UNIDADES" Type="Self.UNIDADES" Multiplicity="1" />
+          <End Role="DETALLE_FLOR_CLASIFICADA" Type="Self.DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADES">
+              <PropertyRef Name="UNDCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="UNDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES">
+          <End Role="VARIEDADES" Type="Self.VARIEDADES" Multiplicity="1" />
+          <End Role="DETALLE_FLOR_CLASIFICADA" Type="Self.DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLES_RELATIONS_DETALLE_">
+          <End Role="DETALLE_FLOR_CLASIFICADA" Type="Self.DETALLE_FLOR_CLASIFICADA" Multiplicity="1" />
+          <End Role="DETALLES_PREENVIOS" Type="Self.DETALLES_PREENVIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="DTECODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLES_PREENVIOS">
+              <PropertyRef Name="DTECODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLES_RELATIONS_PREENVIO">
+          <End Role="PREENVIOS" Type="Self.PREENVIOS" Multiplicity="1" />
+          <End Role="DETALLES_PREENVIOS" Type="Self.DETALLES_PREENVIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREENVIOS">
+              <PropertyRef Name="PRECODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLES_PREENVIOS">
+              <PropertyRef Name="PRECODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_RELATIONS_EMPRESAS">
+          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="1" />
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="EMPCODIGOI" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="EMPCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESTADOS_RELATIONS_PAICES">
+          <End Role="PAICES" Type="Self.PAICES" Multiplicity="1" />
+          <End Role="ESTADOS" Type="Self.ESTADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAICES">
+              <PropertyRef Name="PAICODIGOI" />
+            </Principal>
+            <Dependent Role="ESTADOS">
+              <PropertyRef Name="PAICODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FINCAS_RELATIONS_EMPRESAS">
+          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="1" />
+          <End Role="FINCAS" Type="Self.FINCAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="EMPCODIGOI" />
+            </Principal>
+            <Dependent Role="FINCAS">
+              <PropertyRef Name="EMPCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INGRESO_PRODUCCION_BLOQUES">
+          <End Role="BLOQUES" Type="Self.BLOQUES" Multiplicity="1" />
+          <End Role="INGRESO_PRODUCCION" Type="Self.INGRESO_PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BLOQUES">
+              <PropertyRef Name="BLQCODIGOI" />
+            </Principal>
+            <Dependent Role="INGRESO_PRODUCCION">
+              <PropertyRef Name="BLCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
+          <End Role="CONTROL_PRODUCCION" Type="Self.CONTROL_PRODUCCION" Multiplicity="0..1" />
+          <End Role="INGRESO_PRODUCCION" Type="Self.INGRESO_PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTROL_PRODUCCION">
+              <PropertyRef Name="CNPCODIGOI" />
+            </Principal>
+            <Dependent Role="INGRESO_PRODUCCION">
+              <PropertyRef Name="CNPCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INGRESO_PRODUCCION_VARIEDADES1">
+          <End Role="VARIEDADES" Type="Self.VARIEDADES" Multiplicity="0..1" />
+          <End Role="INGRESO_PRODUCCION" Type="Self.INGRESO_PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Principal>
+            <Dependent Role="INGRESO_PRODUCCION">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODULOS_MODULOS">
+          <End Role="MODULOS" Type="Self.MODULOS" Multiplicity="0..1" />
+          <End Role="MODULOS1" Type="Self.MODULOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODULOS">
+              <PropertyRef Name="MODCODIGOI" />
+            </Principal>
+            <Dependent Role="MODULOS1">
+              <PropertyRef Name="MODNIVEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODULOS_PERFILES_MODULOS">
+          <End Role="MODULOS" Type="Self.MODULOS" Multiplicity="1" />
+          <End Role="MODULOS_PERFILES" Type="Self.MODULOS_PERFILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODULOS">
+              <PropertyRef Name="MODCODIGOI" />
+            </Principal>
+            <Dependent Role="MODULOS_PERFILES">
+              <PropertyRef Name="MODCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODULOS_PERFILES_PERFILES">
+          <End Role="PERFILES" Type="Self.PERFILES" Multiplicity="1" />
+          <End Role="MODULOS_PERFILES" Type="Self.MODULOS_PERFILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERFILES">
+              <PropertyRef Name="PERCODIGOI" />
+            </Principal>
+            <Dependent Role="MODULOS_PERFILES">
+              <PropertyRef Name="PERCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PREENVIO_RELATIONS_CLIENTES">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="PREENVIOS" Type="Self.PREENVIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="CLNCODIGOI" />
+            </Principal>
+            <Dependent Role="PREENVIOS">
+              <PropertyRef Name="CLNCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_CAU_RELATIONS_CAUSAS">
+          <End Role="CAUSAS" Type="Self.CAUSAS" Multiplicity="1" />
+          <End Role="TIPO_CAUSAS" Type="Self.TIPO_CAUSAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUSAS">
+              <PropertyRef Name="CAUCODIGOI" />
+            </Principal>
+            <Dependent Role="TIPO_CAUSAS">
+              <PropertyRef Name="CAUCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS">
+          <End Role="TAMANO_TALLOS" Type="Self.TAMANO_TALLOS" Multiplicity="1" />
+          <End Role="UNIDADES_TAMANIO_TIPO" Type="Self.UNIDADES_TAMANIO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAMANO_TALLOS">
+              <PropertyRef Name="TMTCODIGOI" />
+            </Principal>
+            <Dependent Role="UNIDADES_TAMANIO_TIPO">
+              <PropertyRef Name="TMTCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES">
+          <End Role="TIPOS_FLORES" Type="Self.TIPOS_FLORES" Multiplicity="1" />
+          <End Role="UNIDADES_TAMANIO_TIPO" Type="Self.UNIDADES_TAMANIO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOS_FLORES">
+              <PropertyRef Name="TPFCODIGOI" />
+            </Principal>
+            <Dependent Role="UNIDADES_TAMANIO_TIPO">
+              <PropertyRef Name="TPFCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNIDADES_TAMANIO_TIPO_UNIDADES">
+          <End Role="UNIDADES" Type="Self.UNIDADES" Multiplicity="1" />
+          <End Role="UNIDADES_TAMANIO_TIPO" Type="Self.UNIDADES_TAMANIO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADES">
+              <PropertyRef Name="UNDCODIGOI" />
+            </Principal>
+            <Dependent Role="UNIDADES_TAMANIO_TIPO">
+              <PropertyRef Name="UNDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIOS_EMPLEADOS">
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADOS">
+              <PropertyRef Name="EPLCODIGOI" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="EPLCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIOS_PERFILES_PERFILES">
+          <End Role="PERFILES" Type="Self.PERFILES" Multiplicity="1" />
+          <End Role="USUARIOS_PERFILES" Type="Self.USUARIOS_PERFILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERFILES">
+              <PropertyRef Name="PERCODIGOI" />
+            </Principal>
+            <Dependent Role="USUARIOS_PERFILES">
+              <PropertyRef Name="PERCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIOS_PERFILES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="USUARIOS_PERFILES" Type="Self.USUARIOS_PERFILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="USRCODIGOI" />
+            </Principal>
+            <Dependent Role="USUARIOS_PERFILES">
+              <PropertyRef Name="USRCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spInsert_control_flor_nacional" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TPCCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="VRDCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="CFNCANTIDAD" Type="int" Mode="In" />
+          <Parameter Name="CFNOBSERVACION" Type="varchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spInsert_detalle_flor_clasificada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TMTCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="UNDCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="TPFCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="VRDCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="DTECANTIDAD" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spSelect_flor_numerotallos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_tallos_unidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
+          <Parameter Name="undCodigoI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_tallos_unidad_tam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
+          <Parameter Name="undCodigoI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdate_control_flor_nacional" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CFNCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="TPCCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="VRDCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="CFNCANTIDAD" Type="int" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spUpdate_detalle_flor_clasificada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DTECODIGOI" Type="int" Mode="In" />
+          <Parameter Name="TMTCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="UNDCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="TPFCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="VRDCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="DTECANTIDAD" Type="int" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spVerificar_control_flor_nacional" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="CAUCODIGOI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spVerificar_detalle_flor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TPFCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="UNDCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spVerificar_proceso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="identificador" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spVerificar_proceso_diario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="TPFCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="UNDCODIGOI" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BDFloricolaModelStoreContainer">
+          <EntitySet Name="BLOQUES" EntityType="Self.BLOQUES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BLOQUES_VARIEDADES" EntityType="Self.BLOQUES_VARIEDADES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAUSAS" EntityType="Self.CAUSAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONCILIACION" EntityType="Self.CONCILIACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTROL_PRODUCCION" EntityType="Self.CONTROL_PRODUCCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTROLES_FLOR_NACIONAL" EntityType="Self.CONTROLES_FLOR_NACIONAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_FLOR_CLASIFICADA" EntityType="Self.DETALLE_FLOR_CLASIFICADA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLES_PREENVIOS" EntityType="Self.DETALLES_PREENVIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPRESAS" EntityType="Self.EMPRESAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADOS" EntityType="Self.ESTADOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FINCAS" EntityType="Self.FINCAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INGRESO_PRODUCCION" EntityType="Self.INGRESO_PRODUCCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MODULOS" EntityType="Self.MODULOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MODULOS_PERFILES" EntityType="Self.MODULOS_PERFILES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAICES" EntityType="Self.PAICES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERFILES" EntityType="Self.PERFILES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PREENVIOS" EntityType="Self.PREENVIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROCESO_CLASIFICACION" EntityType="Self.PROCESO_CLASIFICACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAMANO_TALLOS" EntityType="Self.TAMANO_TALLOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_CAUSAS" EntityType="Self.TIPO_CAUSAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOS_FLORES" EntityType="Self.TIPOS_FLORES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UNIDADES" EntityType="Self.UNIDADES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UNIDADES_TAMANIO_TIPO" EntityType="Self.UNIDADES_TAMANIO_TIPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIOS_PERFILES" EntityType="Self.USUARIOS_PERFILES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VARIEDADES" EntityType="Self.VARIEDADES" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BLOQUES_RELATIONS_FINCAS" Association="Self.FK_BLOQUES_RELATIONS_FINCAS">
+            <End Role="FINCAS" EntitySet="FINCAS" />
+            <End Role="BLOQUES" EntitySet="BLOQUES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BLOQUES_VARIEDADES_BLOQUES" Association="Self.FK_BLOQUES_VARIEDADES_BLOQUES">
+            <End Role="BLOQUES" EntitySet="BLOQUES" />
+            <End Role="BLOQUES_VARIEDADES" EntitySet="BLOQUES_VARIEDADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BLOQUES_VARIEDADES_VARIEDADES" Association="Self.FK_BLOQUES_VARIEDADES_VARIEDADES">
+            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
+            <End Role="BLOQUES_VARIEDADES" EntitySet="BLOQUES_VARIEDADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTES_RELATIONS_ESTADOS" Association="Self.FK_CLIENTES_RELATIONS_ESTADOS">
+            <End Role="ESTADOS" EntitySet="ESTADOS" />
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONCILIACION_PREENVIOS" Association="Self.FK_CONCILIACION_PREENVIOS">
+            <End Role="PREENVIOS" EntitySet="PREENVIOS" />
+            <End Role="CONCILIACION" EntitySet="CONCILIACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLE_RELATIONS_PROCESO_" Association="Self.FK_CONTROLE_RELATIONS_PROCESO_">
+            <End Role="PROCESO_CLASIFICACION" EntitySet="PROCESO_CLASIFICACION" />
+            <End Role="CONTROLES_FLOR_NACIONAL" EntitySet="CONTROLES_FLOR_NACIONAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLE_RELATIONS_TIPO_CAU" Association="Self.FK_CONTROLE_RELATIONS_TIPO_CAU">
+            <End Role="TIPO_CAUSAS" EntitySet="TIPO_CAUSAS" />
+            <End Role="CONTROLES_FLOR_NACIONAL" EntitySet="CONTROLES_FLOR_NACIONAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLES_FLOR_NACIONAL_VARIEDADES" Association="Self.FK_CONTROLES_FLOR_NACIONAL_VARIEDADES">
+            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
+            <End Role="CONTROLES_FLOR_NACIONAL" EntitySet="CONTROLES_FLOR_NACIONAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE__RELATIONS_PROCESO_" Association="Self.FK_DETALLE__RELATIONS_PROCESO_">
+            <End Role="PROCESO_CLASIFICACION" EntitySet="PROCESO_CLASIFICACION" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE__RELATIONS_TAMANO_T" Association="Self.FK_DETALLE__RELATIONS_TAMANO_T">
+            <End Role="TAMANO_TALLOS" EntitySet="TAMANO_TALLOS" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE__RELATIONS_TIPOS_FL" Association="Self.FK_DETALLE__RELATIONS_TIPOS_FL">
+            <End Role="TIPOS_FLORES" EntitySet="TIPOS_FLORES" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE__RELATIONS_UNIDADES" Association="Self.FK_DETALLE__RELATIONS_UNIDADES">
+            <End Role="UNIDADES" EntitySet="UNIDADES" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES" Association="Self.FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES">
+            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLES_RELATIONS_DETALLE_" Association="Self.FK_DETALLES_RELATIONS_DETALLE_">
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+            <End Role="DETALLES_PREENVIOS" EntitySet="DETALLES_PREENVIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLES_RELATIONS_PREENVIO" Association="Self.FK_DETALLES_RELATIONS_PREENVIO">
+            <End Role="PREENVIOS" EntitySet="PREENVIOS" />
+            <End Role="DETALLES_PREENVIOS" EntitySet="DETALLES_PREENVIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_RELATIONS_EMPRESAS" Association="Self.FK_EMPLEADO_RELATIONS_EMPRESAS">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESTADOS_RELATIONS_PAICES" Association="Self.FK_ESTADOS_RELATIONS_PAICES">
+            <End Role="PAICES" EntitySet="PAICES" />
+            <End Role="ESTADOS" EntitySet="ESTADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FINCAS_RELATIONS_EMPRESAS" Association="Self.FK_FINCAS_RELATIONS_EMPRESAS">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+            <End Role="FINCAS" EntitySet="FINCAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INGRESO_PRODUCCION_BLOQUES" Association="Self.FK_INGRESO_PRODUCCION_BLOQUES">
+            <End Role="BLOQUES" EntitySet="BLOQUES" />
+            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" Association="Self.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
+            <End Role="CONTROL_PRODUCCION" EntitySet="CONTROL_PRODUCCION" />
+            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INGRESO_PRODUCCION_VARIEDADES1" Association="Self.FK_INGRESO_PRODUCCION_VARIEDADES1">
+            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
+            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODULOS_MODULOS" Association="Self.FK_MODULOS_MODULOS">
+            <End Role="MODULOS" EntitySet="MODULOS" />
+            <End Role="MODULOS1" EntitySet="MODULOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODULOS_PERFILES_MODULOS" Association="Self.FK_MODULOS_PERFILES_MODULOS">
+            <End Role="MODULOS" EntitySet="MODULOS" />
+            <End Role="MODULOS_PERFILES" EntitySet="MODULOS_PERFILES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODULOS_PERFILES_PERFILES" Association="Self.FK_MODULOS_PERFILES_PERFILES">
+            <End Role="PERFILES" EntitySet="PERFILES" />
+            <End Role="MODULOS_PERFILES" EntitySet="MODULOS_PERFILES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PREENVIO_RELATIONS_CLIENTES" Association="Self.FK_PREENVIO_RELATIONS_CLIENTES">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="PREENVIOS" EntitySet="PREENVIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_CAU_RELATIONS_CAUSAS" Association="Self.FK_TIPO_CAU_RELATIONS_CAUSAS">
+            <End Role="CAUSAS" EntitySet="CAUSAS" />
+            <End Role="TIPO_CAUSAS" EntitySet="TIPO_CAUSAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS" Association="Self.FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS">
+            <End Role="TAMANO_TALLOS" EntitySet="TAMANO_TALLOS" />
+            <End Role="UNIDADES_TAMANIO_TIPO" EntitySet="UNIDADES_TAMANIO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES" Association="Self.FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES">
+            <End Role="TIPOS_FLORES" EntitySet="TIPOS_FLORES" />
+            <End Role="UNIDADES_TAMANIO_TIPO" EntitySet="UNIDADES_TAMANIO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNIDADES_TAMANIO_TIPO_UNIDADES" Association="Self.FK_UNIDADES_TAMANIO_TIPO_UNIDADES">
+            <End Role="UNIDADES" EntitySet="UNIDADES" />
+            <End Role="UNIDADES_TAMANIO_TIPO" EntitySet="UNIDADES_TAMANIO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIOS_EMPLEADOS" Association="Self.FK_USUARIOS_EMPLEADOS">
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIOS_PERFILES_PERFILES" Association="Self.FK_USUARIOS_PERFILES_PERFILES">
+            <End Role="PERFILES" EntitySet="PERFILES" />
+            <End Role="USUARIOS_PERFILES" EntitySet="USUARIOS_PERFILES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIOS_PERFILES_USUARIOS" Association="Self.FK_USUARIOS_PERFILES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="USUARIOS_PERFILES" EntitySet="USUARIOS_PERFILES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDFloricolaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BLOQUES">
+          <Key>
+            <PropertyRef Name="BLQCODIGOI" />
+          </Key>
+          <Property Name="BLQCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FNCCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="BLQIDENTIFIC" Type="Int32" Nullable="false" />
+          <Property Name="BLQNUMCAMAS" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FINCAS" Relationship="Self.FK_BLOQUES_RELATIONS_FINCAS" FromRole="BLOQUES" ToRole="FINCAS" />
+          <NavigationProperty Name="BLOQUES_VARIEDADES" Relationship="BDFloricolaModel.FK_BLOQUES_VARIEDADES_BLOQUES" FromRole="BLOQUES" ToRole="BLOQUES_VARIEDADES" />
+          <NavigationProperty Name="INGRESO_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_BLOQUES" FromRole="BLOQUES" ToRole="INGRESO_PRODUCCION" />
+        </EntityType>
+        <EntityType Name="CAUSAS">
+          <Key>
+            <PropertyRef Name="CAUCODIGOI" />
+          </Key>
+          <Property Name="CAUCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CAUDESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TIPO_CAUSAS" Relationship="Self.FK_TIPO_CAU_RELATIONS_CAUSAS" FromRole="CAUSAS" ToRole="TIPO_CAUSAS" />
+        </EntityType>
+        <EntityType Name="EMPLEADOS">
+          <Key>
+            <PropertyRef Name="EPLCODIGOI" />
+          </Key>
+          <Property Name="EPLCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMPCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="EPLCEDULA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EPLAPELLIDOP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EPLAPELLIDOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EPLNOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EPLDIRECCION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EPLTELEFONO" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.FK_USUARIOS_EMPLEADOS" FromRole="EMPLEADOS" ToRole="USUARIOS" />
+          <NavigationProperty Name="EMPRESAS" Relationship="BDFloricolaModel.FK_EMPLEADO_RELATIONS_EMPRESAS" FromRole="EMPLEADOS" ToRole="EMPRESAS" />
+        </EntityType>
+        <EntityType Name="FINCAS">
+          <Key>
+            <PropertyRef Name="FNCCODIGOI" />
+          </Key>
+          <Property Name="FNCCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMPCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="FNCNOMBREC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FNCDIRECCION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BLOQUES" Relationship="Self.FK_BLOQUES_RELATIONS_FINCAS" FromRole="FINCAS" ToRole="BLOQUES" />
+          <NavigationProperty Name="EMPRESAS" Relationship="BDFloricolaModel.FK_FINCAS_RELATIONS_EMPRESAS" FromRole="FINCAS" ToRole="EMPRESAS" />
+        </EntityType>
+        <EntityType Name="MODULOS">
+          <Key>
+            <PropertyRef Name="MODCODIGOI" />
+          </Key>
+          <Property Name="MODCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MODDESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MODURL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MODNIVEL" Type="Int32" />
+          <NavigationProperty Name="MODULOS1" Relationship="Self.FK_MODULOS_MODULOS" FromRole="MODULOS" ToRole="MODULOS1" />
+          <NavigationProperty Name="MODULOS2" Relationship="Self.FK_MODULOS_MODULOS" FromRole="MODULOS1" ToRole="MODULOS" />
+          <NavigationProperty Name="MODULOS_PERFILES" Relationship="Self.FK_MODULOS_PERFILES_MODULOS" FromRole="MODULOS" ToRole="MODULOS_PERFILES" />
+        </EntityType>
+        <EntityType Name="MODULOS_PERFILES">
+          <Key>
+            <PropertyRef Name="MOPCODIGOI" />
+          </Key>
+          <Property Name="MOPCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MODCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="PERCODIGOI" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MODULOS" Relationship="Self.FK_MODULOS_PERFILES_MODULOS" FromRole="MODULOS_PERFILES" ToRole="MODULOS" />
+          <NavigationProperty Name="PERFILES" Relationship="Self.FK_MODULOS_PERFILES_PERFILES" FromRole="MODULOS_PERFILES" ToRole="PERFILES" />
+        </EntityType>
+        <EntityType Name="PAICES">
+          <Key>
+            <PropertyRef Name="PAICODIGOI" />
+          </Key>
+          <Property Name="PAICODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PAINOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ESTADOS" Relationship="BDFloricolaModel.FK_ESTADOS_RELATIONS_PAICES" FromRole="PAICES" ToRole="ESTADOS" />
+        </EntityType>
+        <EntityType Name="PERFILES">
+          <Key>
+            <PropertyRef Name="PERCODIGOI" />
+          </Key>
+          <Property Name="PERCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PERDESCRIPCION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PERESTADO" Type="Boolean" Nullable="false" />
+          <Property Name="PEROBSERVACION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MODULOS_PERFILES" Relationship="Self.FK_MODULOS_PERFILES_PERFILES" FromRole="PERFILES" ToRole="MODULOS_PERFILES" />
+          <NavigationProperty Name="USUARIOS_PERFILES" Relationship="Self.FK_USUARIOS_PERFILES_PERFILES" FromRole="PERFILES" ToRole="USUARIOS_PERFILES" />
+        </EntityType>
+        <EntityType Name="PREENVIOS">
+          <Key>
+            <PropertyRef Name="PRECODIGOI" />
+          </Key>
+          <Property Name="PRECODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLNCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="PREFECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PRENUMERO" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="PREAWB" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PREHAWB" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PRENUMPIEZAS" Type="Int32" Nullable="false" />
+          <Property Name="PREIDCAJAS" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CLIENTES" Relationship="BDFloricolaModel.FK_PREENVIO_RELATIONS_CLIENTES" FromRole="PREENVIOS" ToRole="CLIENTES" />
+          <NavigationProperty Name="CONCILIACION" Relationship="BDFloricolaModel.FK_CONCILIACION_PREENVIOS" FromRole="PREENVIOS" ToRole="CONCILIACION" />
+          <NavigationProperty Name="DETALLES_PREENVIOS" Relationship="BDFloricolaModel.FK_DETALLES_RELATIONS_PREENVIO" FromRole="PREENVIOS" ToRole="DETALLES_PREENVIOS" />
+        </EntityType>
+        <EntityType Name="TIPO_CAUSAS">
+          <Key>
+            <PropertyRef Name="TPCCODIGOI" />
+          </Key>
+          <Property Name="TPCCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CAUCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="TPCDESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TPCESTADO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CAUSAS" Relationship="Self.FK_TIPO_CAU_RELATIONS_CAUSAS" FromRole="TIPO_CAUSAS" ToRole="CAUSAS" />
+          <NavigationProperty Name="CONTROLES_FLOR_NACIONAL" Relationship="BDFloricolaModel.FK_CONTROLE_RELATIONS_TIPO_CAU" FromRole="TIPO_CAUSAS" ToRole="CONTROLES_FLOR_NACIONAL" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="USRCODIGOI" />
+          </Key>
+          <Property Name="USRCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EPLCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="USRLOGIN" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USRPASSWORD" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USRESTADO" Type="Boolean" Nullable="false" />
+          <Property Name="USRESTADOCAMBIO" Type="Boolean" />
+          <NavigationProperty Name="EMPLEADOS" Relationship="Self.FK_USUARIOS_EMPLEADOS" FromRole="USUARIOS" ToRole="EMPLEADOS" />
+          <NavigationProperty Name="USUARIOS_PERFILES" Relationship="Self.FK_USUARIOS_PERFILES_USUARIOS" FromRole="USUARIOS" ToRole="USUARIOS_PERFILES" />
+        </EntityType>
+        <EntityType Name="USUARIOS_PERFILES">
+          <Key>
+            <PropertyRef Name="USPCODIGOI" />
+          </Key>
+          <Property Name="USPCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USRCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="PERCODIGOI" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PERFILES" Relationship="Self.FK_USUARIOS_PERFILES_PERFILES" FromRole="USUARIOS_PERFILES" ToRole="PERFILES" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.FK_USUARIOS_PERFILES_USUARIOS" FromRole="USUARIOS_PERFILES" ToRole="USUARIOS" />
+        </EntityType>
+        <EntityType Name="VARIEDADES">
+          <Key>
+            <PropertyRef Name="VRDCODIGOI" />
+          </Key>
+          <Property Name="VRDCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VRDIDENTIFIC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VRDNOMBREC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VRDCOLOR" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VRDESTADO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CONTROLES_FLOR_NACIONAL" Relationship="BDFloricolaModel.FK_CONTROLES_FLOR_NACIONAL_VARIEDADES" FromRole="VARIEDADES" ToRole="CONTROLES_FLOR_NACIONAL" />
+          <NavigationProperty Name="BLOQUES_VARIEDADES" Relationship="BDFloricolaModel.FK_BLOQUES_VARIEDADES_VARIEDADES" FromRole="VARIEDADES" ToRole="BLOQUES_VARIEDADES" />
+          <NavigationProperty Name="INGRESO_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1" FromRole="VARIEDADES" ToRole="INGRESO_PRODUCCION" />
+          <NavigationProperty Name="DETALLE_FLOR_CLASIFICADA" Relationship="BDFloricolaModel.FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES" FromRole="VARIEDADES" ToRole="DETALLE_FLOR_CLASIFICADA" />
+          </EntityType>
+        <Association Name="FK_BLOQUES_RELATIONS_FINCAS">
+          <End Role="FINCAS" Type="Self.FINCAS" Multiplicity="1" />
+          <End Role="BLOQUES" Type="Self.BLOQUES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FINCAS">
+              <PropertyRef Name="FNCCODIGOI" />
+            </Principal>
+            <Dependent Role="BLOQUES">
+              <PropertyRef Name="FNCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_CAU_RELATIONS_CAUSAS">
+          <End Role="CAUSAS" Type="Self.CAUSAS" Multiplicity="1" />
+          <End Role="TIPO_CAUSAS" Type="Self.TIPO_CAUSAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUSAS">
+              <PropertyRef Name="CAUCODIGOI" />
+            </Principal>
+            <Dependent Role="TIPO_CAUSAS">
+              <PropertyRef Name="CAUCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIOS_EMPLEADOS">
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADOS">
+              <PropertyRef Name="EPLCODIGOI" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="EPLCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODULOS_MODULOS">
+          <End Role="MODULOS" Type="Self.MODULOS" Multiplicity="0..1" />
+          <End Role="MODULOS1" Type="Self.MODULOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODULOS">
+              <PropertyRef Name="MODCODIGOI" />
+            </Principal>
+            <Dependent Role="MODULOS1">
+              <PropertyRef Name="MODNIVEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODULOS_PERFILES_MODULOS">
+          <End Role="MODULOS" Type="Self.MODULOS" Multiplicity="1" />
+          <End Role="MODULOS_PERFILES" Type="Self.MODULOS_PERFILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODULOS">
+              <PropertyRef Name="MODCODIGOI" />
+            </Principal>
+            <Dependent Role="MODULOS_PERFILES">
+              <PropertyRef Name="MODCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODULOS_PERFILES_PERFILES">
+          <End Role="PERFILES" Type="Self.PERFILES" Multiplicity="1" />
+          <End Role="MODULOS_PERFILES" Type="Self.MODULOS_PERFILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERFILES">
+              <PropertyRef Name="PERCODIGOI" />
+            </Principal>
+            <Dependent Role="MODULOS_PERFILES">
+              <PropertyRef Name="PERCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIOS_PERFILES_PERFILES">
+          <End Role="PERFILES" Type="Self.PERFILES" Multiplicity="1" />
+          <End Role="USUARIOS_PERFILES" Type="Self.USUARIOS_PERFILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERFILES">
+              <PropertyRef Name="PERCODIGOI" />
+            </Principal>
+            <Dependent Role="USUARIOS_PERFILES">
+              <PropertyRef Name="PERCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIOS_PERFILES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="USUARIOS_PERFILES" Type="Self.USUARIOS_PERFILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="USRCODIGOI" />
+            </Principal>
+            <Dependent Role="USUARIOS_PERFILES">
+              <PropertyRef Name="USRCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDFloricolaContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BLOQUES" EntityType="Self.BLOQUES" />
+          <EntitySet Name="CAUSAS" EntityType="Self.CAUSAS" />
+          <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" />
+          <EntitySet Name="FINCAS" EntityType="Self.FINCAS" />
+          <EntitySet Name="MODULOS" EntityType="Self.MODULOS" />
+          <EntitySet Name="MODULOS_PERFILES" EntityType="Self.MODULOS_PERFILES" />
+          <EntitySet Name="PAICES" EntityType="Self.PAICES" />
+          <EntitySet Name="PERFILES" EntityType="Self.PERFILES" />
+          <EntitySet Name="PREENVIOS" EntityType="Self.PREENVIOS" />
+          <EntitySet Name="TIPO_CAUSAS" EntityType="Self.TIPO_CAUSAS" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+          <EntitySet Name="USUARIOS_PERFILES" EntityType="Self.USUARIOS_PERFILES" />
+          <EntitySet Name="VARIEDADES" EntityType="Self.VARIEDADES" />
+          <AssociationSet Name="FK_BLOQUES_RELATIONS_FINCAS" Association="Self.FK_BLOQUES_RELATIONS_FINCAS">
+            <End Role="FINCAS" EntitySet="FINCAS" />
+            <End Role="BLOQUES" EntitySet="BLOQUES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_CAU_RELATIONS_CAUSAS" Association="Self.FK_TIPO_CAU_RELATIONS_CAUSAS">
+            <End Role="CAUSAS" EntitySet="CAUSAS" />
+            <End Role="TIPO_CAUSAS" EntitySet="TIPO_CAUSAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIOS_EMPLEADOS" Association="Self.FK_USUARIOS_EMPLEADOS">
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODULOS_MODULOS" Association="Self.FK_MODULOS_MODULOS">
+            <End Role="MODULOS" EntitySet="MODULOS" />
+            <End Role="MODULOS1" EntitySet="MODULOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODULOS_PERFILES_MODULOS" Association="Self.FK_MODULOS_PERFILES_MODULOS">
+            <End Role="MODULOS" EntitySet="MODULOS" />
+            <End Role="MODULOS_PERFILES" EntitySet="MODULOS_PERFILES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODULOS_PERFILES_PERFILES" Association="Self.FK_MODULOS_PERFILES_PERFILES">
+            <End Role="PERFILES" EntitySet="PERFILES" />
+            <End Role="MODULOS_PERFILES" EntitySet="MODULOS_PERFILES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIOS_PERFILES_PERFILES" Association="Self.FK_USUARIOS_PERFILES_PERFILES">
+            <End Role="PERFILES" EntitySet="PERFILES" />
+            <End Role="USUARIOS_PERFILES" EntitySet="USUARIOS_PERFILES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIOS_PERFILES_USUARIOS" Association="Self.FK_USUARIOS_PERFILES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="USUARIOS_PERFILES" EntitySet="USUARIOS_PERFILES" />
+          </AssociationSet>
+          <EntitySet Name="EMPRESAS" EntityType="BDFloricolaModel.EMPRESAS" />
+          <AssociationSet Name="FK_EMPLEADO_RELATIONS_EMPRESAS" Association="BDFloricolaModel.FK_EMPLEADO_RELATIONS_EMPRESAS">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FINCAS_RELATIONS_EMPRESAS" Association="BDFloricolaModel.FK_FINCAS_RELATIONS_EMPRESAS">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+            <End Role="FINCAS" EntitySet="FINCAS" />
+          </AssociationSet>
+          <FunctionImport Name="spSelect_Bloque_variedades" ReturnType="Collection(BDFloricolaModel.spSelect_Bloque_variedades_Result)">
+          <Parameter Name="blqCodigoI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CLIENTES" EntityType="BDFloricolaModel.CLIENTES" />
+          <AssociationSet Name="FK_PREENVIO_RELATIONS_CLIENTES" Association="BDFloricolaModel.FK_PREENVIO_RELATIONS_CLIENTES">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="PREENVIOS" EntitySet="PREENVIOS" />
+          </AssociationSet>
+          <FunctionImport Name="spSelect_Bloque_numeroCama" ReturnType="Collection(BDFloricolaModel.spSelect_Bloque_numeroCama_Result)">
+          <Parameter Name="blqCodigo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CONCILIACION" EntityType="BDFloricolaModel.CONCILIACION" />
+          <EntitySet Name="CONTROLES_FLOR_NACIONAL" EntityType="BDFloricolaModel.CONTROLES_FLOR_NACIONAL" />
+          <EntitySet Name="TIPOS_FLORES" EntityType="BDFloricolaModel.TIPOS_FLORES" />
+          <AssociationSet Name="FK_CONCILIACION_PREENVIOS" Association="BDFloricolaModel.FK_CONCILIACION_PREENVIOS">
+            <End Role="PREENVIOS" EntitySet="PREENVIOS" />
+            <End Role="CONCILIACION" EntitySet="CONCILIACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLE_RELATIONS_TIPO_CAU" Association="BDFloricolaModel.FK_CONTROLE_RELATIONS_TIPO_CAU">
+            <End Role="TIPO_CAUSAS" EntitySet="TIPO_CAUSAS" />
+            <End Role="CONTROLES_FLOR_NACIONAL" EntitySet="CONTROLES_FLOR_NACIONAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLES_FLOR_NACIONAL_VARIEDADES" Association="BDFloricolaModel.FK_CONTROLES_FLOR_NACIONAL_VARIEDADES">
+            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
+            <End Role="CONTROLES_FLOR_NACIONAL" EntitySet="CONTROLES_FLOR_NACIONAL" />
+          </AssociationSet>
+          <EntitySet Name="ESTADOS" EntityType="BDFloricolaModel.ESTADOS" />
+          <AssociationSet Name="FK_CLIENTES_RELATIONS_ESTADOS" Association="BDFloricolaModel.FK_CLIENTES_RELATIONS_ESTADOS">
+            <End Role="ESTADOS" EntitySet="ESTADOS" />
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESTADOS_RELATIONS_PAICES" Association="BDFloricolaModel.FK_ESTADOS_RELATIONS_PAICES">
+            <End Role="PAICES" EntitySet="PAICES" />
+            <End Role="ESTADOS" EntitySet="ESTADOS" />
+          </AssociationSet>
+          <EntitySet Name="BLOQUES_VARIEDADES" EntityType="BDFloricolaModel.BLOQUES_VARIEDADES" />
+          <AssociationSet Name="FK_BLOQUES_VARIEDADES_BLOQUES" Association="BDFloricolaModel.FK_BLOQUES_VARIEDADES_BLOQUES">
+            <End Role="BLOQUES" EntitySet="BLOQUES" />
+            <End Role="BLOQUES_VARIEDADES" EntitySet="BLOQUES_VARIEDADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BLOQUES_VARIEDADES_VARIEDADES" Association="BDFloricolaModel.FK_BLOQUES_VARIEDADES_VARIEDADES">
+            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
+            <End Role="BLOQUES_VARIEDADES" EntitySet="BLOQUES_VARIEDADES" />
+          </AssociationSet>
+          <EntitySet Name="INGRESO_PRODUCCION" EntityType="BDFloricolaModel.INGRESO_PRODUCCION" />
+          <AssociationSet Name="FK_INGRESO_PRODUCCION_BLOQUES" Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_BLOQUES">
+            <End Role="BLOQUES" EntitySet="BLOQUES" />
+            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INGRESO_PRODUCCION_VARIEDADES1" Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1">
+            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
+            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
+          </AssociationSet>
+          <FunctionImport Name="spSelect_flor_numerotallos" ReturnType="Collection(BDFloricolaModel.spSelect_flor_numerotallos_Result)">
+          <Parameter Name="tpfCodigoI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_tallos_unidad" ReturnType="Collection(BDFloricolaModel.spSelect_tallos_unidad_Result)">
+            <Parameter Name="tpfCodigoI" Mode="In" Type="Int32" />
+            <Parameter Name="undCodigoI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_tallos_unidad_tam" ReturnType="Collection(BDFloricolaModel.spSelect_tallos_unidad_tam_Result)">
+            <Parameter Name="tpfCodigoI" Mode="In" Type="Int32" />
+            <Parameter Name="undCodigoI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsert_detalle_flor_clasificada">
+            <Parameter Name="TMTCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="UNDCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="TPFCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="VRDCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="DTECANTIDAD" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spVerificar_detalle_flor" ReturnType="Collection(BDFloricolaModel.spVerificar_detalle_flor_Result)">
+            <Parameter Name="TPFCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="UNDCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="CONTROL_PRODUCCION" EntityType="BDFloricolaModel.CONTROL_PRODUCCION" />
+          <EntitySet Name="DETALLE_FLOR_CLASIFICADA" EntityType="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA" />
+          <EntitySet Name="DETALLES_PREENVIOS" EntityType="BDFloricolaModel.DETALLES_PREENVIOS" />
+          <EntitySet Name="PROCESO_CLASIFICACION" EntityType="BDFloricolaModel.PROCESO_CLASIFICACION" />
+          <EntitySet Name="TAMANO_TALLOS" EntityType="BDFloricolaModel.TAMANO_TALLOS" />
+          <EntitySet Name="UNIDADES" EntityType="BDFloricolaModel.UNIDADES" />
+          <EntitySet Name="UNIDADES_TAMANIO_TIPO" EntityType="BDFloricolaModel.UNIDADES_TAMANIO_TIPO" />
+          <AssociationSet Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
+            <End Role="CONTROL_PRODUCCION" EntitySet="CONTROL_PRODUCCION" />
+            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTROLE_RELATIONS_PROCESO_" Association="BDFloricolaModel.FK_CONTROLE_RELATIONS_PROCESO_">
+            <End Role="PROCESO_CLASIFICACION" EntitySet="PROCESO_CLASIFICACION" />
+            <End Role="CONTROLES_FLOR_NACIONAL" EntitySet="CONTROLES_FLOR_NACIONAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE__RELATIONS_PROCESO_" Association="BDFloricolaModel.FK_DETALLE__RELATIONS_PROCESO_">
+            <End Role="PROCESO_CLASIFICACION" EntitySet="PROCESO_CLASIFICACION" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE__RELATIONS_TAMANO_T" Association="BDFloricolaModel.FK_DETALLE__RELATIONS_TAMANO_T">
+            <End Role="TAMANO_TALLOS" EntitySet="TAMANO_TALLOS" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE__RELATIONS_TIPOS_FL" Association="BDFloricolaModel.FK_DETALLE__RELATIONS_TIPOS_FL">
+            <End Role="TIPOS_FLORES" EntitySet="TIPOS_FLORES" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE__RELATIONS_UNIDADES" Association="BDFloricolaModel.FK_DETALLE__RELATIONS_UNIDADES">
+            <End Role="UNIDADES" EntitySet="UNIDADES" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES" Association="BDFloricolaModel.FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES">
+            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLES_RELATIONS_DETALLE_" Association="BDFloricolaModel.FK_DETALLES_RELATIONS_DETALLE_">
+            <End Role="DETALLE_FLOR_CLASIFICADA" EntitySet="DETALLE_FLOR_CLASIFICADA" />
+            <End Role="DETALLES_PREENVIOS" EntitySet="DETALLES_PREENVIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLES_RELATIONS_PREENVIO" Association="BDFloricolaModel.FK_DETALLES_RELATIONS_PREENVIO">
+            <End Role="PREENVIOS" EntitySet="PREENVIOS" />
+            <End Role="DETALLES_PREENVIOS" EntitySet="DETALLES_PREENVIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS" Association="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS">
+            <End Role="TAMANO_TALLOS" EntitySet="TAMANO_TALLOS" />
+            <End Role="UNIDADES_TAMANIO_TIPO" EntitySet="UNIDADES_TAMANIO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES" Association="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES">
+            <End Role="TIPOS_FLORES" EntitySet="TIPOS_FLORES" />
+            <End Role="UNIDADES_TAMANIO_TIPO" EntitySet="UNIDADES_TAMANIO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNIDADES_TAMANIO_TIPO_UNIDADES" Association="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_UNIDADES">
+            <End Role="UNIDADES" EntitySet="UNIDADES" />
+            <End Role="UNIDADES_TAMANIO_TIPO" EntitySet="UNIDADES_TAMANIO_TIPO" />
+          </AssociationSet>
+          <FunctionImport Name="spVerificar_proceso_diario" ReturnType="Collection(Int32)">
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="TPFCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="UNDCODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spVerificar_proceso" ReturnType="Collection(Int32)">
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="identificador" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdate_detalle_flor_clasificada">
+            <Parameter Name="DTECODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="TMTCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="UNDCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="TPFCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="VRDCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="DTECANTIDAD" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spInsert_control_flor_nacional">
+            <Parameter Name="TPCCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="VRDCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="CFNCANTIDAD" Mode="In" Type="Int32" />
+            <Parameter Name="CFNOBSERVACION" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spVerificar_control_flor_nacional" ReturnType="Collection(BDFloricolaModel.spVerificar_control_flor_nacional_Result)">
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="CAUCODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdate_control_flor_nacional">
+            <Parameter Name="CFNCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="TPCCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="VRDCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="CFNCANTIDAD" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          </EntityContainer>
+        <EntityType Name="EMPRESAS">
+          <Key>
+            <PropertyRef Name="EMPCODIGOI" />
+          </Key>
+          <Property Name="EMPCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMPRUC" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="EMPNOMBREC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMPDIRECCION" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="EMPTELEFOC" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="EMPLEADOS" Relationship="BDFloricolaModel.FK_EMPLEADO_RELATIONS_EMPRESAS" FromRole="EMPRESAS" ToRole="EMPLEADOS" />
+          <NavigationProperty Name="FINCAS" Relationship="BDFloricolaModel.FK_FINCAS_RELATIONS_EMPRESAS" FromRole="EMPRESAS" ToRole="FINCAS" />
+        </EntityType>
+        <Association Name="FK_EMPLEADO_RELATIONS_EMPRESAS">
+          <End Type="BDFloricolaModel.EMPRESAS" Role="EMPRESAS" Multiplicity="1" />
+          <End Type="BDFloricolaModel.EMPLEADOS" Role="EMPLEADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="EMPCODIGOI" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="EMPCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FINCAS_RELATIONS_EMPRESAS">
+          <End Type="BDFloricolaModel.EMPRESAS" Role="EMPRESAS" Multiplicity="1" />
+          <End Type="BDFloricolaModel.FINCAS" Role="FINCAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="EMPCODIGOI" />
+            </Principal>
+            <Dependent Role="FINCAS">
+              <PropertyRef Name="EMPCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spSelect_Bloque_variedades_Result">
+          <Property Type="Int32" Name="BLQCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="VRDCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="BLQIDENTIFIC" Nullable="false" />
+          <Property Type="String" Name="VRDNOMBREC" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="CLNCODIGOI" />
+          </Key>
+          <Property Name="CLNCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ESTCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="CLNRUC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="CLNRAZONSOCIAL" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="CLNDIRECCION" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="CLNCONSIGNATARIO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CLNTELEFONO" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="PREENVIOS" Relationship="BDFloricolaModel.FK_PREENVIO_RELATIONS_CLIENTES" FromRole="CLIENTES" ToRole="PREENVIOS" />
+          <NavigationProperty Name="ESTADOS" Relationship="BDFloricolaModel.FK_CLIENTES_RELATIONS_ESTADOS" FromRole="CLIENTES" ToRole="ESTADOS" />
+        </EntityType>
+        <Association Name="FK_PREENVIO_RELATIONS_CLIENTES">
+          <End Type="BDFloricolaModel.CLIENTES" Role="CLIENTES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.PREENVIOS" Role="PREENVIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="CLNCODIGOI" />
+            </Principal>
+            <Dependent Role="PREENVIOS">
+              <PropertyRef Name="CLNCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spSelect_Bloque_numeroCama_Result">
+          <Property Type="Int32" Name="BLVNUMEROCAMA" Nullable="false" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CONCILIACION">
+          <Key>
+            <PropertyRef Name="CNCCODIGOI" />
+          </Key>
+          <Property Name="CNCCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="PRECODIGOI" Type="Int32" />
+          <Property Name="CNCFECHA" Type="DateTime" Precision="3" />
+          <Property Name="CNCESTADO" Type="Boolean" />
+          <Property Name="CNCOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PREENVIOS" Relationship="BDFloricolaModel.FK_CONCILIACION_PREENVIOS" FromRole="CONCILIACION" ToRole="PREENVIOS" />
+        </EntityType>
+        <EntityType Name="CONTROLES_FLOR_NACIONAL">
+          <Key>
+            <PropertyRef Name="CFNCODIGOI" />
+          </Key>
+          <Property Name="CFNCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TPCCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="PRCCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="VRDCODIGOI" Type="Int32" />
+          <Property Name="CFNCANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="CFNOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TIPO_CAUSAS" Relationship="BDFloricolaModel.FK_CONTROLE_RELATIONS_TIPO_CAU" FromRole="CONTROLES_FLOR_NACIONAL" ToRole="TIPO_CAUSAS" />
+          <NavigationProperty Name="VARIEDADES" Relationship="BDFloricolaModel.FK_CONTROLES_FLOR_NACIONAL_VARIEDADES" FromRole="CONTROLES_FLOR_NACIONAL" ToRole="VARIEDADES" />
+          <NavigationProperty Name="PROCESO_CLASIFICACION" Relationship="BDFloricolaModel.FK_CONTROLE_RELATIONS_PROCESO_" FromRole="CONTROLES_FLOR_NACIONAL" ToRole="PROCESO_CLASIFICACION" />
+        </EntityType>
+        <EntityType Name="TIPOS_FLORES">
+          <Key>
+            <PropertyRef Name="TPFCODIGOI" />
+          </Key>
+          <Property Name="TPFCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TPFDESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETALLE_FLOR_CLASIFICADA" Relationship="BDFloricolaModel.FK_DETALLE__RELATIONS_TIPOS_FL" FromRole="TIPOS_FLORES" ToRole="DETALLE_FLOR_CLASIFICADA" />
+          <NavigationProperty Name="UNIDADES_TAMANIO_TIPO" Relationship="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES" FromRole="TIPOS_FLORES" ToRole="UNIDADES_TAMANIO_TIPO" />
+        </EntityType>
+        <Association Name="FK_CONCILIACION_PREENVIOS">
+          <End Type="BDFloricolaModel.PREENVIOS" Role="PREENVIOS" Multiplicity="0..1" />
+          <End Type="BDFloricolaModel.CONCILIACION" Role="CONCILIACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREENVIOS">
+              <PropertyRef Name="PRECODIGOI" />
+            </Principal>
+            <Dependent Role="CONCILIACION">
+              <PropertyRef Name="PRECODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLE_RELATIONS_TIPO_CAU">
+          <End Type="BDFloricolaModel.TIPO_CAUSAS" Role="TIPO_CAUSAS" Multiplicity="1" />
+          <End Type="BDFloricolaModel.CONTROLES_FLOR_NACIONAL" Role="CONTROLES_FLOR_NACIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CAUSAS">
+              <PropertyRef Name="TPCCODIGOI" />
+            </Principal>
+            <Dependent Role="CONTROLES_FLOR_NACIONAL">
+              <PropertyRef Name="TPCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLES_FLOR_NACIONAL_VARIEDADES">
+          <End Type="BDFloricolaModel.VARIEDADES" Role="VARIEDADES" Multiplicity="0..1" />
+          <End Type="BDFloricolaModel.CONTROLES_FLOR_NACIONAL" Role="CONTROLES_FLOR_NACIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Principal>
+            <Dependent Role="CONTROLES_FLOR_NACIONAL">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ESTADOS">
+          <Key>
+            <PropertyRef Name="ESTCODIGOI" />
+          </Key>
+          <Property Name="ESTCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PAICODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="ESTNOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTES" Relationship="BDFloricolaModel.FK_CLIENTES_RELATIONS_ESTADOS" FromRole="ESTADOS" ToRole="CLIENTES" />
+          <NavigationProperty Name="PAICES" Relationship="BDFloricolaModel.FK_ESTADOS_RELATIONS_PAICES" FromRole="ESTADOS" ToRole="PAICES" />
+        </EntityType>
+        <Association Name="FK_CLIENTES_RELATIONS_ESTADOS">
+          <End Type="BDFloricolaModel.ESTADOS" Role="ESTADOS" Multiplicity="1" />
+          <End Type="BDFloricolaModel.CLIENTES" Role="CLIENTES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOS">
+              <PropertyRef Name="ESTCODIGOI" />
+            </Principal>
+            <Dependent Role="CLIENTES">
+              <PropertyRef Name="ESTCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESTADOS_RELATIONS_PAICES">
+          <End Type="BDFloricolaModel.PAICES" Role="PAICES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.ESTADOS" Role="ESTADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAICES">
+              <PropertyRef Name="PAICODIGOI" />
+            </Principal>
+            <Dependent Role="ESTADOS">
+              <PropertyRef Name="PAICODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BLOQUES_VARIEDADES">
+          <Key>
+            <PropertyRef Name="BLVCODIGOI" />
+          </Key>
+          <Property Name="BLVCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BLQCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="VRDCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="BLVNUMEROCAMA" Type="Int32" />
+          <Property Name="BLVCANTIDAD" Type="Int32" />
+          <Property Name="BLVOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="BLVFECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BLOQUES" Relationship="BDFloricolaModel.FK_BLOQUES_VARIEDADES_BLOQUES" FromRole="BLOQUES_VARIEDADES" ToRole="BLOQUES" />
+          <NavigationProperty Name="VARIEDADES" Relationship="BDFloricolaModel.FK_BLOQUES_VARIEDADES_VARIEDADES" FromRole="BLOQUES_VARIEDADES" ToRole="VARIEDADES" />
+        </EntityType>
+        <Association Name="FK_BLOQUES_VARIEDADES_BLOQUES">
+          <End Type="BDFloricolaModel.BLOQUES" Role="BLOQUES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.BLOQUES_VARIEDADES" Role="BLOQUES_VARIEDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BLOQUES">
+              <PropertyRef Name="BLQCODIGOI" />
+            </Principal>
+            <Dependent Role="BLOQUES_VARIEDADES">
+              <PropertyRef Name="BLQCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BLOQUES_VARIEDADES_VARIEDADES">
+          <End Type="BDFloricolaModel.VARIEDADES" Role="VARIEDADES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.BLOQUES_VARIEDADES" Role="BLOQUES_VARIEDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Principal>
+            <Dependent Role="BLOQUES_VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="INGRESO_PRODUCCION">
+          <Key>
+            <PropertyRef Name="INPCODIGOI" />
+          </Key>
+          <Property Name="INPCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BLCCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="VRDCODIGOI" Type="Int32" />
+          <Property Name="CNPCODIGOI" Type="Int32" />
+          <Property Name="INPNUMMALLAS" Type="Int32" Nullable="false" />
+          <Property Name="INPFECHA" Type="DateTime" Precision="3" />
+          <Property Name="INPCANTIDADTALLOS" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BLOQUES" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_BLOQUES" FromRole="INGRESO_PRODUCCION" ToRole="BLOQUES" />
+          <NavigationProperty Name="VARIEDADES" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1" FromRole="INGRESO_PRODUCCION" ToRole="VARIEDADES" />
+          <NavigationProperty Name="CONTROL_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" FromRole="INGRESO_PRODUCCION" ToRole="CONTROL_PRODUCCION" />
+        </EntityType>
+        <Association Name="FK_INGRESO_PRODUCCION_BLOQUES">
+          <End Type="BDFloricolaModel.BLOQUES" Role="BLOQUES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.INGRESO_PRODUCCION" Role="INGRESO_PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BLOQUES">
+              <PropertyRef Name="BLQCODIGOI" />
+            </Principal>
+            <Dependent Role="INGRESO_PRODUCCION">
+              <PropertyRef Name="BLCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INGRESO_PRODUCCION_VARIEDADES1">
+          <End Type="BDFloricolaModel.VARIEDADES" Role="VARIEDADES" Multiplicity="0..1" />
+          <End Type="BDFloricolaModel.INGRESO_PRODUCCION" Role="INGRESO_PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Principal>
+            <Dependent Role="INGRESO_PRODUCCION">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spSelect_flor_numerotallos_Result">
+          <Property Type="String" Name="TPFDESCRIPCION" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spSelect_tallos_unidad_Result">
+          <Property Type="String" Name="TPFDESCRIPCION" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+          <Property Type="String" Name="TMTDESCRIPC" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="spSelect_tallos_unidad_tam_Result">
+          <Property Type="String" Name="TPFDESCRIPCION" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+          <Property Type="String" Name="TMTDESCRIPC" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="TMTCODIGOI" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spVerificar_detalle_flor_Result">
+          <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="TMTCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="PRCCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="VRDCODIGOI" Nullable="false" />
+          <Property Type="DateTime" Name="DTEFECHAINGRESO" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="CONTROL_PRODUCCION">
+          <Key>
+            <PropertyRef Name="CNPCODIGOI" />
+          </Key>
+          <Property Name="CNPCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="CNPFECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CNPOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="INGRESO_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" FromRole="CONTROL_PRODUCCION" ToRole="INGRESO_PRODUCCION" />
+        </EntityType>
+        <EntityType Name="DETALLE_FLOR_CLASIFICADA">
+          <Key>
+            <PropertyRef Name="DTECODIGOI" />
+          </Key>
+          <Property Name="DTECODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TMTCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="UNDCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="TPFCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="PRCCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="VRDCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="DTEFECHAINGRESO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DTECANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="DTEOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PROCESO_CLASIFICACION" Relationship="BDFloricolaModel.FK_DETALLE__RELATIONS_PROCESO_" FromRole="DETALLE_FLOR_CLASIFICADA" ToRole="PROCESO_CLASIFICACION" />
+          <NavigationProperty Name="TAMANO_TALLOS" Relationship="BDFloricolaModel.FK_DETALLE__RELATIONS_TAMANO_T" FromRole="DETALLE_FLOR_CLASIFICADA" ToRole="TAMANO_TALLOS" />
+          <NavigationProperty Name="TIPOS_FLORES" Relationship="BDFloricolaModel.FK_DETALLE__RELATIONS_TIPOS_FL" FromRole="DETALLE_FLOR_CLASIFICADA" ToRole="TIPOS_FLORES" />
+          <NavigationProperty Name="UNIDADES" Relationship="BDFloricolaModel.FK_DETALLE__RELATIONS_UNIDADES" FromRole="DETALLE_FLOR_CLASIFICADA" ToRole="UNIDADES" />
+          <NavigationProperty Name="VARIEDADES" Relationship="BDFloricolaModel.FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES" FromRole="DETALLE_FLOR_CLASIFICADA" ToRole="VARIEDADES" />
+          <NavigationProperty Name="DETALLES_PREENVIOS" Relationship="BDFloricolaModel.FK_DETALLES_RELATIONS_DETALLE_" FromRole="DETALLE_FLOR_CLASIFICADA" ToRole="DETALLES_PREENVIOS" />
+        </EntityType>
+        <EntityType Name="DETALLES_PREENVIOS">
+          <Key>
+            <PropertyRef Name="DTPCODIGOI" />
+          </Key>
+          <Property Name="DTPCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DTECODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="PRECODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="DTPCANTIDAD" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DETALLE_FLOR_CLASIFICADA" Relationship="BDFloricolaModel.FK_DETALLES_RELATIONS_DETALLE_" FromRole="DETALLES_PREENVIOS" ToRole="DETALLE_FLOR_CLASIFICADA" />
+          <NavigationProperty Name="PREENVIOS" Relationship="BDFloricolaModel.FK_DETALLES_RELATIONS_PREENVIO" FromRole="DETALLES_PREENVIOS" ToRole="PREENVIOS" />
+        </EntityType>
+        <EntityType Name="PROCESO_CLASIFICACION">
+          <Key>
+            <PropertyRef Name="PRCCODIGOI" />
+          </Key>
+          <Property Name="PRCCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRCOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PRCFECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PRCESTADO" Type="Boolean" />
+          <Property Name="PCRIDENTIFICADOR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CONTROLES_FLOR_NACIONAL" Relationship="BDFloricolaModel.FK_CONTROLE_RELATIONS_PROCESO_" FromRole="PROCESO_CLASIFICACION" ToRole="CONTROLES_FLOR_NACIONAL" />
+          <NavigationProperty Name="DETALLE_FLOR_CLASIFICADA" Relationship="BDFloricolaModel.FK_DETALLE__RELATIONS_PROCESO_" FromRole="PROCESO_CLASIFICACION" ToRole="DETALLE_FLOR_CLASIFICADA" />
+        </EntityType>
+        <EntityType Name="TAMANO_TALLOS">
+          <Key>
+            <PropertyRef Name="TMTCODIGOI" />
+          </Key>
+          <Property Name="TMTCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TMTDESCRIPC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETALLE_FLOR_CLASIFICADA" Relationship="BDFloricolaModel.FK_DETALLE__RELATIONS_TAMANO_T" FromRole="TAMANO_TALLOS" ToRole="DETALLE_FLOR_CLASIFICADA" />
+          <NavigationProperty Name="UNIDADES_TAMANIO_TIPO" Relationship="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS" FromRole="TAMANO_TALLOS" ToRole="UNIDADES_TAMANIO_TIPO" />
+        </EntityType>
+        <EntityType Name="UNIDADES">
+          <Key>
+            <PropertyRef Name="UNDCODIGOI" />
+          </Key>
+          <Property Name="UNDCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UNDDESCRIPCION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETALLE_FLOR_CLASIFICADA" Relationship="BDFloricolaModel.FK_DETALLE__RELATIONS_UNIDADES" FromRole="UNIDADES" ToRole="DETALLE_FLOR_CLASIFICADA" />
+          <NavigationProperty Name="UNIDADES_TAMANIO_TIPO" Relationship="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_UNIDADES" FromRole="UNIDADES" ToRole="UNIDADES_TAMANIO_TIPO" />
+        </EntityType>
+        <EntityType Name="UNIDADES_TAMANIO_TIPO">
+          <Key>
+            <PropertyRef Name="UTTCODIGOI" />
+          </Key>
+          <Property Name="UTTCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="UNDCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="TPFCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="TMTCODIGOI" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAMANO_TALLOS" Relationship="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS" FromRole="UNIDADES_TAMANIO_TIPO" ToRole="TAMANO_TALLOS" />
+          <NavigationProperty Name="TIPOS_FLORES" Relationship="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES" FromRole="UNIDADES_TAMANIO_TIPO" ToRole="TIPOS_FLORES" />
+          <NavigationProperty Name="UNIDADES" Relationship="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_UNIDADES" FromRole="UNIDADES_TAMANIO_TIPO" ToRole="UNIDADES" />
+        </EntityType>
+        <Association Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
+          <End Type="BDFloricolaModel.CONTROL_PRODUCCION" Role="CONTROL_PRODUCCION" Multiplicity="0..1" />
+          <End Type="BDFloricolaModel.INGRESO_PRODUCCION" Role="INGRESO_PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTROL_PRODUCCION">
+              <PropertyRef Name="CNPCODIGOI" />
+            </Principal>
+            <Dependent Role="INGRESO_PRODUCCION">
+              <PropertyRef Name="CNPCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTROLE_RELATIONS_PROCESO_">
+          <End Type="BDFloricolaModel.PROCESO_CLASIFICACION" Role="PROCESO_CLASIFICACION" Multiplicity="1" />
+          <End Type="BDFloricolaModel.CONTROLES_FLOR_NACIONAL" Role="CONTROLES_FLOR_NACIONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCESO_CLASIFICACION">
+              <PropertyRef Name="PRCCODIGOI" />
+            </Principal>
+            <Dependent Role="CONTROLES_FLOR_NACIONAL">
+              <PropertyRef Name="PRCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE__RELATIONS_PROCESO_">
+          <End Type="BDFloricolaModel.PROCESO_CLASIFICACION" Role="PROCESO_CLASIFICACION" Multiplicity="1" />
+          <End Type="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA" Role="DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCESO_CLASIFICACION">
+              <PropertyRef Name="PRCCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="PRCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE__RELATIONS_TAMANO_T">
+          <End Type="BDFloricolaModel.TAMANO_TALLOS" Role="TAMANO_TALLOS" Multiplicity="1" />
+          <End Type="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA" Role="DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAMANO_TALLOS">
+              <PropertyRef Name="TMTCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="TMTCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE__RELATIONS_TIPOS_FL">
+          <End Type="BDFloricolaModel.TIPOS_FLORES" Role="TIPOS_FLORES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA" Role="DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOS_FLORES">
+              <PropertyRef Name="TPFCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="TPFCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE__RELATIONS_UNIDADES">
+          <End Type="BDFloricolaModel.UNIDADES" Role="UNIDADES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA" Role="DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADES">
+              <PropertyRef Name="UNDCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="UNDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES">
+          <End Type="BDFloricolaModel.VARIEDADES" Role="VARIEDADES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA" Role="DETALLE_FLOR_CLASIFICADA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLES_RELATIONS_DETALLE_">
+          <End Type="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA" Role="DETALLE_FLOR_CLASIFICADA" Multiplicity="1" />
+          <End Type="BDFloricolaModel.DETALLES_PREENVIOS" Role="DETALLES_PREENVIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_FLOR_CLASIFICADA">
+              <PropertyRef Name="DTECODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLES_PREENVIOS">
+              <PropertyRef Name="DTECODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLES_RELATIONS_PREENVIO">
+          <End Type="BDFloricolaModel.PREENVIOS" Role="PREENVIOS" Multiplicity="1" />
+          <End Type="BDFloricolaModel.DETALLES_PREENVIOS" Role="DETALLES_PREENVIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREENVIOS">
+              <PropertyRef Name="PRECODIGOI" />
+            </Principal>
+            <Dependent Role="DETALLES_PREENVIOS">
+              <PropertyRef Name="PRECODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS">
+          <End Type="BDFloricolaModel.TAMANO_TALLOS" Role="TAMANO_TALLOS" Multiplicity="1" />
+          <End Type="BDFloricolaModel.UNIDADES_TAMANIO_TIPO" Role="UNIDADES_TAMANIO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAMANO_TALLOS">
+              <PropertyRef Name="TMTCODIGOI" />
+            </Principal>
+            <Dependent Role="UNIDADES_TAMANIO_TIPO">
+              <PropertyRef Name="TMTCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES">
+          <End Type="BDFloricolaModel.TIPOS_FLORES" Role="TIPOS_FLORES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.UNIDADES_TAMANIO_TIPO" Role="UNIDADES_TAMANIO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOS_FLORES">
+              <PropertyRef Name="TPFCODIGOI" />
+            </Principal>
+            <Dependent Role="UNIDADES_TAMANIO_TIPO">
+              <PropertyRef Name="TPFCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNIDADES_TAMANIO_TIPO_UNIDADES">
+          <End Type="BDFloricolaModel.UNIDADES" Role="UNIDADES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.UNIDADES_TAMANIO_TIPO" Role="UNIDADES_TAMANIO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADES">
+              <PropertyRef Name="UNDCODIGOI" />
+            </Principal>
+            <Dependent Role="UNIDADES_TAMANIO_TIPO">
+              <PropertyRef Name="UNDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spVerificar_control_flor_nacional_Result">
+          <Property Type="Int32" Name="CFNCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="TPCCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="PRCCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="VRDCODIGOI" Nullable="true" />
+          <Property Type="Int32" Name="CFNCANTIDAD" Nullable="false" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDFloricolaModelStoreContainer" CdmEntityContainer="BDFloricolaContext">
+          <EntitySetMapping Name="BLOQUES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.BLOQUES">
+              <MappingFragment StoreEntitySet="BLOQUES">
+                <ScalarProperty Name="BLQCODIGOI" ColumnName="BLQCODIGOI" />
+                <ScalarProperty Name="FNCCODIGOI" ColumnName="FNCCODIGOI" />
+                <ScalarProperty Name="BLQIDENTIFIC" ColumnName="BLQIDENTIFIC" />
+                <ScalarProperty Name="BLQNUMCAMAS" ColumnName="BLQNUMCAMAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAUSAS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.CAUSAS">
+              <MappingFragment StoreEntitySet="CAUSAS">
+                <ScalarProperty Name="CAUCODIGOI" ColumnName="CAUCODIGOI" />
+                <ScalarProperty Name="CAUDESCRIPCION" ColumnName="CAUDESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADOS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.EMPLEADOS">
+              <MappingFragment StoreEntitySet="EMPLEADOS">
+                <ScalarProperty Name="EPLCODIGOI" ColumnName="EPLCODIGOI" />
+                <ScalarProperty Name="EMPCODIGOI" ColumnName="EMPCODIGOI" />
+                <ScalarProperty Name="EPLCEDULA" ColumnName="EPLCEDULA" />
+                <ScalarProperty Name="EPLAPELLIDOP" ColumnName="EPLAPELLIDOP" />
+                <ScalarProperty Name="EPLAPELLIDOM" ColumnName="EPLAPELLIDOM" />
+                <ScalarProperty Name="EPLNOMBRES" ColumnName="EPLNOMBRES" />
+                <ScalarProperty Name="EPLDIRECCION" ColumnName="EPLDIRECCION" />
+                <ScalarProperty Name="EPLTELEFONO" ColumnName="EPLTELEFONO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FINCAS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.FINCAS">
+              <MappingFragment StoreEntitySet="FINCAS">
+                <ScalarProperty Name="FNCCODIGOI" ColumnName="FNCCODIGOI" />
+                <ScalarProperty Name="EMPCODIGOI" ColumnName="EMPCODIGOI" />
+                <ScalarProperty Name="FNCNOMBREC" ColumnName="FNCNOMBREC" />
+                <ScalarProperty Name="FNCDIRECCION" ColumnName="FNCDIRECCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MODULOS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.MODULOS">
+              <MappingFragment StoreEntitySet="MODULOS">
+                <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
+                <ScalarProperty Name="MODDESCRIPCION" ColumnName="MODDESCRIPCION" />
+                <ScalarProperty Name="MODURL" ColumnName="MODURL" />
+                <ScalarProperty Name="MODNIVEL" ColumnName="MODNIVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MODULOS_PERFILES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.MODULOS_PERFILES">
+              <MappingFragment StoreEntitySet="MODULOS_PERFILES">
+                <ScalarProperty Name="MOPCODIGOI" ColumnName="MOPCODIGOI" />
+                <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
+                <ScalarProperty Name="PERCODIGOI" ColumnName="PERCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAICES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.PAICES">
+              <MappingFragment StoreEntitySet="PAICES">
+                <ScalarProperty Name="PAICODIGOI" ColumnName="PAICODIGOI" />
+                <ScalarProperty Name="PAINOMBRE" ColumnName="PAINOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERFILES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.PERFILES">
+              <MappingFragment StoreEntitySet="PERFILES">
+                <ScalarProperty Name="PERCODIGOI" ColumnName="PERCODIGOI" />
+                <ScalarProperty Name="PERDESCRIPCION" ColumnName="PERDESCRIPCION" />
+                <ScalarProperty Name="PERESTADO" ColumnName="PERESTADO" />
+                <ScalarProperty Name="PEROBSERVACION" ColumnName="PEROBSERVACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PREENVIOS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.PREENVIOS">
+              <MappingFragment StoreEntitySet="PREENVIOS">
+                <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+                <ScalarProperty Name="CLNCODIGOI" ColumnName="CLNCODIGOI" />
+                <ScalarProperty Name="PREFECHA" ColumnName="PREFECHA" />
+                <ScalarProperty Name="PRENUMERO" ColumnName="PRENUMERO" />
+                <ScalarProperty Name="PREAWB" ColumnName="PREAWB" />
+                <ScalarProperty Name="PREHAWB" ColumnName="PREHAWB" />
+                <ScalarProperty Name="PRENUMPIEZAS" ColumnName="PRENUMPIEZAS" />
+                <ScalarProperty Name="PREIDCAJAS" ColumnName="PREIDCAJAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CAUSAS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.TIPO_CAUSAS">
+              <MappingFragment StoreEntitySet="TIPO_CAUSAS">
+                <ScalarProperty Name="TPCCODIGOI" ColumnName="TPCCODIGOI" />
+                <ScalarProperty Name="CAUCODIGOI" ColumnName="CAUCODIGOI" />
+                <ScalarProperty Name="TPCDESCRIPCION" ColumnName="TPCDESCRIPCION" />
+                <ScalarProperty Name="TPCESTADO" ColumnName="TPCESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.USUARIOS">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="USRCODIGOI" ColumnName="USRCODIGOI" />
+                <ScalarProperty Name="EPLCODIGOI" ColumnName="EPLCODIGOI" />
+                <ScalarProperty Name="USRLOGIN" ColumnName="USRLOGIN" />
+                <ScalarProperty Name="USRPASSWORD" ColumnName="USRPASSWORD" />
+                <ScalarProperty Name="USRESTADO" ColumnName="USRESTADO" />
+                <ScalarProperty Name="USRESTADOCAMBIO" ColumnName="USRESTADOCAMBIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS_PERFILES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.USUARIOS_PERFILES">
+              <MappingFragment StoreEntitySet="USUARIOS_PERFILES">
+                <ScalarProperty Name="USPCODIGOI" ColumnName="USPCODIGOI" />
+                <ScalarProperty Name="USRCODIGOI" ColumnName="USRCODIGOI" />
+                <ScalarProperty Name="PERCODIGOI" ColumnName="PERCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VARIEDADES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.VARIEDADES">
+              <MappingFragment StoreEntitySet="VARIEDADES">
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="VRDIDENTIFIC" ColumnName="VRDIDENTIFIC" />
+                <ScalarProperty Name="VRDNOMBREC" ColumnName="VRDNOMBREC" />
+                <ScalarProperty Name="VRDCOLOR" ColumnName="VRDCOLOR" />
+                <ScalarProperty Name="VRDESTADO" ColumnName="VRDESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESAS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.EMPRESAS">
+              <MappingFragment StoreEntitySet="EMPRESAS">
+                <ScalarProperty Name="EMPTELEFOC" ColumnName="EMPTELEFOC" />
+                <ScalarProperty Name="EMPDIRECCION" ColumnName="EMPDIRECCION" />
+                <ScalarProperty Name="EMPNOMBREC" ColumnName="EMPNOMBREC" />
+                <ScalarProperty Name="EMPRUC" ColumnName="EMPRUC" />
+                <ScalarProperty Name="EMPCODIGOI" ColumnName="EMPCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.CLIENTES">
+              <MappingFragment StoreEntitySet="CLIENTES">
+                <ScalarProperty Name="CLNTELEFONO" ColumnName="CLNTELEFONO" />
+                <ScalarProperty Name="CLNCONSIGNATARIO" ColumnName="CLNCONSIGNATARIO" />
+                <ScalarProperty Name="CLNDIRECCION" ColumnName="CLNDIRECCION" />
+                <ScalarProperty Name="CLNRAZONSOCIAL" ColumnName="CLNRAZONSOCIAL" />
+                <ScalarProperty Name="CLNRUC" ColumnName="CLNRUC" />
+                <ScalarProperty Name="ESTCODIGOI" ColumnName="ESTCODIGOI" />
+                <ScalarProperty Name="CLNCODIGOI" ColumnName="CLNCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONCILIACION">
+            <EntityTypeMapping TypeName="BDFloricolaModel.CONCILIACION">
+              <MappingFragment StoreEntitySet="CONCILIACION">
+                <ScalarProperty Name="CNCOBSERVACION" ColumnName="CNCOBSERVACION" />
+                <ScalarProperty Name="CNCESTADO" ColumnName="CNCESTADO" />
+                <ScalarProperty Name="CNCFECHA" ColumnName="CNCFECHA" />
+                <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+                <ScalarProperty Name="CNCCODIGOI" ColumnName="CNCCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTROLES_FLOR_NACIONAL">
+            <EntityTypeMapping TypeName="BDFloricolaModel.CONTROLES_FLOR_NACIONAL">
+              <MappingFragment StoreEntitySet="CONTROLES_FLOR_NACIONAL">
+                <ScalarProperty Name="CFNOBSERVACION" ColumnName="CFNOBSERVACION" />
+                <ScalarProperty Name="CFNCANTIDAD" ColumnName="CFNCANTIDAD" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+                <ScalarProperty Name="TPCCODIGOI" ColumnName="TPCCODIGOI" />
+                <ScalarProperty Name="CFNCODIGOI" ColumnName="CFNCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOS_FLORES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.TIPOS_FLORES">
+              <MappingFragment StoreEntitySet="TIPOS_FLORES">
+                <ScalarProperty Name="TPFDESCRIPCION" ColumnName="TPFDESCRIPCION" />
+                <ScalarProperty Name="TPFCODIGOI" ColumnName="TPFCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADOS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.ESTADOS">
+              <MappingFragment StoreEntitySet="ESTADOS">
+                <ScalarProperty Name="ESTNOMBRE" ColumnName="ESTNOMBRE" />
+                <ScalarProperty Name="PAICODIGOI" ColumnName="PAICODIGOI" />
+                <ScalarProperty Name="ESTCODIGOI" ColumnName="ESTCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BLOQUES_VARIEDADES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.BLOQUES_VARIEDADES">
+              <MappingFragment StoreEntitySet="BLOQUES_VARIEDADES">
+                <ScalarProperty Name="BLVFECHA" ColumnName="BLVFECHA" />
+                <ScalarProperty Name="BLVOBSERVACION" ColumnName="BLVOBSERVACION" />
+                <ScalarProperty Name="BLVCANTIDAD" ColumnName="BLVCANTIDAD" />
+                <ScalarProperty Name="BLVNUMEROCAMA" ColumnName="BLVNUMEROCAMA" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="BLQCODIGOI" ColumnName="BLQCODIGOI" />
+                <ScalarProperty Name="BLVCODIGOI" ColumnName="BLVCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INGRESO_PRODUCCION">
+            <EntityTypeMapping TypeName="BDFloricolaModel.INGRESO_PRODUCCION">
+              <MappingFragment StoreEntitySet="INGRESO_PRODUCCION">
+                <ScalarProperty Name="INPCANTIDADTALLOS" ColumnName="INPCANTIDADTALLOS" />
+                <ScalarProperty Name="INPFECHA" ColumnName="INPFECHA" />
+                <ScalarProperty Name="INPNUMMALLAS" ColumnName="INPNUMMALLAS" />
+                <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="BLCCODIGOI" ColumnName="BLCCODIGOI" />
+                <ScalarProperty Name="INPCODIGOI" ColumnName="INPCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_flor_numerotallos" FunctionName="BDFloricolaModel.Store.spSelect_flor_numerotallos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_flor_numerotallos_Result">
+                <ScalarProperty Name="TPFDESCRIPCION" ColumnName="TPFDESCRIPCION" />
+                <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_tallos_unidad" FunctionName="BDFloricolaModel.Store.spSelect_tallos_unidad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_tallos_unidad_Result">
+                <ScalarProperty Name="TPFDESCRIPCION" ColumnName="TPFDESCRIPCION" />
+                <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+                <ScalarProperty Name="TMTDESCRIPC" ColumnName="TMTDESCRIPC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_tallos_unidad_tam" FunctionName="BDFloricolaModel.Store.spSelect_tallos_unidad_tam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_tallos_unidad_tam_Result">
+                <ScalarProperty Name="TPFDESCRIPCION" ColumnName="TPFDESCRIPCION" />
+                <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+                <ScalarProperty Name="TMTDESCRIPC" ColumnName="TMTDESCRIPC" />
+                <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spInsert_detalle_flor_clasificada" FunctionName="BDFloricolaModel.Store.spInsert_detalle_flor_clasificada" />
+          <FunctionImportMapping FunctionImportName="spVerificar_detalle_flor" FunctionName="BDFloricolaModel.Store.spVerificar_detalle_flor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spVerificar_detalle_flor_Result">
+                <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+                <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+                <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="DTEFECHAINGRESO" ColumnName="DTEFECHAINGRESO" />
+                <ScalarProperty Name="DTECANTIDAD" ColumnName="DTECANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CONTROL_PRODUCCION">
+            <EntityTypeMapping TypeName="BDFloricolaModel.CONTROL_PRODUCCION">
+              <MappingFragment StoreEntitySet="CONTROL_PRODUCCION">
+                <ScalarProperty Name="CNPOBSERVACION" ColumnName="CNPOBSERVACION" />
+                <ScalarProperty Name="CNPFECHA" ColumnName="CNPFECHA" />
+                <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_FLOR_CLASIFICADA">
+            <EntityTypeMapping TypeName="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA">
+              <MappingFragment StoreEntitySet="DETALLE_FLOR_CLASIFICADA">
+                <ScalarProperty Name="DTEOBSERVACION" ColumnName="DTEOBSERVACION" />
+                <ScalarProperty Name="DTECANTIDAD" ColumnName="DTECANTIDAD" />
+                <ScalarProperty Name="DTEFECHAINGRESO" ColumnName="DTEFECHAINGRESO" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+                <ScalarProperty Name="TPFCODIGOI" ColumnName="TPFCODIGOI" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+                <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+                <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLES_PREENVIOS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.DETALLES_PREENVIOS">
+              <MappingFragment StoreEntitySet="DETALLES_PREENVIOS">
+                <ScalarProperty Name="DTPCANTIDAD" ColumnName="DTPCANTIDAD" />
+                <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+                <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+                <ScalarProperty Name="DTPCODIGOI" ColumnName="DTPCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROCESO_CLASIFICACION">
+            <EntityTypeMapping TypeName="BDFloricolaModel.PROCESO_CLASIFICACION">
+              <MappingFragment StoreEntitySet="PROCESO_CLASIFICACION">
+                <ScalarProperty Name="PCRIDENTIFICADOR" ColumnName="PCRIDENTIFICADOR" />
+                <ScalarProperty Name="PRCESTADO" ColumnName="PRCESTADO" />
+                <ScalarProperty Name="PRCFECHA" ColumnName="PRCFECHA" />
+                <ScalarProperty Name="PRCOBSERVACION" ColumnName="PRCOBSERVACION" />
+                <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAMANO_TALLOS">
+            <EntityTypeMapping TypeName="BDFloricolaModel.TAMANO_TALLOS">
+              <MappingFragment StoreEntitySet="TAMANO_TALLOS">
+                <ScalarProperty Name="TMTDESCRIPC" ColumnName="TMTDESCRIPC" />
+                <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNIDADES">
+            <EntityTypeMapping TypeName="BDFloricolaModel.UNIDADES">
+              <MappingFragment StoreEntitySet="UNIDADES">
+                <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNIDADES_TAMANIO_TIPO">
+            <EntityTypeMapping TypeName="BDFloricolaModel.UNIDADES_TAMANIO_TIPO">
+              <MappingFragment StoreEntitySet="UNIDADES_TAMANIO_TIPO">
+                <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+                <ScalarProperty Name="TPFCODIGOI" ColumnName="TPFCODIGOI" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+                <ScalarProperty Name="UTTCODIGOI" ColumnName="UTTCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spVerificar_proceso_diario" FunctionName="BDFloricolaModel.Store.spVerificar_proceso_diario" />
+          <FunctionImportMapping FunctionImportName="spVerificar_proceso" FunctionName="BDFloricolaModel.Store.spVerificar_proceso" />
+          <FunctionImportMapping FunctionImportName="spUpdate_detalle_flor_clasificada" FunctionName="BDFloricolaModel.Store.spUpdate_detalle_flor_clasificada" />
+          <FunctionImportMapping FunctionImportName="spInsert_control_flor_nacional" FunctionName="BDFloricolaModel.Store.spInsert_control_flor_nacional" />
+          <FunctionImportMapping FunctionImportName="spVerificar_control_flor_nacional" FunctionName="BDFloricolaModel.Store.spVerificar_control_flor_nacional">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spVerificar_control_flor_nacional_Result">
+                <ScalarProperty Name="CFNCODIGOI" ColumnName="CFNCODIGOI" />
+                <ScalarProperty Name="TPCCODIGOI" ColumnName="TPCCODIGOI" />
+                <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="CFNCANTIDAD" ColumnName="CFNCANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spUpdate_control_flor_nacional" FunctionName="BDFloricolaModel.Store.spUpdate_control_flor_nacional" />
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

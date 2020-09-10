@@ -1,0 +1,154 @@
+﻿
+@{
+	ViewBag.Title = "Reportes";
+}
+<style>
+	#chart_wrap {
+		position: relative;
+		padding-bottom: 100%;
+		height: 0;
+		overflow:hidden;
+	}
+
+	.grafico {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width:100%;
+		height:400px;
+	}
+</style>
+<h2 class="text-center">Reporte de Bloques</h2>
+
+<div class="row pt-2 pb-4">
+	<div class=" pl-5 pr-5 col-md-5 text-center">@Html.Partial("~/Views/Shared/_Flash.cshtml")</div> <br />
+</div>
+
+<div class="row pt-2">
+	<div class="col-md-12 " style="text-align:left">
+		<div class="row pl-5 pr-5">
+			<div class="col-md-3 ">
+				<label class="control-label">Seleccione el bloque</label>
+				@Html.DropDownList("listaBloques", null, htmlAttributes: new { @class = "form-control", id = "cmbBloque" })
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-6">
+				<div id="chart_wrap">
+					<div id="grafico" class="grafico"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div id="chart_wrap">
+					<div id="grafico1" class="grafico"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script>
+		var cmbBloque = document.getElementById('cmbBloque');
+		cmbBloque.addEventListener("change", obtenerInformacion);
+
+		$(document).ready(function () {
+			obtenerDatos();
+			obtenerDatosNumeroCamas();
+		});
+
+		function obtenerInformacion() {
+			obtenerDatos();
+			obtenerDatosNumeroCamas();
+		}
+
+		function obtenerDatos() {
+			 $.ajax({
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                url: '/Reportes/ObtenerTotalVariedades?blqCodigoI='+cmbBloque.value,
+                success: function (result) {
+                    google.charts.load('current', {
+                        'packages': ['corechart']
+                    });
+                    google.charts.setOnLoadCallback(function () {
+                        crearGrafico(result);
+                    });
+                }
+            });
+		}
+
+		function obtenerDatosNumeroCamas() {
+			 $.ajax({
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                url: '/Reportes/ObtenerTotalCamas?blqCodigoI='+cmbBloque.value,
+                success: function (result) {
+                    google.charts.load('current', {
+                        'packages': ['corechart']
+                    });
+                    google.charts.setOnLoadCallback(function () {
+                        crearGraficoNumeroCamas(result);
+                    });
+                }
+            });
+		}
+
+		function crearGrafico(result) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Variedad');
+            data.addColumn('number', 'Cantidad');
+            var dataArray = [];
+
+            $.each(result, function (i, obj) {
+                dataArray.push([obj.VRDNOMBREC, obj.TOTAL]);
+            });
+            data.addRows(dataArray);
+
+            var columnChartOptions = {
+				title: "Cantidad de Variedades por Bloque",
+				width: '100%',
+				 height: '400px'
+            };
+
+
+            var columnChart = new google.visualization.PieChart(document
+				.getElementById('grafico'));
+
+			columnChart.draw(data, columnChartOptions);
+		}
+
+		function crearGraficoNumeroCamas(result) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Cama');
+            data.addColumn('number', 'Cantidad');
+            var dataArray = [];
+
+			$.each(result, function (i, obj) {
+				console.log(obj);
+                dataArray.push([obj.BlvNumeroCama, obj.TOTAL]);
+            });
+            data.addRows(dataArray);
+
+			var columnChartOptions = {
+				legend: { position: "top", alignment: "center" },  
+				title: "Cantidad por Camas",
+				width: '80%',
+				height: '400px',
+				hAxis: {title: 'Número de Cama', titleTextStyle: {color: 'black'}} 
+            };
+
+
+            var columnChart = new google.visualization.ColumnChart(document
+				.getElementById('grafico1'));
+
+			columnChart.draw(data, columnChartOptions);
+		}
+
+	</script>
+}

@@ -1,0 +1,182 @@
+﻿@model IEnumerable<SysFloricola.Models.EMPRESAS>
+@{
+	ViewBag.Title = "Empresas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/EstilosModal.css" rel="stylesheet" />
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+<h2 class="text-center">Administración de Empresas</h2>
+
+<div class="row pt-2 pb-4">
+	<div class=" pl-5 pr-5 col-md-5 text-center">@Html.Partial("~/Views/Shared/_Flash.cshtml")</div> <br />
+	<div class="col-md-12 pr-5" style="text-align:right">
+		<a onclick="abrirModal(0)" style="cursor: pointer;" class="action-item text-black-50 " data-toggle="tooltip" title="Crear Empresa">
+			<i class="fa fa-plus text-success" style="font-size: 16px;"></i> Crear Empresa
+		</a>
+	</div>
+</div>
+
+<div class="row pt-2">
+	<div class="col-md-12 pl-5 pr-5" style="text-align:center">
+		<table class="table table-cards" id="tabla">
+			<thead style="background-color: #2A3F54" class="text-white">
+				<tr>
+					<th scope="col">
+						RUC
+					</th>
+					<th scope="col">
+						Nombre
+					</th>
+					<th scope="col">
+						Dirección
+					</th>
+					<th scope="col">
+						Teléfono
+					</th>
+					<th scope="col">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPRUC)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPNOMBREC)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPDIRECCION)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPTELEFOC)
+						</td>
+						<td class="text-center">
+							<div class="actions ml-3">
+								<a onclick="abrirModal(@item.EMPCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item mr-2 text-info" data-toggle="tooltip" title="Editar Empresa">
+									<i class="fa fa-edit"></i>
+								</a>
+								<a onclick="abrirModalEliminar(@item.EMPCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item text-danger mr-2" data-toggle="tooltip" title="Eliminar Empresa">
+									<i class="fa fa-trash"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="myModal" id="modalCrear" name="modalCrear"></div>
+<div class="myModal" id="modalEliminar" name="modalEliminar"></div>
+
+@section Scripts {
+	<script src="~/Scripts/jquery.dataTables.js"></script>
+	<script>
+		modalCrear = document.getElementById('modalCrear');
+		modalEliminar = document.getElementById('modalEliminar');
+
+		$(document).ready(function () {
+			$('.alert').fadeIn();
+                setTimeout(function () {
+                $(".alert").fadeOut();
+			}, 5000);
+
+			$('#tabla').DataTable({
+				"ordering": false,
+				"bInfo": false,
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ por página",
+					"zeroRecords": "No hay registros",
+					"infoEmpty": "No hay registros disponibles",
+					"search": "Buscar:",
+					 "paginate": {
+						 "previous": "Anterior",
+						 "next": "Siguiente",
+					}
+				}
+			});
+
+		});
+
+	    function abrirModal(id) {
+			var url = '/Empresas/CrearEmpresa?id=' + id;
+            $.get(url, function (url) {
+                $("#modalCrear").html(url);
+                modalCrear.style.display = 'block';
+				var tituloModal = document.getElementById('tituloModalCrear');
+				var btnFormulario = document.getElementById('btnFormulario');
+				if (id == 0) {
+					tituloModal.textContent = "Crear Empresa";
+					btnFormulario.value = "Crear Empresa";
+				}
+				else {
+					tituloModal.textContent = "Editar Empresa"
+					btnFormulario.value = "Editar Empresa";
+				}
+                bloquearBarraDesplazamiento();
+            });
+		}
+
+		function cerrarModal() {
+            modalCrear.style.display = 'none';
+            activarBarraDesplazamiento();
+		}
+
+		function cerrarModalConfirmacion() {
+            modalEliminar.style.display = 'none';
+            activarBarraDesplazamiento();
+		}
+
+		function bloquearBarraDesplazamiento() {
+            $('body').css({ 'overflow': 'hidden' });
+            $(document).bind('scroll', function () {
+                window.scrollTo(0, 0);
+            });
+        }
+
+        function activarBarraDesplazamiento() {
+            $(document).unbind('scroll');
+            $('body').css({ 'overflow': 'visible' });
+			}
+
+		function validar() {
+			var ruc = $('#txtRuc').val();
+			var nombre = $('#txtNombre').val();
+			var direccion = $('#txtDireccion').val();
+			var telefono = $('#txtTelefono').val();
+			if (ruc.trim() === "") {
+				var elemento = document.getElementById("ruc");
+				elemento.hidden = false;
+				return false;
+			} else if (nombre.trim() === "") {
+				var elemento = document.getElementById("nombre");
+				elemento.hidden = false;
+				return false;
+			} else if (direccion.trim() === "") {
+				var elemento = document.getElementById("direccion");
+				elemento.hidden = false;
+				return false;
+			} else if (telefono.trim() === "") {
+				var elemento = document.getElementById("telefono");
+				elemento.hidden = false;
+				return false;
+			}
+		}
+
+		function abrirModalEliminar(id) {
+			var url = '/Empresas/Confirmacion?id=' + id;
+			$.get(url, function (url) {
+				$("#modalEliminar").html(url);
+				modalEliminar.style.display = 'block'
+				bloquearBarraDesplazamiento();
+			});
+		}
+
+	</script>
+}
+
+
+
+

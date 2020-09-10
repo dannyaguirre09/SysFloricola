@@ -1,0 +1,164 @@
+﻿@model IEnumerable<SysFloricola.Models.FINCAS>
+
+@{
+	ViewBag.Title = "Fincas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/EstilosModal.css" rel="stylesheet" />
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+<h2 class="text-center">Administración de Fincas</h2>
+
+<div class="row pt-2 pb-4">
+	<div class=" pl-5 pr-5 col-md-5 text-center">@Html.Partial("~/Views/Shared/_Flash.cshtml")</div> <br />
+	<div class="col-md-12 pr-5" style="text-align:right">
+		<a onclick="abrirModal(0)" style="cursor: pointer;" class="action-item text-black-50 " data-toggle="tooltip" title="Crear Finca">
+			<i class="fa fa-plus text-success" style="font-size: 16px;"></i> Crear Finca
+		</a>
+	</div>
+</div>
+
+<div class="row pt-2">
+	<div class="col-md-12 pl-5 pr-5" style="text-align:center">
+		<table class="table table-cards" id="tablaFincas">
+			<thead style="background-color: #2A3F54" class="text-white">
+				<tr>
+					<th scope="col">
+						@Html.DisplayNameFor(model => model.FNCNOMBREC)
+					</th>
+					<th scope="col">
+						@Html.DisplayNameFor(model => model.FNCDIRECCION)
+					</th>
+					<th scope="col">
+						@Html.DisplayNameFor(model => model.EMPRESAS.EMPNOMBREC)
+					</th>
+					<th scope="col">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.FNCNOMBREC)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.FNCDIRECCION)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMPRESAS.EMPNOMBREC)
+						</td>
+						<td class="text-center">
+							<div class="actions ml-3">
+								<a onclick="abrirModal(@item.FNCCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item mr-2 text-info" data-toggle="tooltip" title="Editar Finca">
+									<i class="fa fa-edit"></i>
+								</a>
+								<a onclick="abrirModalEliminar(@item.FNCCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item text-danger mr-2" data-toggle="tooltip" title="Eliminar Finca">
+									<i class="fa fa-trash"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="myModal" id="modalCrearFinca" name="modalCrearFinca"></div>
+<div class="myModal" id="modalEliminar" name="modalEliminar"></div>
+
+@section Scripts {
+	<script src="~/Scripts/jquery.dataTables.js"></script>
+	<script>
+		modalCrearFinca = document.getElementById('modalCrearFinca');
+		modalEliminar = document.getElementById('modalEliminar');
+
+		$(document).ready(function () {
+			$('.alert').fadeIn();
+                setTimeout(function () {
+                $(".alert").fadeOut();
+			}, 5000);
+
+			$('#tablaFincas').DataTable({
+				"ordering": false,
+				"bInfo": false,
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ por página",
+					"zeroRecords": "No hay registros",
+					"infoEmpty": "No hay registros disponibles",
+					"search": "Buscar:",
+					 "paginate": {
+						 "previous": "Anterior",
+						 "next": "Siguiente",
+					}
+				}
+			});
+
+		});
+
+	    function abrirModal(fncCodigoI) {
+			var url = '/Fincas/CrearFinca?fncCodigoI=' + fncCodigoI;
+            $.get(url, function (url) {
+                $("#modalCrearFinca").html(url);
+                modalCrearFinca.style.display = 'block';
+				var tituloModal = document.getElementById('tituloModalCrearFinca');
+				var btnFormulario = document.getElementById('btnFormulario');
+				if (fncCodigoI == 0) {
+					tituloModal.textContent = "Crear Finca";
+					btnFormulario.value = "Crear Finca";
+				}
+				else {
+					tituloModal.textContent = "Editar Finca"
+					btnFormulario.value = "Editar Finca";
+				}
+                bloquearBarraDesplazamiento();
+            });
+		}
+
+		function cerrarModal() {
+            modalCrearFinca.style.display = 'none';
+            activarBarraDesplazamiento();
+		}
+
+		function cerrarModalConfirmacion() {
+            modalEliminar.style.display = 'none';
+            activarBarraDesplazamiento();
+		}
+
+		function bloquearBarraDesplazamiento() {
+            $('body').css({ 'overflow': 'hidden' });
+            $(document).bind('scroll', function () {
+                window.scrollTo(0, 0);
+            });
+        }
+
+        function activarBarraDesplazamiento() {
+            $(document).unbind('scroll');
+            $('body').css({ 'overflow': 'visible' });
+			}
+
+		function validar() {
+			var nombre = $('#txtNombre').val();
+			var direccion = $('#txtDireccion').val();
+			 if (nombre.trim() == "") {
+				var elemento = document.getElementById("nombre");
+				elemento.hidden = false;
+				return false;
+			} else if (direccion.trim() == "") {
+				var elemento = document.getElementById("direccion");
+				elemento.hidden = false;
+				return false;
+			}
+		}
+
+		function abrirModalEliminar(fncCodigoI) {
+			var url = '/Fincas/Confirmacion?fncCodigoI=' + fncCodigoI;
+			$.get(url, function (url) {
+				$("#modalEliminar").html(url);
+				modalEliminar.style.display = 'block'
+				bloquearBarraDesplazamiento();
+			});
+		}
+
+	</script>
+}
+

@@ -1,0 +1,68 @@
+﻿@model SysFloricola.Models.CLIENTES
+@{
+    Layout = null;
+}
+
+	<div class="flex" id="flex">
+		<div class="contenido-modal" style="width: 750px; height:480px;">
+			<div class="modal-Titulo flex">
+				<h6 id="tituloModalCrear" class="text-white pt-2"></h6>
+				<span class="cerrarModal" onclick="cerrarModal()" id="cerrarModal">&times;</span>
+			</div>
+			<div class="modal-Cuerpo">
+				@using (Html.BeginForm("CrearCliente", "Clientes", FormMethod.Post, new { onsubmit = "return validar()" }))
+				{
+					@Html.AntiForgeryToken()
+
+					<div class="form-horizontal pl-3 pr-3">
+						<div style="display:block; position:relative; height:350px; overflow-y:auto; overflow-x:hidden">
+							@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+							@Html.HiddenFor(model => model.CLNCODIGOI)
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label class="control-label">Estado</label>
+									@Html.DropDownList("ESTCODIGOI", null, htmlAttributes: new { @class = "form-control" })
+								</div>
+								<div class="col-md-6">
+									<label class="control-label">Razón Social</label>
+									@Html.EditorFor(model => model.CLNRAZONSOCIAL, new { htmlAttributes = new { @class = "form-control", @id = "txtRazon" } })
+									<label id="razon" hidden class="text-danger control-label">Ingrese la razón social</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6  pt-2">
+									<label class="control-label">Dirección</label>
+									@Html.EditorFor(model => model.CLNDIRECCION, new { htmlAttributes = new { @class = "form-control", @id = "txtDireccion" } })
+									<label id="direccion" hidden class="text-danger control-label">Ingrese la dirección</label>
+								</div>
+								<div class="form-group col-md-6 pt-2">
+									<label class="control-label">Número de RUC</label>
+									@Html.EditorFor(model => model.CLNRUC, new { htmlAttributes = new { @class = "form-control", @id = "txtRuc" } })
+									<label id="ruc" hidden class="text-danger control-label">Ingrese el RUC</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 pt-2">
+									<label class="control-label">Teléfono</label>
+									@Html.EditorFor(model => model.CLNTELEFONO, new { htmlAttributes = new { @class = "form-control", @id = "txtTelefono" } })
+									<label id="telefono" hidden class="text-danger control-label">Ingrese el teléfono</label>
+								</div>
+								<div class="form-group col-md-6 pt-2">
+									<label class="control-label">Consignatario</label>
+									@Html.EditorFor(model => model.CLNCONSIGNATARIO, new { htmlAttributes = new { @class = "form-control", @id = "txtConsignatario" } })
+									<label id="consignatario" hidden class="text-danger control-label">Ingrese el consignatario</label>
+								</div>
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-md-12" style="text-align:right">
+								<input id="btnFormulario" type="submit" value="Guardar" class="btn btn-success" />
+								<input onclick="cerrarModal()" type="button" value="Cancelar" class="btn btn-info" />
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
