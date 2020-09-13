@@ -147,6 +147,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresoProduccionController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
+    <Compile Include="Controllers\PreenvioController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\TipoCausasController.cs" />
     <Compile Include="Controllers\TipoFloresController.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Models\PERFILES.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PreenvioDAL.cs" />
     <Compile Include="Models\PREENVIOS.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
@@ -2042,6 +2044,9 @@
     <Content Include="Views\DetalleFlorClasificada\EliminarControlDiario.cshtml" />
     <Content Include="Views\ControlFlorNacional\Index.cshtml" />
     <Content Include="Views\ControlFlorNacional\CrearControlFlorNacional.cshtml" />
+    <Content Include="Views\Preenvio\Index.cshtml" />
+    <Content Include="Views\Preenvio\Preenvio.cshtml" />
+    <Content Include="Views\Preenvio\ModalCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,7 +18,7 @@
 
 <div class="row pt-2">
 	<div class="col-md-12 pl-5 pr-5" style="text-align:center">
-		<table class="table table-cards" id="tabla">
+		<table class="table table-cards table-responsive-lg" id="tabla">
 			<thead style="background-color: #2A3F54" class="text-white">
 				<tr>
 					<th scope="col">
@@ -45,9 +45,9 @@
 								<a href="~/DetalleFlorClasificada/CrearControlDiario?proceso=@item.PRCCODIGOI" font-size:14px;" class="action-item mr-2 text-info" data-toggle="tooltip" title="Editar Registro">
 									<i class="fa fa-edit"></i>
 								</a>
-								<a onclick="abrirModalEliminar(@item.PRCCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item text-danger mr-2" data-toggle="tooltip" title="Eliminar Registro">
+								@*<a onclick="abrirModalEliminar(@item.PRCCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item text-danger mr-2" data-toggle="tooltip" title="Eliminar Registro">
 									<i class="fa fa-trash"></i>
-								</a>
+								</a>*@
 							</div>
 						</td>
 					</tr>

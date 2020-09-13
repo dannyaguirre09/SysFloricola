@@ -1,0 +1,146 @@
+﻿
+@{
+	ViewBag.Title = "Preenvío";
+}
+
+	<link href="~/Content/css/EstilosModal.css" rel="stylesheet" />
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+
+<div class="row  pb-4">
+	<div class=" pl-5 pr-5 col-md-5 text-center">
+		<div hidden id="creado" class="alert alert-success">Registro Creado Correctamente</div>
+		<div hidden id="error" class="alert alert-danger">Ocurrió un problema al crear el registro</div>
+	</div> <br />
+	<br />
+	<div class="col-md-12 pl-4">
+		<div class="col-md-6" style="text-align:left">
+			<a href="~/Preenvio/Index" style="cursor: pointer;" class="action-item text-black-50 " data-toggle="tooltip" title="Regresar">
+				<i class="fa fa-arrow-circle-left text-black-50" style="font-size: 16px;"></i> Regresar
+			</a>
+		</div>
+		<div class="col-md-6 pr-5" style="text-align:right">
+			<label class="control-label">Fecha: @ViewBag.Fecha</label>
+		</div>
+	</div>
+</div>
+
+<form id="formulario">
+	<div class="row pt-2">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-6 pl-5 pr-5">
+					<label class="control-label">Ingrese la fecha de Preenvío</label>
+					<input type="date" required class="form-control" name="fechaPreenvio" id="fechaPreenvio" />
+				</div>
+				<div class="col-md-6 pl-5 pr-5">
+					<label class="control-label">Ingrese el AWB</label>
+					<input type="text" class="form-control" name="awb" id="awb" />
+				</div>
+			</div>
+			<div class="row pt-4">
+				<div class="col-md-6 pl-5 pr-5">
+					<label class="control-label">Ingrese el AWB</label>
+					<input type="text" class="form-control" name="hawb" id="hawb" />
+				</div>
+				<div class="col-md-6 pl-5 pr-5" id="formCliente">
+					<label class="control-label" id="label">Agregar el cliente</label><br id="salto" />
+					<a onclick="abrirModal()" style="cursor:pointer;" id="agregarCliente"><i class="fa fa-plus text-success" style="font-size: 16px;"></i></a>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="col-md-12 pl-5 pr-5 " style="text-align:right">
+			<input type="submit" value="Guardar" id="btnGuardar" hidden class="btn btn-success" />
+		</div>
+
+	</div>
+</form>
+
+<div class="myModal" id="modalCliente" name="modalCliente"></div>
+
+@section Scripts {
+	<script src="~/Scripts/jquery.dataTables.js"></script>
+	<script>
+		var Cliente;
+		modalCliente = document.getElementById('modalCliente');
+
+		$(document).ready(function () {
+			var now = new Date();
+			var day = ("0" + now.getDate()).slice(-2);
+			var month = ("0" + (now.getMonth() + 1)).slice(-2);
+			var today = now.getFullYear() + "-" + (month) + "-" + (day);
+			$("#fechaPreenvio").val(today);
+		});
+
+		function abrirModal() {
+			var url = '/Preenvio/ModalCliente';
+            $.get(url, function (url) {
+                $("#modalCliente").html(url);
+                modalCliente.style.display = 'block';
+				var tituloModal = document.getElementById('titulmodalCliente');
+				tituloModal.textContent = "Seleccionar Cliente";
+                bloquearBarraDesplazamiento();
+            });
+		}
+
+		function bloquearBarraDesplazamiento() {
+            $('body').css({ 'overflow': 'hidden' });
+            $(document).bind('scroll', function () {
+                window.scrollTo(0, 0);
+            });
+        }
+
+        function activarBarraDesplazamiento() {
+            $(document).unbind('scroll');
+            $('body').css({ 'overflow': 'visible' });
+			}
+
+		function cerrarModal() {
+            modalCliente.style.display = 'none';
+            activarBarraDesplazamiento();
+			}
+
+	async function llenarCliente(cliente) {
+		Cliente = cliente;
+		cerrarModal();
+		var formCliente = document.getElementById('formCliente');
+		try {
+			var agregarCliente = document.getElementById('agregarCliente');
+			var texto = document.getElementById('label');
+			var salto = document.getElementById('salto');
+			await formCliente.removeChild(texto);
+			await formCliente.removeChild(agregarCliente);
+			await formCliente.removeChild(salto);
+		} catch (e) {
+			var labelEditar = document.getElementById('labelEditar')
+			formCliente.removeChild(labelEditar);
+			var nombreCliente = document.getElementById('nombreCliente');
+			formCliente.removeChild(nombreCliente);
+		}
+		
+
+		var label = document.createElement('label');
+		label.setAttribute('class', 'control-label');
+		label.textContent = 'Editar '
+		label.setAttribute('onclick', 'abrirModal()')
+		label.setAttribute('style', 'cursor: pointer;')
+		label.setAttribute('id', 'labelEditar')
+		var icono = document.createElement('i');
+		icono.setAttribute('class', 'fa fa-edit')
+		await label.appendChild(icono);
+
+		await formCliente.appendChild(label);
+
+		var input = document.createElement('input');
+		input.setAttribute('class', 'form-control');
+		input.setAttribute('readonly', 'true');
+		input.setAttribute('id', 'nombreCliente');
+		input.setAttribute('value', cliente.razonSocial + ' - ' + cliente.ruc);
+		await formCliente.appendChild(input);
+
+		
+	}
+
+	</script>
+}

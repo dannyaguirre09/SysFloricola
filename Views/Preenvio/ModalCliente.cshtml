@@ -1,0 +1,156 @@
+﻿@model IEnumerable<SysFloricola.Models.CLIENTES>
+@{
+	ViewBag.Title = "Clientes";
+	Layout = null;
+}
+
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+
+<div class="flex" id="flex">
+	<div class="contenido-modal" style="width: 900px; height:550px;">
+		<div class="modal-Titulo flex">
+			<h6 id="titulmodalCliente" class="text-white pt-2"></h6>
+			<span class="cerrarModal" onclick="cerrarModal()" id="cerrarModal">&times;</span>
+		</div>
+		<div class="modal-Cuerpo">
+			<div class="row pt-2">
+				<div class="col-md-12 pl-5 pr-5" style="text-align:center">
+					<form name = "form">
+						<div style="display:block; position:relative; height:390px; overflow-y:auto; overflow-x:hidden">
+							<table class="table table-cards table-responsive-lg tabla" id="tabla" name="tabla">
+								<thead style="background-color: #2A3F54" class="text-white">
+									<tr>
+										<th></th>
+										<th scope="col">
+											Razón Social
+										</th>
+										<th scope="col">
+											RUC
+										</th>
+										<th scope="col">
+											Dirección
+										</th>
+										<th scope="col">
+											Consignatario
+										</th>
+										<th scope="col">
+											Teléfono
+										</th>
+										<th scope="col">
+											Estado
+										</th>
+										<th scope="col" >Código</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var item in Model)
+									{
+										<tr>
+											<td>
+												<input type="checkbox" class="call-checkbox" name="groupCheckbox[]" />
+											</td>
+											
+											<td>
+												@Html.DisplayFor(modelItem => item.CLNRAZONSOCIAL)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.CLNRUC)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.CLNDIRECCION)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.CLNCONSIGNATARIO)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.CLNTELEFONO)
+											</td>
+											<td>
+												@Html.DisplayFor(modelItem => item.ESTADOS.ESTNOMBRE)
+											</td>
+											<td  >
+												@Html.DisplayFor(modelItem => item.CLNCODIGOI)
+											</td>
+
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<div hidden id="advertencia" class="text-danger pl-5">Solo se permite seleccionar un Cliente</div>
+				<div class="col-md-12" style="text-align:right">
+					<input onclick="comprobarChecks()" id="btnCliente" type="submit" value="Seleccionar" class="btn btn-success" />
+					<input onclick="cerrarModal()" type="button" value="Cancelar" class="btn btn-info" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	var advertencia = document.getElementById('advertencia') 
+
+	$(document).ready(function () {
+		$('.alert').fadeIn();
+		setTimeout(function () {
+			$(".alert").fadeOut();
+		}, 5000);
+
+		$('#tabla').DataTable({
+			"ordering": false,
+			"bInfo": false,
+			"language": {
+				"lengthMenu": "Mostrar _MENU_ por página",
+				"zeroRecords": "No hay registros",
+				"infoEmpty": "No hay registros disponibles",
+				"search": "Buscar:",
+				"paginate": {
+					"previous": "Anterior",
+					"next": "Siguiente",
+				}
+			}
+		});
+
+	});
+
+
+	function comprobarChecks(){
+		var checkbox = document.getElementsByName('groupCheckbox[]');
+		var contador = 0;
+		for(var i=0; i< checkbox.length; i++) {
+			if(checkbox[i].checked)
+				contador++
+		}
+  
+		if (contador == 0) {
+			advertencia.hidden = false;
+			advertencia.textContent = '¡Por favor, seleccione un Cliente!';
+		} else if (contador > 1) {
+			advertencia.hidden = false;
+			advertencia.textContent = '* Solo se permite seleccionar un cliente';
+		} else {
+			seleccion = [];
+			$(".tabla tr td input[type='checkbox']:checked").each(function(){
+			   row = $(this).closest('tr');
+			   seleccion.push({
+				   id: row.find('td:eq(7)').text().trim(),
+				   razonSocial : row.find('td:eq(1)').text().trim(),
+				  ruc : row.find('td:eq(2)').text().trim(),
+				  direccion: row.find('td:eq(3)').text().trim(),
+				  consignatario : row.find('td:eq(4)').text().trim()
+			   });
+			});
+			llenarCliente(seleccion[0]);
+
+		}
+	}
+
+</script>
+
+
+
+
