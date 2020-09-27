@@ -672,8 +672,34 @@
           <Parameter Name="DTECANTIDAD" Type="int" Mode="In" />
           <Parameter Name="fecha" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="spInsert_Detalle_preenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DTECODIGOI" Type="int" Mode="In" />
+          <Parameter Name="DTPCANTIDAD" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_detalle_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
+          <Parameter Name="preestado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_detalle_items_editar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
+        </Function>
         <Function Name="spSelect_flor_numerotallos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_Items_Preenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TPFCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="VRDCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="TMTCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="UNDCODIGOI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_listado_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_preenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_preenvio_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
         </Function>
         <Function Name="spSelect_tallos_unidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
@@ -1349,6 +1375,32 @@
             <Parameter Name="CFNCANTIDAD" Mode="In" Type="Int32" />
             <Parameter Name="Fecha" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="spSelect_Items_Preenvio" ReturnType="Collection(BDFloricolaModel.spSelect_Items_Preenvio_Result)">
+            <Parameter Name="TPFCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="VRDCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="TMTCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="UNDCODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsert_Detalle_preenvio">
+            <Parameter Name="DTECODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="DTPCANTIDAD" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_preenvio" ReturnType="Collection(BDFloricolaModel.spSelect_preenvio_Result)">
+          <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_preenvio_id" ReturnType="Collection(BDFloricolaModel.spSelect_preenvio_id_Result)">
+          <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_detalle_items" ReturnType="Collection(BDFloricolaModel.spSelect_detalle_items_Result)">
+            <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="preestado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_detalle_items_editar" ReturnType="Collection(BDFloricolaModel.spSelect_detalle_items_editar_Result)">
+          <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_listado_items" ReturnType="Collection(BDFloricolaModel.spSelect_listado_items_Result)">
+            <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="EMPRESAS">
           <Key>
@@ -1864,6 +1916,78 @@
           <Property Type="Int32" Name="VRDCODIGOI" Nullable="true" />
           <Property Type="Int32" Name="CFNCANTIDAD" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="spSelect_Items_Preenvio_Result">
+          <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+          <Property Type="String" Name="TMTDESCRIPC" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TPFDESCRIPCION" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PRCCODIGOI" Nullable="false" />
+          <Property Type="String" Name="VRDNOMBREC" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="DTEFECHAINGRESO" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spSelect_preenvio_Result">
+          <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+          <Property Type="Decimal" Name="PRENUMERO" Nullable="false" Precision="5" Scale="0" />
+          <Property Type="String" Name="PREAWB" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="PREHAWB" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="PRENUMPIEZAS" Nullable="false" />
+          <Property Type="String" Name="PREIDCAJAS" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="DTPCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTPCANTIDAD" Nullable="false" />
+          <Property Type="Int32" Name="CLNCODIGOI" Nullable="false" />
+          <Property Type="String" Name="CLNRUC" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="CLNRAZONSOCIAL" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="CLNTELEFONO" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="spSelect_preenvio_id_Result">
+          <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+          <Property Type="Decimal" Name="PRENUMERO" Nullable="false" Precision="5" Scale="0" />
+          <Property Type="String" Name="PREAWB" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="PREHAWB" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="PRENUMPIEZAS" Nullable="false" />
+          <Property Type="DateTime" Name="PREFECHA" Nullable="false" Precision="23" />
+          <Property Type="String" Name="PREIDCAJAS" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="CLNCODIGOI" Nullable="false" />
+          <Property Type="String" Name="CLNRUC" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="CLNRAZONSOCIAL" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="CLNTELEFONO" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="spSelect_detalle_items_Result">
+          <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTPCANTIDAD" Nullable="false" />
+          <Property Type="Int32" Name="TMTCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="VRDCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spSelect_detalle_items_editar_Result">
+          <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTPCANTIDAD" Nullable="false" />
+          <Property Type="Int32" Name="TMTCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="VRDCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
+          <Property Type="String" Name="TMTDESCRIPC" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="VRDNOMBREC" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="spSelect_listado_items_Result">
+          <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTPCANTIDAD" Nullable="false" />
+          <Property Type="Int32" Name="TMTCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="VRDCODIGOI" Nullable="false" />
+          <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
+          <Property Type="String" Name="TMTDESCRIPC" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="VRDNOMBREC" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Identificador" Nullable="false" MaxLength="36" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2226,6 +2350,103 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spUpdate_control_flor_nacional" FunctionName="BDFloricolaModel.Store.spUpdate_control_flor_nacional" />
+          <FunctionImportMapping FunctionImportName="spSelect_Items_Preenvio" FunctionName="BDFloricolaModel.Store.spSelect_Items_Preenvio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_Items_Preenvio_Result">
+                <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+                <ScalarProperty Name="TMTDESCRIPC" ColumnName="TMTDESCRIPC" />
+                <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+                <ScalarProperty Name="TPFDESCRIPCION" ColumnName="TPFDESCRIPCION" />
+                <ScalarProperty Name="PRCCODIGOI" ColumnName="PRCCODIGOI" />
+                <ScalarProperty Name="VRDNOMBREC" ColumnName="VRDNOMBREC" />
+                <ScalarProperty Name="DTEFECHAINGRESO" ColumnName="DTEFECHAINGRESO" />
+                <ScalarProperty Name="DTECANTIDAD" ColumnName="DTECANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spInsert_Detalle_preenvio" FunctionName="BDFloricolaModel.Store.spInsert_Detalle_preenvio" />
+          <FunctionImportMapping FunctionImportName="spSelect_preenvio" FunctionName="BDFloricolaModel.Store.spSelect_preenvio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_preenvio_Result">
+                <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+                <ScalarProperty Name="PRENUMERO" ColumnName="PRENUMERO" />
+                <ScalarProperty Name="PREAWB" ColumnName="PREAWB" />
+                <ScalarProperty Name="PREHAWB" ColumnName="PREHAWB" />
+                <ScalarProperty Name="PRENUMPIEZAS" ColumnName="PRENUMPIEZAS" />
+                <ScalarProperty Name="PREIDCAJAS" ColumnName="PREIDCAJAS" />
+                <ScalarProperty Name="DTPCODIGOI" ColumnName="DTPCODIGOI" />
+                <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+                <ScalarProperty Name="DTPCANTIDAD" ColumnName="DTPCANTIDAD" />
+                <ScalarProperty Name="CLNCODIGOI" ColumnName="CLNCODIGOI" />
+                <ScalarProperty Name="CLNRUC" ColumnName="CLNRUC" />
+                <ScalarProperty Name="CLNRAZONSOCIAL" ColumnName="CLNRAZONSOCIAL" />
+                <ScalarProperty Name="CLNTELEFONO" ColumnName="CLNTELEFONO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_preenvio_id" FunctionName="BDFloricolaModel.Store.spSelect_preenvio_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_preenvio_id_Result">
+                <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+                <ScalarProperty Name="PRENUMERO" ColumnName="PRENUMERO" />
+                <ScalarProperty Name="PREAWB" ColumnName="PREAWB" />
+                <ScalarProperty Name="PREHAWB" ColumnName="PREHAWB" />
+                <ScalarProperty Name="PRENUMPIEZAS" ColumnName="PRENUMPIEZAS" />
+                <ScalarProperty Name="PREFECHA" ColumnName="PREFECHA" />
+                <ScalarProperty Name="PREIDCAJAS" ColumnName="PREIDCAJAS" />
+                <ScalarProperty Name="CLNCODIGOI" ColumnName="CLNCODIGOI" />
+                <ScalarProperty Name="CLNRUC" ColumnName="CLNRUC" />
+                <ScalarProperty Name="CLNRAZONSOCIAL" ColumnName="CLNRAZONSOCIAL" />
+                <ScalarProperty Name="CLNTELEFONO" ColumnName="CLNTELEFONO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_detalle_items" FunctionName="BDFloricolaModel.Store.spSelect_detalle_items">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_detalle_items_Result">
+                <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+                <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+                <ScalarProperty Name="DTPCANTIDAD" ColumnName="DTPCANTIDAD" />
+                <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="DTECANTIDAD" ColumnName="DTECANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_detalle_items_editar" FunctionName="BDFloricolaModel.Store.spSelect_detalle_items_editar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_detalle_items_editar_Result">
+                <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+                <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+                <ScalarProperty Name="DTPCANTIDAD" ColumnName="DTPCANTIDAD" />
+                <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="DTECANTIDAD" ColumnName="DTECANTIDAD" />
+                <ScalarProperty Name="TMTDESCRIPC" ColumnName="TMTDESCRIPC" />
+                <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+                <ScalarProperty Name="VRDNOMBREC" ColumnName="VRDNOMBREC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_listado_items" FunctionName="BDFloricolaModel.Store.spSelect_listado_items">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_listado_items_Result">
+                <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+                <ScalarProperty Name="DTECODIGOI" ColumnName="DTECODIGOI" />
+                <ScalarProperty Name="DTPCANTIDAD" ColumnName="DTPCANTIDAD" />
+                <ScalarProperty Name="TMTCODIGOI" ColumnName="TMTCODIGOI" />
+                <ScalarProperty Name="UNDCODIGOI" ColumnName="UNDCODIGOI" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="DTECANTIDAD" ColumnName="DTECANTIDAD" />
+                <ScalarProperty Name="TMTDESCRIPC" ColumnName="TMTDESCRIPC" />
+                <ScalarProperty Name="UNDDESCRIPCION" ColumnName="UNDDESCRIPCION" />
+                <ScalarProperty Name="VRDNOMBREC" ColumnName="VRDNOMBREC" />
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

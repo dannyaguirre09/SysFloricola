@@ -251,7 +251,25 @@
     <Compile Include="Models\spSelect_Bloque_variedades_Result.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spSelect_detalle_items_editar_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSelect_detalle_items_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spSelect_flor_numerotallos_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSelect_Items_Preenvio_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSelect_listado_items_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSelect_preenvio_id_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSelect_preenvio_Result.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spSelect_tallos_unidad_Result.cs">
@@ -2047,6 +2065,8 @@
     <Content Include="Views\Preenvio\Index.cshtml" />
     <Content Include="Views\Preenvio\Preenvio.cshtml" />
     <Content Include="Views\Preenvio\ModalCliente.cshtml" />
+    <Content Include="Views\Preenvio\ModalItems.cshtml" />
+    <Content Include="Views\Preenvio\EditarPreenvio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -178,6 +178,8 @@ C:\Users\PC1\Desktop\SysFloricola\obj\Debug\SysFloricola.csproj.CoreCompileInput
 C:\Users\PC1\Desktop\SysFloricola\obj\Debug\SysFloricola.csproj.CopyComplete
 C:\Users\PC1\Desktop\SysFloricola\obj\Debug\SysFloricola.dll
 C:\Users\PC1\Desktop\SysFloricola\obj\Debug\SysFloricola.pdb
+C:\Users\PC1\Documents\Proyectos\SysFloricola\obj\Debug\SysFloricola.csproj.CoreCompileInputs.cache
+C:\Users\PC1\Documents\Proyectos\SysFloricola\obj\Debug\SysFloricola.csprojAssemblyReference.cache
 C:\Users\PC1\Documents\Proyectos\SysFloricola\bin\SysFloricola.dll.config
 C:\Users\PC1\Documents\Proyectos\SysFloricola\bin\SysFloricola.dll
 C:\Users\PC1\Documents\Proyectos\SysFloricola\bin\SysFloricola.pdb
@@ -264,8 +266,6 @@ C:\Users\PC1\Documents\Proyectos\SysFloricola\bin\es\System.Web.Razor.resources.
 C:\Users\PC1\Documents\Proyectos\SysFloricola\bin\es\System.Web.WebPages.resources.dll
 C:\Users\PC1\Documents\Proyectos\SysFloricola\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\PC1\Documents\Proyectos\SysFloricola\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\Users\PC1\Documents\Proyectos\SysFloricola\obj\Debug\SysFloricola.csproj.CoreCompileInputs.cache
 C:\Users\PC1\Documents\Proyectos\SysFloricola\obj\Debug\SysFloricola.csproj.CopyComplete
 C:\Users\PC1\Documents\Proyectos\SysFloricola\obj\Debug\SysFloricola.dll
 C:\Users\PC1\Documents\Proyectos\SysFloricola\obj\Debug\SysFloricola.pdb
-C:\Users\PC1\Documents\Proyectos\SysFloricola\obj\Debug\SysFloricola.csprojAssemblyReference.cache

@@ -280,5 +280,88 @@ namespace SysFloricola.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spUpdate_control_flor_nacional", cFNCODIGOIParameter, tPCCODIGOIParameter, vRDCODIGOIParameter, cFNCANTIDADParameter, fechaParameter);
         }
+    
+        public virtual ObjectResult<spSelect_Items_Preenvio_Result> spSelect_Items_Preenvio(Nullable<int> tPFCODIGOI, Nullable<int> vRDCODIGOI, Nullable<int> tMTCODIGOI, Nullable<int> uNDCODIGOI)
+        {
+            var tPFCODIGOIParameter = tPFCODIGOI.HasValue ?
+                new ObjectParameter("TPFCODIGOI", tPFCODIGOI) :
+                new ObjectParameter("TPFCODIGOI", typeof(int));
+    
+            var vRDCODIGOIParameter = vRDCODIGOI.HasValue ?
+                new ObjectParameter("VRDCODIGOI", vRDCODIGOI) :
+                new ObjectParameter("VRDCODIGOI", typeof(int));
+    
+            var tMTCODIGOIParameter = tMTCODIGOI.HasValue ?
+                new ObjectParameter("TMTCODIGOI", tMTCODIGOI) :
+                new ObjectParameter("TMTCODIGOI", typeof(int));
+    
+            var uNDCODIGOIParameter = uNDCODIGOI.HasValue ?
+                new ObjectParameter("UNDCODIGOI", uNDCODIGOI) :
+                new ObjectParameter("UNDCODIGOI", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_Items_Preenvio_Result>("spSelect_Items_Preenvio", tPFCODIGOIParameter, vRDCODIGOIParameter, tMTCODIGOIParameter, uNDCODIGOIParameter);
+        }
+    
+        public virtual int spInsert_Detalle_preenvio(Nullable<int> dTECODIGOI, Nullable<int> dTPCANTIDAD)
+        {
+            var dTECODIGOIParameter = dTECODIGOI.HasValue ?
+                new ObjectParameter("DTECODIGOI", dTECODIGOI) :
+                new ObjectParameter("DTECODIGOI", typeof(int));
+    
+            var dTPCANTIDADParameter = dTPCANTIDAD.HasValue ?
+                new ObjectParameter("DTPCANTIDAD", dTPCANTIDAD) :
+                new ObjectParameter("DTPCANTIDAD", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsert_Detalle_preenvio", dTECODIGOIParameter, dTPCANTIDADParameter);
+        }
+    
+        public virtual ObjectResult<spSelect_preenvio_Result> spSelect_preenvio(Nullable<int> pRECODIGOI)
+        {
+            var pRECODIGOIParameter = pRECODIGOI.HasValue ?
+                new ObjectParameter("PRECODIGOI", pRECODIGOI) :
+                new ObjectParameter("PRECODIGOI", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_preenvio_Result>("spSelect_preenvio", pRECODIGOIParameter);
+        }
+    
+        public virtual ObjectResult<spSelect_preenvio_id_Result> spSelect_preenvio_id(Nullable<int> pRECODIGOI)
+        {
+            var pRECODIGOIParameter = pRECODIGOI.HasValue ?
+                new ObjectParameter("PRECODIGOI", pRECODIGOI) :
+                new ObjectParameter("PRECODIGOI", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_preenvio_id_Result>("spSelect_preenvio_id", pRECODIGOIParameter);
+        }
+    
+        public virtual ObjectResult<spSelect_detalle_items_Result> spSelect_detalle_items(Nullable<int> pRECODIGOI, Nullable<int> preestado)
+        {
+            var pRECODIGOIParameter = pRECODIGOI.HasValue ?
+                new ObjectParameter("PRECODIGOI", pRECODIGOI) :
+                new ObjectParameter("PRECODIGOI", typeof(int));
+    
+            var preestadoParameter = preestado.HasValue ?
+                new ObjectParameter("preestado", preestado) :
+                new ObjectParameter("preestado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_detalle_items_Result>("spSelect_detalle_items", pRECODIGOIParameter, preestadoParameter);
+        }
+    
+        public virtual ObjectResult<spSelect_detalle_items_editar_Result> spSelect_detalle_items_editar(Nullable<int> pRECODIGOI)
+        {
+            var pRECODIGOIParameter = pRECODIGOI.HasValue ?
+                new ObjectParameter("PRECODIGOI", pRECODIGOI) :
+                new ObjectParameter("PRECODIGOI", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_detalle_items_editar_Result>("spSelect_detalle_items_editar", pRECODIGOIParameter);
+        }
+    
+        public virtual ObjectResult<spSelect_listado_items_Result> spSelect_listado_items(Nullable<int> pRECODIGOI)
+        {
+            var pRECODIGOIParameter = pRECODIGOI.HasValue ?
+                new ObjectParameter("PRECODIGOI", pRECODIGOI) :
+                new ObjectParameter("PRECODIGOI", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_listado_items_Result>("spSelect_listado_items", pRECODIGOIParameter);
+        }
     }
 }

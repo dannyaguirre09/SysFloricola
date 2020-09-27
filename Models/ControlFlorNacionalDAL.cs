@@ -103,7 +103,7 @@ namespace SysFloricola.Models
 						transaction.Commit();
 						respuesta = 1;
 					}
-					catch (Exception ex)
+					catch (Exception)
 					{
 						transaction.Rollback();
 					}

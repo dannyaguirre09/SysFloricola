@@ -1,0 +1,256 @@
+﻿
+@{
+	Layout = null;
+}
+
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+
+<div class="flex" id="flex">
+	<div class="contenido-modal" style="width: 900px; height:550px;">
+		<div class="modal-Titulo flex">
+			<h6 id="titulmodalItems" class="text-white pt-2"></h6>
+			<span class="cerrarModal" onclick="cerrarModalItems()" id="cerrarModal">&times;</span>
+		</div>
+		<div class="modal-Cuerpo">
+			<div class="row pt-2">
+				<div class="col-md-12 pl-5 pr-5">
+						<div class="col-md-6" hidden>
+							<label class="control-label">Tipo de Flor</label>
+							@Html.DropDownList("TPFCODIGOI", null, htmlAttributes: new { @class = "form-control", @id = "cmbTipoFlor" })
+						</div>
+						<div class="row">
+
+							<div class="col-md-4">
+								<label class="control-label">Seleccione la variedad</label>
+								@Html.DropDownList("VRDCODIGOI", null, htmlAttributes: new { @class = "form-control", @id = "VRDCODIGOI" })
+							</div>
+							<div class="col-md-3">
+								<label class="control-label">Seleccione el tamaño</label>
+								@Html.DropDownList("TMTCODIGOI", null, htmlAttributes: new { @class = "form-control", @id = "TMTCODIGOI" })
+							</div>
+							<div class="col-md-3">
+								<label class="control-label">Seleccione la unidad</label>
+								<select class="form-control" name="UNDCODIGOI" id="cmbTallos"></select>
+							</div>
+							<div class="col-md-2 pt-4 mb-2 pl-5">
+								<a onclick="obtenerItems()" style="cursor: pointer;" class="action-item text-black-50 " data-toggle="tooltip" title="" data-original-title="Buscar">
+									<i class="fa fa-search text-black-50" style="font-size: 16px;"></i> Buscar
+								</a>
+								
+							</div>
+						</div>
+					
+					<div class="col-md-12 pb-0 pt-3" style="text-align:right">
+						<label class="control-label" id="total" style="font-size:18px;">Total: 0</label>
+					</div>
+
+					<div class="row pt-0">
+						<div class="col-md-12">
+							<form name="formularioItems" id="formularioItems">
+								<div style="display:block; position:relative; height:290px; overflow-y:auto; overflow-x:hidden">
+									<table class="table table-cards table-responsive-lg tabla" id="tablaItems" name="tabla">
+										<thead style="background-color: #2A3F54" class="text-white">
+											<tr>
+												<th scope="col">
+													Variedad
+												</th>
+												<th scope="col">
+													Cantidad Disponible
+												</th>
+												<th scope="col">
+													Fecha Ingreso
+												</th>
+												<th scope="col"></th>
+											</tr>
+										</thead>
+										<tbody id="contenido"></tbody>
+									</table>
+								</div>
+								<div hidden  id="advertenciaItems" class="text-danger pl-5">¡Debe seleccionar al menos uno!</div>
+								<div class="col-md-12" style="text-align:right">
+									<input id="btnCliente" onclick="crearItem()" type="button"	 value="Seleccionar" class="btn btn-success" />
+									<input onclick="cerrarModalItems()" type="button" value="Cancelar" class="btn btn-info" />
+								</div>
+							</form>
+						</div>
+					
+					</div>
+					
+				</div>
+			</div>
+				
+		</div>
+	</div>
+</div>
+
+<script>
+	let cmbTipoFlor = document.getElementById("cmbTipoFlor");
+	let cmbTallos = document.getElementById("cmbTallos");
+	let VRDCODIGOI = document.getElementById("VRDCODIGOI");
+	let TMTCODIGOI = document.getElementById("TMTCODIGOI");
+	var contenido = document.getElementById('contenido');
+	var tabla = document.getElementById('tablaItems');
+	cmbTipoFlor.addEventListener("change", actualizar);
+	var listaItems = [];
+	var total = 0;
+	actualizar();
+
+	async function actualizar() {
+		await $.get("/DetalleFlorClasificada/listaTallos?id=" + cmbTipoFlor.value)
+			.done(function (response) {
+				if (response.estado) {
+					cmbTallos.innerHTML = "";
+					let opt = document.createElement("option");
+					response.lista.forEach(function (element) {
+						opt = document.createElement("option");
+						opt.appendChild(document.createTextNode(element.UNDDESCRIPCION));
+						opt.value = element.UNDCODIGOI;
+						cmbTallos.appendChild(opt);
+					});
+				} else {
+					alert(response.mensaje);
+				}
+			});
+	}
+
+
+	async function obtenerItems() {
+		listaItems.length = 0;
+		total = 0;
+		await $.get(`/Preenvio/ObtenerItems?TPFCODIGOI=${cmbTipoFlor.value}&VRDCODIGOI=${VRDCODIGOI.value}&TMTCODIGOI=${TMTCODIGOI.value}&UNDCODIGOI=${cmbTallos.value}`)
+			.done(function (response) {
+				if (response.estado) {
+					listaItems = response.data;
+					llenarTabla();
+				} else {
+					alert(response.mensaje);
+				}
+			});
+		}
+
+	async function llenarTabla() {
+		try {
+			tabla.removeChild(contenido);
+			contenido = document.createElement('tbody');
+
+		} catch (e) {
+			console.log(e);
+		}
+		let opt;
+		var totalTexto = document.getElementById('total');
+		totalTexto.innerText = 'Total: 0';
+		listaItems.forEach(function (element) {
+			opt = document.createElement("tr");
+			var VRDNOMBREC = document.createElement("td");
+			var DTECANTIDAD = document.createElement("td");
+			var DTEFECHAINGRESO = document.createElement("td");
+			var CuadroTexto = document.createElement("td");
+
+				
+			var cuadroTexto = document.createElement('input');				
+			cuadroTexto.setAttribute('type', 'number');
+			cuadroTexto.setAttribute('value', '0');
+			cuadroTexto.setAttribute('id', element.DTECODIGOI)
+			cuadroTexto.setAttribute('onkeypress', `verificar(${element.DTECANTIDAD}, ${element.DTECODIGOI})`);
+			cuadroTexto.setAttribute('onchange', `verificar(${element.DTECANTIDAD}, ${element.DTECODIGOI})`);
+			cuadroTexto.setAttribute('onblur', `sumarTotal()`);
+			cuadroTexto.setAttribute('style', 'text-align:right; width: 50px;');
+
+				
+			VRDNOMBREC.append(element.VRDNOMBREC);
+
+			ListaDetalleItems.forEach(function (nuevoItem) {
+				nuevoItem.forEach(function (detalle) {
+					if (parseInt(detalle.DTECODIGOI) === element.DTECODIGOI ) {
+						var cantidadNueva = element.DTECANTIDAD - parseInt(detalle.cantidadIngresada);
+						element.DTECANTIDAD = cantidadNueva;
+					}
+						
+				})
+			});
+
+			DTECANTIDAD.append(element.DTECANTIDAD);
+			DTEFECHAINGRESO.append(element.DTEFECHAINGRESO);
+			CuadroTexto.append(cuadroTexto);
+
+			if (element.DTECANTIDAD > 0) {
+				opt.append(VRDNOMBREC);
+				opt.append(DTECANTIDAD);
+				opt.append(DTEFECHAINGRESO);
+				opt.append(CuadroTexto);
+
+				contenido.appendChild(opt);
+			}	
+			
+		});
+
+		tabla.appendChild(contenido);
+	}
+
+	function verificar(cantidad, id) {
+		try {
+			var texto = document.getElementById(id);
+			var cantidadIngresado = texto.value
+			if (cantidad < cantidadIngresado) {
+				texto.value = cantidad;
+			}
+			if (cantidadIngresado < 0) {
+				texto.value = 0;
+			}
+		} catch (e) {
+			console.log('primero: ' + e);
+		}
+		
+
+	}
+
+	function sumarTotal() {
+		total = 0;
+		try {
+			var tablaTotal = document.getElementById('tablaItems');
+			$(".tabla tr td input[type='number']").each(function () {
+				row = $(this).context.value
+				if (row.trim() === '') {
+					row = 0;
+					$(this).context.value = 0;
+				}
+				total += parseInt(row)
+			});
+
+			var totalTexto = document.getElementById('total');
+			totalTexto.innerText = 'Total: ' + total;
+		} catch (e) {
+			console.log(e);
+		}
+		
+	}
+
+	function crearItem() {
+		if (total === 0) {
+			var advertenciaItems = document.getElementById('advertenciaItems');
+			advertenciaItems.hidden = false;
+		} else {
+			var textoTallos = $('#cmbTallos').find('option:selected').text();	
+			var textoLenght = $('#TMTCODIGOI').find('option:selected').text();	
+			items = [];
+			$(".tabla tr td input[type='number']").each(function () {
+				va = $(this).closest('tr');
+				row = $(this).context.value
+				var idItems = $(this).context.id
+				if (parseInt(row) > 0) {
+					items.push({
+						DTECODIGOI: idItems,
+						cantidadIngresada: row,
+						variedad: va.find('td:eq(0)').text().trim(),
+						stem: textoTallos,
+						length: textoLenght
+					});
+				} 
+			});
+			llenarDetalle(items, total);
+			cerrarModalItems();
+		}
+
+	}
+
+</script>

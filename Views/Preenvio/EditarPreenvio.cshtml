@@ -1,0 +1,464 @@
+﻿@model IEnumerable<SysFloricola.Models.Preenvio>
+
+@{
+	ViewBag.Title = "Preenvío";
+}
+
+<link href="~/Content/css/EstilosModal.css" rel="stylesheet" />
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+
+<div class="row  pb-3 ">
+	<div class=" pl-5 pr-5 col-md-5 pt-0 mt-0 text-center">
+		<div hidden id="error" class="alert alert-danger">Ocurrió un problema al crear el registro</div>
+	</div>
+	<div class="col-md-12 pl-4 pt-2 mb-2">
+		<div class="col-md-6" style="text-align:left">
+			<a href="~/Preenvio/Index" style="cursor: pointer;" class="action-item text-black-50 " data-toggle="tooltip" title="Regresar">
+				<i class="fa fa-arrow-circle-left text-black-50" style="font-size: 16px;"></i> Regresar
+			</a>
+		</div>
+		<div class="col-md-6 pr-5" style="text-align:right">
+			<label class="control-label">Editar Preenvío</label>
+		</div>
+	</div>
+</div>
+
+<form id="formulario" onsubmit="return validar()">
+	<div class="row pt-2 pb-5 mb-5">
+		<div class="col-md-12">
+			@foreach (var item in Model)
+			{
+				<input type="text" hidden id="precodigoI" value="@item.PRECODIGOI" />
+				<div class="row">
+					<div class="col-md-6 pl-5 pr-5">
+						<label class="control-label">Ingrese la fecha de Preenvío</label>
+						<input type="text" readonly required class="form-control" value="@item.PREFECHA.ToShortDateString()" name="fechaPreenvio" id="fechaPreenvio" />
+					</div>
+					<div class="col-md-6 pl-5 pr-5" id="formCliente">
+
+
+						<label class="control-label" onclick="abrirModal()" style="cursor: pointer;" id="labelEditar">Cliente  <i class="fa fa-edit"></i></label><input class="form-control" readonly id="nombreCliente" value="@item.CLNRAZONSOCIAL - @item.CLNRUC">
+					</div>
+
+				</div>
+				<div class="row pt-4">
+					<div class="col-md-4 pl-5 ">
+						<label class="control-label">Ingrese el AWB</label>
+						<input type="text" class="form-control" value="@item.PREAWB" name="awb" id="awb" />
+						<label id="awbAdvertencia" hidden class="text-danger control-label">Ingrese el AWB</label>
+					</div>
+					<div class="col-md-4 pl-4 pr-4 ">
+						<label class="control-label">Ingrese el HAWB</label>
+						<input type="text" class="form-control" value="@item.PREHAWB" name="hawb" id="hawb" />
+						<label id="hawbAdvertencia" hidden class="text-danger control-label">Ingrese el HAWB</label>
+					</div>
+					<div class="col-md-4  pr-5">
+						<label class="control-label">Número de Preenvío</label>
+						<input type="number" class="form-control" value="@item.PRENUMERO" name="numeroPreenvio" id="numeroPreenvio" />
+						<label id="numeroPreenvioAdvertencia" hidden class="text-danger control-label">Ingrese el Número de Preenvío</label>
+					</div>
+				</div>
+
+				<div class="row pt-4">
+					<div class="col-md-4 pl-5 ">
+						<label class="control-label">Ingrese Número de Pieza</label>
+						<input type="number" class="form-control" value="@item.PRENUMPIEZAS" name="numeroPieza" id="numeroPieza" />
+						<label id="numeroPiezaAdvertencia" hidden class="text-danger control-label">Ingrese el Número de Pieza</label>
+					</div>
+					<div class="col-md-4 pl-4 pr-4 ">
+						<label class="control-label">Ingrese el número de caja</label>
+						<input type="text" class="form-control" name="numeroCaja" value="@item.PREIDCAJAS" id="numeroCaja" />
+						<label id="numeroCajaAdvertencia" hidden class="text-danger control-label">Ingrese el Número de Caja</label>
+					</div>
+				</div>
+
+			}
+
+
+			<div class="row pl-5 pr-5 pt-5">
+				<a onclick="abrirModalItems()" style="cursor:pointer;" id="agregarCliente pb-5 mb-5"><i class="fa fa-plus text-success" style="font-size: 16px;"></i> Agregar Item</a>
+				<br /><br />
+				<table class="table table-responsive-lg pt-5">
+					<thead style="background-color: #2A3F54" class="text-white">
+						<tr>
+							<th>Variedad</th>
+							<th>Tamaño</th>
+							<th>Total</th>
+							<th>Unidad</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody id="contenidoDetalle"></tbody>
+				</table>
+			</div>
+
+			<div class="row">
+				<div hidden id="clienteAdvertencia" class="text-danger pl-5">¡Por favor, Seleccione un Cliente!</div>
+				<div class="col-md-12 pr-5" style="text-align:right">
+					<input type="submit" value="Guardar Cambios" id="btnGuardar" class="btn btn-success" />
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+</form>
+
+<div class="myModal" id="modalCliente" name="modalCliente"></div>
+<div class="myModal" id="modalItems" name="modalItems"></div>
+
+@section Scripts {
+	<script src="~/Scripts/jquery.dataTables.js"></script>
+	<script>
+		var Cliente;
+		var ListaDetalleItems = [];
+		var ListaBD = [];
+		var ListaMostrar = [];
+		var ListaTabla = [];
+		var ListaEliminados = [];
+		var array = [];
+		modalCliente = document.getElementById('modalCliente');
+		modalItems = document.getElementById('modalItems');
+		var precodigoI = document.getElementById('precodigoI').value;
+
+		$(document).ready(function () {
+			obtenerDetalleItems();
+		});
+
+		async function obtenerDetalleItems() {
+			await $.get("/Preenvio/ListaDetalleItems?preCodigoI=" + precodigoI)
+				.done(function (response) {
+					if (response.estado) {
+						ListaBD = response.lista;
+						response.lista.forEach(function (element) {
+							response.lista.forEach(function (item) {
+								if (item != element) {
+									if (item.VRDCODIGOI === element.VRDCODIGOI && item.TMTCODIGOI === element.TMTCODIGOI && item.UNDCODIGOI === element.UNDCODIGOI) {
+										array.push(item);
+									}
+								}
+							});
+						});
+						crearListas();
+					} else {
+						alert(response.mensaje);
+					}
+				});
+
+		}
+
+		async function crearListas() {
+			var elementosRepetidos = [];
+			var respuesta = false;
+			var bandera = 1
+			ListaBD.forEach(function (element) {
+				bandera = 1;
+				array.forEach(function (item) {
+					if (bandera == 1) {
+						if (element === item) {
+							respuesta = true;
+							bandera++;
+						} else {
+							respuesta = false;
+						}
+					}
+				})
+				if (!respuesta) {
+					ListaMostrar.push(element);
+					ListaTabla.push(element);
+				} else {
+					elementosRepetidos.push(element);
+				}
+			});
+
+
+			let nuevoObjeto = []
+			elementosRepetidos.forEach(x => {
+				if (!nuevoObjeto.hasOwnProperty(x.Identificador)) {
+					nuevoObjeto[x.Identificador] = []
+				} else {
+					ListaMostrar.push(nuevoObjeto[x.Identificador])
+				}
+ 
+				nuevoObjeto[x.Identificador].push({
+				  PRECODIGOI: x.PRECODIGOI,
+					DTECODIGOI: x.DTECODIGOI,
+					DTPCANTIDAD: x.DTPCANTIDAD,
+					PRECODIGOI: x.PRECODIGOI,
+					TMTCODIGOI: x.TMTCODIGOI,
+					TMTDESCRIPC: x.TMTDESCRIPC,
+					UNDCODIGOI: x.UNDCODIGOI,
+					UNDDESCRIPCION: x.UNDDESCRIPCION,
+					VRDCODIGOI: x.VRDCODIGOI,
+					variedad: x.VRDNOMBREC,
+					total: x.DTPCANTIDAD,
+					length: x.UNDDESCRIPCION,
+					stem: x.TMTDESCRIPC,
+					Identificador: x.Identificador
+				})
+				
+			})			
+			llenarTabla(ListaMostrar);
+		}
+
+	async function llenarTabla(listaElementos) {		
+		for (var i = 0; i < listaElementos.length; i++) {
+			var suma = listaElementos[i].DTPCANTIDAD;
+			var nombreVariedad, total, numeroStems, numeroLenght
+			if (listaElementos[i].length) {
+				suma = 0;
+				for (var j = 0; j < listaElementos[i].length; j++) {
+					suma += parseInt(listaElementos[i][j].DTPCANTIDAD)
+					nombreVariedad = listaElementos[i][j].variedad;
+					numeroStems = listaElementos[i][j].UNDDESCRIPCION;
+					numeroLenght = listaElementos[i][j].TMTDESCRIPC;
+					total = suma;
+				}
+			} else {
+				nombreVariedad = listaElementos[i].VRDNOMBREC;
+				total = listaElementos[i].DTPCANTIDAD;
+				numeroStems = listaElementos[i].UNDDESCRIPCION;
+				numeroLenght =listaElementos[i].TMTDESCRIPC;
+			}
+
+			var contenidoDetalle = document.getElementById('contenidoDetalle');
+			var tr = document.createElement("tr");
+			var variedad = document.createElement("td");
+			var tamanio = document.createElement("td");
+			var Total = document.createElement("td");
+			var stem = document.createElement("td");
+			var accion = document.createElement("td");
+
+			var icono = document.createElement("i");
+			icono.setAttribute('class', 'fa fa-trash');
+
+			//////////////////////////////////////////////////////////
+			var a = document.createElement("a");
+			a.setAttribute("style", "cursor:pointer; font-size:14px");
+			a.setAttribute('class', 'action-item text-danger mr-2 borrar');
+			a.setAttribute('data-toggle', 'tooltip');
+			a.setAttribute('title', 'Eliminar Registro');
+			a.appendChild(icono);
+			///////////////////////////////////////////////////////////
+
+			variedad.append(nombreVariedad);
+			Total.append(total);
+			stem.append(numeroStems);
+			tamanio.append(numeroLenght);
+			accion.append(a);
+
+			tr.appendChild(variedad);
+			tr.appendChild(tamanio);
+			tr.appendChild(Total);
+			tr.appendChild(stem);
+			tr.appendChild(accion);
+
+			contenidoDetalle.appendChild(tr);
+		}
+
+	}
+
+		function abrirModal() {
+			var url = '/Preenvio/ModalCliente';
+			$.get(url, function (url) {
+				$("#modalCliente").html(url);
+				modalCliente.style.display = 'block';
+				var tituloModal = document.getElementById('titulmodalCliente');
+				tituloModal.textContent = "Seleccionar Cliente";
+				bloquearBarraDesplazamiento();
+			});
+		}
+
+		function abrirModalItems() {
+			var url = '/Preenvio/ModalItems';
+			$.get(url, function (url) {
+				$("#modalItems").html(url);
+				modalItems.style.display = 'block';
+				var tituloModal = document.getElementById('titulmodalItems');
+				tituloModal.textContent = "Seleccionar Items";
+				bloquearBarraDesplazamiento();
+			});
+		}
+
+		function bloquearBarraDesplazamiento() {
+			$('body').css({ 'overflow': 'hidden' });
+			$(document).bind('scroll', function () {
+				window.scrollTo(0, 0);
+			});
+		}
+
+		function activarBarraDesplazamiento() {
+			$(document).unbind('scroll');
+			$('body').css({ 'overflow': 'visible' });
+		}
+
+		function cerrarModal() {
+			modalCliente.style.display = 'none';
+			activarBarraDesplazamiento();
+		}
+
+		function cerrarModalItems() {
+			modalItems.style.display = 'none';
+			activarBarraDesplazamiento();
+		}
+
+
+		async function llenarCliente(cliente, total) {
+			Cliente = cliente;
+			cerrarModal();
+			var formCliente = document.getElementById('formCliente');
+			try {
+				var agregarCliente = document.getElementById('agregarCliente');
+				var texto = document.getElementById('label');
+				var salto = document.getElementById('salto');
+				await formCliente.removeChild(texto);
+				await formCliente.removeChild(agregarCliente);
+				await formCliente.removeChild(salto);
+			} catch (e) {
+				var labelEditar = document.getElementById('labelEditar')
+				formCliente.removeChild(labelEditar);
+				var nombreCliente = document.getElementById('nombreCliente');
+				formCliente.removeChild(nombreCliente);
+			}
+
+
+			var label = document.createElement('label');
+			label.setAttribute('class', 'control-label');
+			label.textContent = 'Cliente  '
+			label.setAttribute('onclick', 'abrirModal()')
+			label.setAttribute('style', 'cursor: pointer;')
+			label.setAttribute('id', 'labelEditar')
+			var icono = document.createElement('i');
+			icono.setAttribute('class', 'fa fa-edit')
+			await label.appendChild(icono);
+
+			await formCliente.appendChild(label);
+
+			var input = document.createElement('input');
+			input.setAttribute('class', 'form-control');
+			input.setAttribute('readonly', 'true');
+			input.setAttribute('id', 'nombreCliente');
+			input.setAttribute('value', cliente.razonSocial + ' - ' + cliente.ruc);
+			await formCliente.appendChild(input);
+
+		}
+
+		function llenarDetalle(itemDetalle) {
+			var contenidoDetalle = document.getElementById('contenidoDetalle');
+			ListaDetalleItems.push(itemDetalle);
+			var tr = document.createElement("tr");
+			var variedad = document.createElement("td");
+			var tamanio = document.createElement("td");
+			var Total = document.createElement("td");
+			var stem = document.createElement("td");
+			var accion = document.createElement("td");
+
+			var icono = document.createElement("i");
+			icono.setAttribute('class', 'fa fa-trash');
+
+			//////////////////////////////////////////////////////////
+			var a = document.createElement("a");
+			a.setAttribute("style", "cursor:pointer; font-size:14px");
+			a.setAttribute('class', 'action-item text-danger mr-2 borrar');
+			a.setAttribute('data-toggle', 'tooltip');
+			a.setAttribute('title', 'Eliminar Registro');
+			a.appendChild(icono);
+			///////////////////////////////////////////////////////////
+
+			variedad.append(itemDetalle[0].variedad);
+			Total.append(total);
+			stem.append(itemDetalle[0].stem);
+			tamanio.append(itemDetalle[0].length);
+			accion.append(a);
+
+			tr.appendChild(variedad);
+			tr.appendChild(tamanio);
+			tr.appendChild(Total);
+			tr.appendChild(stem);
+			tr.appendChild(accion);
+
+			contenidoDetalle.appendChild(tr);
+		}
+
+		$(document).on('click', '.borrar', function (event) {
+			event.preventDefault();
+			var indice = event.target.parentElement.parentElement.parentElement.rowIndex;
+			ListaDetalleItems.splice(parseInt(indice) - 1, 1);
+			$(this).closest('tr').remove();
+
+		});
+
+		function validar() {
+			var awb = $('#awb').val();
+			var hawb = $('#hawb').val();
+			var numeroPreenvio = $('#numeroPreenvio').val();
+			var numeroPieza = $('#numeroPieza').val();
+			var numeroCaja = $('#numeroCaja').val();
+			if (!Cliente) {
+				var elemento = document.getElementById("clienteAdvertencia");
+				elemento.hidden = false;
+				return false;
+			} else if (awb.trim() === "") {
+				var elemento = document.getElementById("awbAdvertencia");
+				elemento.hidden = false;
+				return false;
+			} else if (hawb.trim() === "") {
+				var elemento = document.getElementById("hawbAdvertencia");
+				elemento.hidden = false;
+				return false;
+			} else if (numeroPreenvio.trim() === "") {
+				var elemento = document.getElementById("numeroPreenvioAdvertencia");
+				elemento.hidden = false;
+				return false;
+			} else if (numeroPieza.trim() === "") {
+				var elemento = document.getElementById("numeroPiezaAdvertencia");
+				elemento.hidden = false;
+				return false;
+			} else if (numeroCaja.trim() === "") {
+				var elemento = document.getElementById("numeroCajaAdvertencia");
+				elemento.hidden = false;
+				return false;
+			} else if (ListaDetalleItems.length === 0) {
+				var elemento = document.getElementById("clienteAdvertencia");
+				elemento.innerText = '¡Se Debe Agregar al menos un Item!';
+				elemento.hidden = false;
+				return false;
+			} else {
+				guardarPreenvio();
+				return false;
+			}
+
+		}
+
+	async function guardarPreenvio() {
+		var Preenvio = {};
+		Preenvio.CLNCODIGOI = Cliente.id;
+		Preenvio.PREFECHA =  document.getElementById('fechaPreenvio').value;
+		Preenvio.PRENUMERO =  document.getElementById('numeroPreenvio').value;
+		Preenvio.PREAWB = document.getElementById('awb').value;
+		Preenvio.PREHAWB = document.getElementById('hawb').value;
+		Preenvio.PRENUMPIEZAS =document.getElementById('numeroPieza').value;
+		Preenvio.PREIDCAJAS = document.getElementById('numeroCaja').value;
+
+		var lista = [];
+		ListaDetalleItems.forEach(function (nuevoItem) {
+			nuevoItem.forEach(function (detalle) {
+				lista.push(detalle);
+			})
+		});
+
+		await $.post('/Preenvio/Preenvio', {
+			preenvio: Preenvio,
+            detalleItems: lista
+		}, function (data, status) {
+			if (data.estado)
+				window.location.replace("Index?id=1");
+			else
+				window.location.replace("Index?id=2");
+        });
+	}
+
+
+	</script>
+}

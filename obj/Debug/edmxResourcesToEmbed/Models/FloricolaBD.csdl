@@ -470,6 +470,32 @@
       <Parameter Name="CFNCANTIDAD" Mode="In" Type="Int32" />
       <Parameter Name="Fecha" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <FunctionImport Name="spSelect_Items_Preenvio" ReturnType="Collection(BDFloricolaModel.spSelect_Items_Preenvio_Result)">
+      <Parameter Name="TPFCODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="VRDCODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="TMTCODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="UNDCODIGOI" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spInsert_Detalle_preenvio">
+      <Parameter Name="DTECODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="DTPCANTIDAD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spSelect_preenvio" ReturnType="Collection(BDFloricolaModel.spSelect_preenvio_Result)">
+      <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spSelect_preenvio_id" ReturnType="Collection(BDFloricolaModel.spSelect_preenvio_id_Result)">
+      <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spSelect_detalle_items" ReturnType="Collection(BDFloricolaModel.spSelect_detalle_items_Result)">
+      <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="preestado" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spSelect_detalle_items_editar" ReturnType="Collection(BDFloricolaModel.spSelect_detalle_items_editar_Result)">
+      <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spSelect_listado_items" ReturnType="Collection(BDFloricolaModel.spSelect_listado_items_Result)">
+      <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="EMPRESAS">
     <Key>
@@ -984,5 +1010,77 @@
     <Property Type="Int32" Name="PRCCODIGOI" Nullable="false" />
     <Property Type="Int32" Name="VRDCODIGOI" Nullable="true" />
     <Property Type="Int32" Name="CFNCANTIDAD" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spSelect_Items_Preenvio_Result">
+    <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+    <Property Type="String" Name="TMTDESCRIPC" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TPFDESCRIPCION" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="PRCCODIGOI" Nullable="false" />
+    <Property Type="String" Name="VRDNOMBREC" Nullable="false" MaxLength="30" />
+    <Property Type="DateTime" Name="DTEFECHAINGRESO" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spSelect_preenvio_Result">
+    <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+    <Property Type="Decimal" Name="PRENUMERO" Nullable="false" Precision="5" Scale="0" />
+    <Property Type="String" Name="PREAWB" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="PREHAWB" Nullable="false" MaxLength="15" />
+    <Property Type="Int32" Name="PRENUMPIEZAS" Nullable="false" />
+    <Property Type="String" Name="PREIDCAJAS" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="DTPCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTPCANTIDAD" Nullable="false" />
+    <Property Type="Int32" Name="CLNCODIGOI" Nullable="false" />
+    <Property Type="String" Name="CLNRUC" Nullable="true" MaxLength="13" />
+    <Property Type="String" Name="CLNRAZONSOCIAL" Nullable="false" MaxLength="60" />
+    <Property Type="String" Name="CLNTELEFONO" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="spSelect_preenvio_id_Result">
+    <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+    <Property Type="Decimal" Name="PRENUMERO" Nullable="false" Precision="5" Scale="0" />
+    <Property Type="String" Name="PREAWB" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="PREHAWB" Nullable="false" MaxLength="15" />
+    <Property Type="Int32" Name="PRENUMPIEZAS" Nullable="false" />
+    <Property Type="DateTime" Name="PREFECHA" Nullable="false" Precision="23" />
+    <Property Type="String" Name="PREIDCAJAS" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="CLNCODIGOI" Nullable="false" />
+    <Property Type="String" Name="CLNRUC" Nullable="true" MaxLength="13" />
+    <Property Type="String" Name="CLNRAZONSOCIAL" Nullable="false" MaxLength="60" />
+    <Property Type="String" Name="CLNTELEFONO" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="spSelect_detalle_items_Result">
+    <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTPCANTIDAD" Nullable="false" />
+    <Property Type="Int32" Name="TMTCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="VRDCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spSelect_detalle_items_editar_Result">
+    <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTPCANTIDAD" Nullable="false" />
+    <Property Type="Int32" Name="TMTCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="VRDCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
+    <Property Type="String" Name="TMTDESCRIPC" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="VRDNOMBREC" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="spSelect_listado_items_Result">
+    <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTECODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTPCANTIDAD" Nullable="false" />
+    <Property Type="Int32" Name="TMTCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="UNDCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="VRDCODIGOI" Nullable="false" />
+    <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
+    <Property Type="String" Name="TMTDESCRIPC" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="VRDNOMBREC" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Identificador" Nullable="false" MaxLength="36" />
   </ComplexType>
 </Schema>

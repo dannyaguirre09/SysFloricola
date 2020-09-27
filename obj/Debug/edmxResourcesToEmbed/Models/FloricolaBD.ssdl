@@ -667,8 +667,34 @@
     <Parameter Name="DTECANTIDAD" Type="int" Mode="In" />
     <Parameter Name="fecha" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="spInsert_Detalle_preenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DTECODIGOI" Type="int" Mode="In" />
+    <Parameter Name="DTPCANTIDAD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spSelect_detalle_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
+    <Parameter Name="preestado" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spSelect_detalle_items_editar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
+  </Function>
   <Function Name="spSelect_flor_numerotallos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spSelect_Items_Preenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TPFCODIGOI" Type="int" Mode="In" />
+    <Parameter Name="VRDCODIGOI" Type="int" Mode="In" />
+    <Parameter Name="TMTCODIGOI" Type="int" Mode="In" />
+    <Parameter Name="UNDCODIGOI" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spSelect_listado_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spSelect_preenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spSelect_preenvio_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
   </Function>
   <Function Name="spSelect_tallos_unidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
