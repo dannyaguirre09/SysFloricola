@@ -363,5 +363,76 @@ namespace SysFloricola.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_listado_items_Result>("spSelect_listado_items", pRECODIGOIParameter);
         }
+    
+        public virtual int spUpdate_Preenvio(Nullable<int> pRECODIGOI, Nullable<int> cLNCODIGO, Nullable<System.DateTime> pREFECHA, Nullable<int> pRENUMERO, string pREAWB, string pREHAWB, Nullable<int> pRENUMPIEZAS, string pREIDCAJAS)
+        {
+            var pRECODIGOIParameter = pRECODIGOI.HasValue ?
+                new ObjectParameter("PRECODIGOI", pRECODIGOI) :
+                new ObjectParameter("PRECODIGOI", typeof(int));
+    
+            var cLNCODIGOParameter = cLNCODIGO.HasValue ?
+                new ObjectParameter("CLNCODIGO", cLNCODIGO) :
+                new ObjectParameter("CLNCODIGO", typeof(int));
+    
+            var pREFECHAParameter = pREFECHA.HasValue ?
+                new ObjectParameter("PREFECHA", pREFECHA) :
+                new ObjectParameter("PREFECHA", typeof(System.DateTime));
+    
+            var pRENUMEROParameter = pRENUMERO.HasValue ?
+                new ObjectParameter("PRENUMERO", pRENUMERO) :
+                new ObjectParameter("PRENUMERO", typeof(int));
+    
+            var pREAWBParameter = pREAWB != null ?
+                new ObjectParameter("PREAWB", pREAWB) :
+                new ObjectParameter("PREAWB", typeof(string));
+    
+            var pREHAWBParameter = pREHAWB != null ?
+                new ObjectParameter("PREHAWB", pREHAWB) :
+                new ObjectParameter("PREHAWB", typeof(string));
+    
+            var pRENUMPIEZASParameter = pRENUMPIEZAS.HasValue ?
+                new ObjectParameter("PRENUMPIEZAS", pRENUMPIEZAS) :
+                new ObjectParameter("PRENUMPIEZAS", typeof(int));
+    
+            var pREIDCAJASParameter = pREIDCAJAS != null ?
+                new ObjectParameter("PREIDCAJAS", pREIDCAJAS) :
+                new ObjectParameter("PREIDCAJAS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spUpdate_Preenvio", pRECODIGOIParameter, cLNCODIGOParameter, pREFECHAParameter, pRENUMEROParameter, pREAWBParameter, pREHAWBParameter, pRENUMPIEZASParameter, pREIDCAJASParameter);
+        }
+    
+        public virtual int spActualizar_Stock(Nullable<int> dTECODIGOI, Nullable<int> dTPCODIGOI, Nullable<int> dTECANTIDAD)
+        {
+            var dTECODIGOIParameter = dTECODIGOI.HasValue ?
+                new ObjectParameter("DTECODIGOI", dTECODIGOI) :
+                new ObjectParameter("DTECODIGOI", typeof(int));
+    
+            var dTPCODIGOIParameter = dTPCODIGOI.HasValue ?
+                new ObjectParameter("DTPCODIGOI", dTPCODIGOI) :
+                new ObjectParameter("DTPCODIGOI", typeof(int));
+    
+            var dTECANTIDADParameter = dTECANTIDAD.HasValue ?
+                new ObjectParameter("DTECANTIDAD", dTECANTIDAD) :
+                new ObjectParameter("DTECANTIDAD", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spActualizar_Stock", dTECODIGOIParameter, dTPCODIGOIParameter, dTECANTIDADParameter);
+        }
+    
+        public virtual int spInsert_Editado_Detalle_preenvio(Nullable<int> dTECODIGOI, Nullable<int> dTPCANTIDAD, Nullable<int> pRECODIGO)
+        {
+            var dTECODIGOIParameter = dTECODIGOI.HasValue ?
+                new ObjectParameter("DTECODIGOI", dTECODIGOI) :
+                new ObjectParameter("DTECODIGOI", typeof(int));
+    
+            var dTPCANTIDADParameter = dTPCANTIDAD.HasValue ?
+                new ObjectParameter("DTPCANTIDAD", dTPCANTIDAD) :
+                new ObjectParameter("DTPCANTIDAD", typeof(int));
+    
+            var pRECODIGOParameter = pRECODIGO.HasValue ?
+                new ObjectParameter("PRECODIGO", pRECODIGO) :
+                new ObjectParameter("PRECODIGO", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsert_Editado_Detalle_preenvio", dTECODIGOIParameter, dTPCANTIDADParameter, pRECODIGOParameter);
+        }
     }
 }

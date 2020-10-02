@@ -30,14 +30,15 @@
 			{
 				<input type="text" hidden id="precodigoI" value="@item.PRECODIGOI" />
 				<div class="row">
+					<input class="form-control" hidden readonly id="codigoCliente" value="@item.CLNCODIGOI">
 					<div class="col-md-6 pl-5 pr-5">
 						<label class="control-label">Ingrese la fecha de Preenvío</label>
 						<input type="text" readonly required class="form-control" value="@item.PREFECHA.ToShortDateString()" name="fechaPreenvio" id="fechaPreenvio" />
 					</div>
 					<div class="col-md-6 pl-5 pr-5" id="formCliente">
 
-
-						<label class="control-label" onclick="abrirModal()" style="cursor: pointer;" id="labelEditar">Cliente  <i class="fa fa-edit"></i></label><input class="form-control" readonly id="nombreCliente" value="@item.CLNRAZONSOCIAL - @item.CLNRUC">
+						<label class="control-label" onclick="abrirModal()" style="cursor: pointer;" id="labelEditar">Cliente  <i class="fa fa-edit"></i></label>
+						<input class="form-control" readonly id="nombreCliente" value="@item.CLNRAZONSOCIAL - @item.CLNRUC">
 					</div>
 
 				</div>
@@ -165,6 +166,9 @@
 					}
 				})
 				if (!respuesta) {
+					element.cantidadIngresada = element.DTPCANTIDAD;
+					element.variedad = element.VRDNOMBREC;
+					element.stem = element.UNDDESCRIPCION;					
 					ListaMostrar.push(element);
 					ListaTabla.push(element);
 				} else {
@@ -195,11 +199,14 @@
 					total: x.DTPCANTIDAD,
 					length: x.UNDDESCRIPCION,
 					stem: x.TMTDESCRIPC,
-					Identificador: x.Identificador
+					Identificador: x.Identificador,
+					cantidadIngresada: x.DTPCANTIDAD
 				})
 				
-			})			
+			})
+			console.log(ListaMostrar)
 			llenarTabla(ListaMostrar);
+			
 		}
 
 	async function llenarTabla(listaElementos) {		
@@ -209,7 +216,7 @@
 			if (listaElementos[i].length) {
 				suma = 0;
 				for (var j = 0; j < listaElementos[i].length; j++) {
-					suma += parseInt(listaElementos[i][j].DTPCANTIDAD)
+					suma += parseInt(listaElementos[i][j].cantidadIngresada)
 					nombreVariedad = listaElementos[i][j].variedad;
 					numeroStems = listaElementos[i][j].UNDDESCRIPCION;
 					numeroLenght = listaElementos[i][j].TMTDESCRIPC;
@@ -308,6 +315,8 @@
 			Cliente = cliente;
 			cerrarModal();
 			var formCliente = document.getElementById('formCliente');
+			var ClienteInput = document.getElementById('codigoCliente');
+			ClienteInput.value = Cliente.id;
 			try {
 				var agregarCliente = document.getElementById('agregarCliente');
 				var texto = document.getElementById('label');
@@ -347,6 +356,7 @@
 		function llenarDetalle(itemDetalle) {
 			var contenidoDetalle = document.getElementById('contenidoDetalle');
 			ListaDetalleItems.push(itemDetalle);
+			ListaMostrar.push(itemDetalle);
 			var tr = document.createElement("tr");
 			var variedad = document.createElement("td");
 			var tamanio = document.createElement("td");
@@ -384,9 +394,8 @@
 		$(document).on('click', '.borrar', function (event) {
 			event.preventDefault();
 			var indice = event.target.parentElement.parentElement.parentElement.rowIndex;
-			ListaDetalleItems.splice(parseInt(indice) - 1, 1);
+			ListaMostrar.splice(parseInt(indice) - 1, 1);
 			$(this).closest('tr').remove();
-
 		});
 
 		function validar() {
@@ -395,11 +404,7 @@
 			var numeroPreenvio = $('#numeroPreenvio').val();
 			var numeroPieza = $('#numeroPieza').val();
 			var numeroCaja = $('#numeroCaja').val();
-			if (!Cliente) {
-				var elemento = document.getElementById("clienteAdvertencia");
-				elemento.hidden = false;
-				return false;
-			} else if (awb.trim() === "") {
+			if (awb.trim() === "") {
 				var elemento = document.getElementById("awbAdvertencia");
 				elemento.hidden = false;
 				return false;
@@ -419,7 +424,7 @@
 				var elemento = document.getElementById("numeroCajaAdvertencia");
 				elemento.hidden = false;
 				return false;
-			} else if (ListaDetalleItems.length === 0) {
+			} else if (ListaMostrar.length === 0) {
 				var elemento = document.getElementById("clienteAdvertencia");
 				elemento.innerText = '¡Se Debe Agregar al menos un Item!';
 				elemento.hidden = false;
@@ -433,7 +438,8 @@
 
 	async function guardarPreenvio() {
 		var Preenvio = {};
-		Preenvio.CLNCODIGOI = Cliente.id;
+		Preenvio.PRECODIGOI = document.getElementById('precodigoI').value;
+		Preenvio.CLNCODIGOI =document.getElementById('codigoCliente').value;
 		Preenvio.PREFECHA =  document.getElementById('fechaPreenvio').value;
 		Preenvio.PRENUMERO =  document.getElementById('numeroPreenvio').value;
 		Preenvio.PREAWB = document.getElementById('awb').value;
@@ -442,18 +448,23 @@
 		Preenvio.PREIDCAJAS = document.getElementById('numeroCaja').value;
 
 		var lista = [];
-		ListaDetalleItems.forEach(function (nuevoItem) {
-			nuevoItem.forEach(function (detalle) {
-				lista.push(detalle);
-			})
+		ListaMostrar.forEach(function (nuevoItem) {
+			if (nuevoItem.length) {
+				nuevoItem.forEach(function (detalle) {
+					lista.push(detalle);
+				})
+			} else {
+				lista.push(nuevoItem);
+			}
 		});
+		console.log(lista);
 
-		await $.post('/Preenvio/Preenvio', {
+		await $.post('/Preenvio/EditarPreenvio', {
 			preenvio: Preenvio,
             detalleItems: lista
 		}, function (data, status) {
 			if (data.estado)
-				window.location.replace("Index?id=1");
+				window.location.replace("Index?id=3");
 			else
 				window.location.replace("Index?id=2");
         });

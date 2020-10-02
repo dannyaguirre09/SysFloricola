@@ -496,6 +496,26 @@
     <FunctionImport Name="spSelect_listado_items" ReturnType="Collection(BDFloricolaModel.spSelect_listado_items_Result)">
       <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="spUpdate_Preenvio">
+      <Parameter Name="PRECODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="CLNCODIGO" Mode="In" Type="Int32" />
+      <Parameter Name="PREFECHA" Mode="In" Type="DateTime" />
+      <Parameter Name="PRENUMERO" Mode="In" Type="Int32" />
+      <Parameter Name="PREAWB" Mode="In" Type="String" />
+      <Parameter Name="PREHAWB" Mode="In" Type="String" />
+      <Parameter Name="PRENUMPIEZAS" Mode="In" Type="Int32" />
+      <Parameter Name="PREIDCAJAS" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spActualizar_Stock">
+      <Parameter Name="DTECODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="DTPCODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="DTECANTIDAD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spInsert_Editado_Detalle_preenvio">
+      <Parameter Name="DTECODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="DTPCANTIDAD" Mode="In" Type="Int32" />
+      <Parameter Name="PRECODIGO" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="EMPRESAS">
     <Key>

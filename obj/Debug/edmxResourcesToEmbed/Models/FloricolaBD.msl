@@ -454,5 +454,8 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spUpdate_Preenvio" FunctionName="BDFloricolaModel.Store.spUpdate_Preenvio" />
+    <FunctionImportMapping FunctionImportName="spActualizar_Stock" FunctionName="BDFloricolaModel.Store.spActualizar_Stock" />
+    <FunctionImportMapping FunctionImportName="spInsert_Editado_Detalle_preenvio" FunctionName="BDFloricolaModel.Store.spInsert_Editado_Detalle_preenvio" />
   </EntityContainerMapping>
 </Mapping>

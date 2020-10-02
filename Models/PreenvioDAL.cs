@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -82,6 +83,38 @@ namespace SysFloricola.Models
 			return respuesta;
 		}
 
+		public int Editar_Preenvio(PREENVIOS preenvio, List<DetalleItems> listaDetalle)
+		{
+			int respuesta = 0;
+			using (var context = new BDFloricolaContext())
+			{
+				using (var transaction = context.Database.BeginTransaction())
+				{
+					try
+					{
+						int res = context.spUpdate_Preenvio(preenvio.PRECODIGOI, preenvio.CLNCODIGOI, preenvio.PREFECHA, Convert.ToInt32(preenvio.PRENUMERO) ,preenvio.PREAWB, preenvio.PREHAWB, preenvio.PRENUMPIEZAS, preenvio.PREIDCAJAS );
+						List<DETALLES_PREENVIOS> listaItemsPreenvio = context.DETALLES_PREENVIOS.Where(x => x.PRECODIGOI == preenvio.PRECODIGOI).ToList();
+
+						foreach (var item in listaItemsPreenvio)
+						{
+							int respuestaActualizar = context.spActualizar_Stock(item.DTECODIGOI, item.DTPCODIGOI, item.DTPCANTIDAD);
+						}
+						foreach (var item in listaDetalle)
+						{
+							int respuestaInsertarNuevo = context.spInsert_Editado_Detalle_preenvio(item.DTECODIGOI, item.cantidadIngresada, preenvio.PRECODIGOI);
+						}
+						transaction.Commit();
+						respuesta = 1;
+					}
+					catch (Exception ex)
+					{
+						transaction.Rollback();
+					}
+				}
+			}
+			return respuesta;
+		}
+
 		public List<Preenvio> Lista_Preenvio_Id(int preCodigoI)
 		{
 			List<Preenvio> lista = new List<Preenvio>();
@@ -92,11 +125,11 @@ namespace SysFloricola.Models
 				{
 					Preenvio obj = new Preenvio();
 					obj.PRECODIGOI = item.PRECODIGOI;
-					obj.PRENUMERO = item.PRENUMERO;
-					obj.PREAWB = item.PREAWB;
-					obj.PREHAWB = item.PREHAWB;
+					obj.PRENUMERO = Convert.ToInt32(item.PRENUMERO);
+					obj.PREAWB = item.PREAWB.TrimEnd();
+					obj.PREHAWB = item.PREHAWB.TrimEnd();
 					obj.PRENUMPIEZAS = item.PRENUMPIEZAS;
-					obj.PREIDCAJAS = item.PREIDCAJAS;
+					obj.PREIDCAJAS = item.PREIDCAJAS.TrimEnd();
 					obj.CLNCODIGOI = item.CLNCODIGOI;
 					obj.CLNRUC = item.CLNRUC;
 					obj.CLNRAZONSOCIAL = item.CLNRAZONSOCIAL;

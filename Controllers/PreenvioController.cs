@@ -18,6 +18,8 @@ namespace SysFloricola.Controllers
 				Request.Flash("success", "Preenvío Creado Correctamente");
 			else if(id == 2)
 					Request.Flash("danger", "No ha sido posible crear el preenvío");
+			else if (id == 3)
+				Request.Flash("success", "Preenvío Editado Correctamente");
 
 			List<PREENVIOS> lista = objDAL.Lista_Preenvios();
             return View(lista);
@@ -43,6 +45,16 @@ namespace SysFloricola.Controllers
 		{
 			List<Preenvio> lista = objDAL.Lista_Preenvio_Id(preCodigoI);
 			return View(lista);
+		}
+
+		[HttpPost]
+		public JsonResult EditarPreenvio(PREENVIOS preenvio, List<DetalleItems> detalleItems)
+		{
+			bool estado = false;
+			int respuesta =  objDAL.Editar_Preenvio(preenvio, detalleItems);
+			if (respuesta == 1)
+				estado = true;
+			return Json(new { estado = estado, respuesta = respuesta }, JsonRequestBehavior.AllowGet);
 		}
 
 		public JsonResult ListaDetalleItems(int preCodigoI)
