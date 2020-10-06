@@ -100,8 +100,8 @@
     <Property Name="PRENUMPIEZAS" Type="Int32" Nullable="false" />
     <Property Name="PREIDCAJAS" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
     <NavigationProperty Name="CLIENTES" Relationship="BDFloricolaModel.FK_PREENVIO_RELATIONS_CLIENTES" FromRole="PREENVIOS" ToRole="CLIENTES" />
-    <NavigationProperty Name="CONCILIACION" Relationship="BDFloricolaModel.FK_CONCILIACION_PREENVIOS" FromRole="PREENVIOS" ToRole="CONCILIACION" />
     <NavigationProperty Name="DETALLES_PREENVIOS" Relationship="BDFloricolaModel.FK_DETALLES_RELATIONS_PREENVIO" FromRole="PREENVIOS" ToRole="DETALLES_PREENVIOS" />
+    <NavigationProperty Name="CONCILIACION" Relationship="BDFloricolaModel.FK_CONCILIACION_PREENVIOS" FromRole="PREENVIOS" ToRole="CONCILIACION" />
   </EntityType>
   <EntityType Name="TIPO_CAUSAS">
     <Key>
@@ -126,6 +126,7 @@
     <Property Name="USRESTADOCAMBIO" Type="Boolean" />
     <NavigationProperty Name="EMPLEADOS" Relationship="Self.FK_USUARIOS_EMPLEADOS" FromRole="USUARIOS" ToRole="EMPLEADOS" />
     <NavigationProperty Name="USUARIOS_PERFILES" Relationship="Self.FK_USUARIOS_PERFILES_USUARIOS" FromRole="USUARIOS" ToRole="USUARIOS_PERFILES" />
+    <Property Name="USRFOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="USUARIOS_PERFILES">
     <Key>
@@ -313,13 +314,8 @@
     <FunctionImport Name="spSelect_Bloque_numeroCama" ReturnType="Collection(BDFloricolaModel.spSelect_Bloque_numeroCama_Result)">
       <Parameter Name="blqCodigo" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="CONCILIACION" EntityType="BDFloricolaModel.CONCILIACION" />
     <EntitySet Name="CONTROLES_FLOR_NACIONAL" EntityType="BDFloricolaModel.CONTROLES_FLOR_NACIONAL" />
     <EntitySet Name="TIPOS_FLORES" EntityType="BDFloricolaModel.TIPOS_FLORES" />
-    <AssociationSet Name="FK_CONCILIACION_PREENVIOS" Association="BDFloricolaModel.FK_CONCILIACION_PREENVIOS">
-      <End Role="PREENVIOS" EntitySet="PREENVIOS" />
-      <End Role="CONCILIACION" EntitySet="CONCILIACION" />
-    </AssociationSet>
     <AssociationSet Name="FK_CONTROLE_RELATIONS_TIPO_CAU" Association="BDFloricolaModel.FK_CONTROLE_RELATIONS_TIPO_CAU">
       <End Role="TIPO_CAUSAS" EntitySet="TIPO_CAUSAS" />
       <End Role="CONTROLES_FLOR_NACIONAL" EntitySet="CONTROLES_FLOR_NACIONAL" />
@@ -516,6 +512,16 @@
       <Parameter Name="DTPCANTIDAD" Mode="In" Type="Int32" />
       <Parameter Name="PRECODIGO" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="spSelect_conciliaciones" ReturnType="Collection(BDFloricolaModel.spSelect_conciliaciones_Result)" />
+    <FunctionImport Name="spSelect_preenvios_conciliacion" ReturnType="Collection(BDFloricolaModel.spSelect_preenvios_conciliacion_Result)" />
+    <EntitySet Name="CONCILIACION" EntityType="BDFloricolaModel.CONCILIACION" />
+    <AssociationSet Name="FK_CONCILIACION_PREENVIOS" Association="BDFloricolaModel.FK_CONCILIACION_PREENVIOS">
+      <End Role="PREENVIOS" EntitySet="PREENVIOS" />
+      <End Role="CONCILIACION" EntitySet="CONCILIACION" />
+    </AssociationSet>
+    <FunctionImport Name="spDelete_Conciliacion">
+      <Parameter Name="CNCCODIGOI" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="EMPRESAS">
     <Key>
@@ -590,17 +596,6 @@
     <Property Type="Int32" Name="BLVNUMEROCAMA" Nullable="false" />
     <Property Type="Int32" Name="Total" Nullable="true" />
   </ComplexType>
-  <EntityType Name="CONCILIACION">
-    <Key>
-      <PropertyRef Name="CNCCODIGOI" />
-    </Key>
-    <Property Name="CNCCODIGOI" Type="Int32" Nullable="false" />
-    <Property Name="PRECODIGOI" Type="Int32" />
-    <Property Name="CNCFECHA" Type="DateTime" Precision="3" />
-    <Property Name="CNCESTADO" Type="Boolean" />
-    <Property Name="CNCOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="PREENVIOS" Relationship="BDFloricolaModel.FK_CONCILIACION_PREENVIOS" FromRole="CONCILIACION" ToRole="PREENVIOS" />
-  </EntityType>
   <EntityType Name="CONTROLES_FLOR_NACIONAL">
     <Key>
       <PropertyRef Name="CFNCODIGOI" />
@@ -624,18 +619,6 @@
     <NavigationProperty Name="DETALLE_FLOR_CLASIFICADA" Relationship="BDFloricolaModel.FK_DETALLE__RELATIONS_TIPOS_FL" FromRole="TIPOS_FLORES" ToRole="DETALLE_FLOR_CLASIFICADA" />
     <NavigationProperty Name="UNIDADES_TAMANIO_TIPO" Relationship="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES" FromRole="TIPOS_FLORES" ToRole="UNIDADES_TAMANIO_TIPO" />
   </EntityType>
-  <Association Name="FK_CONCILIACION_PREENVIOS">
-    <End Type="BDFloricolaModel.PREENVIOS" Role="PREENVIOS" Multiplicity="0..1" />
-    <End Type="BDFloricolaModel.CONCILIACION" Role="CONCILIACION" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PREENVIOS">
-        <PropertyRef Name="PRECODIGOI" />
-      </Principal>
-      <Dependent Role="CONCILIACION">
-        <PropertyRef Name="PRECODIGOI" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CONTROLE_RELATIONS_TIPO_CAU">
     <End Type="BDFloricolaModel.TIPO_CAUSAS" Role="TIPO_CAUSAS" Multiplicity="1" />
     <End Type="BDFloricolaModel.CONTROLES_FLOR_NACIONAL" Role="CONTROLES_FLOR_NACIONAL" Multiplicity="*" />
@@ -1103,4 +1086,48 @@
     <Property Type="String" Name="VRDNOMBREC" Nullable="false" MaxLength="30" />
     <Property Type="String" Name="Identificador" Nullable="false" MaxLength="36" />
   </ComplexType>
+  <ComplexType Name="spSelect_conciliaciones_Result">
+    <Property Type="Int32" Name="CNCCODIGOI" Nullable="false" />
+    <Property Type="DateTime" Name="CNCFECHA" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="CNCESTADO" Nullable="true" />
+    <Property Type="String" Name="CNCOBSERVACION" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+    <Property Type="DateTime" Name="PREFECHA" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="PRENUMERO" Nullable="false" Precision="5" Scale="0" />
+    <Property Type="Int32" Name="CLNCODIGOI" Nullable="false" />
+    <Property Type="String" Name="CLNRUC" Nullable="true" MaxLength="13" />
+    <Property Type="String" Name="CLNRAZONSOCIAL" Nullable="false" MaxLength="60" />
+    <Property Type="String" Name="CLNCONSIGNATARIO" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="spSelect_preenvios_conciliacion_Result">
+    <Property Type="Int32" Name="PRECODIGOI" Nullable="false" />
+    <Property Type="DateTime" Name="PREFECHA" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="PRENUMERO" Nullable="false" Precision="5" Scale="0" />
+    <Property Type="Int32" Name="CLNCODIGOI" Nullable="false" />
+    <Property Type="String" Name="CLNRUC" Nullable="true" MaxLength="13" />
+    <Property Type="String" Name="CLNRAZONSOCIAL" Nullable="false" MaxLength="60" />
+  </ComplexType>
+  <EntityType Name="CONCILIACION">
+    <Key>
+      <PropertyRef Name="CNCCODIGOI" />
+    </Key>
+    <Property Name="CNCCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PRECODIGOI" Type="Int32" />
+    <Property Name="CNCFECHA" Type="DateTime" Precision="3" />
+    <Property Name="CNCESTADO" Type="Boolean" />
+    <Property Name="CNCOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PREENVIOS" Relationship="BDFloricolaModel.FK_CONCILIACION_PREENVIOS" FromRole="CONCILIACION" ToRole="PREENVIOS" />
+  </EntityType>
+  <Association Name="FK_CONCILIACION_PREENVIOS">
+    <End Type="BDFloricolaModel.PREENVIOS" Role="PREENVIOS" Multiplicity="0..1" />
+    <End Type="BDFloricolaModel.CONCILIACION" Role="CONCILIACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PREENVIOS">
+        <PropertyRef Name="PRECODIGOI" />
+      </Principal>
+      <Dependent Role="CONCILIACION">
+        <PropertyRef Name="PRECODIGOI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

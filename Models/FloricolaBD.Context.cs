@@ -42,7 +42,6 @@ namespace SysFloricola.Models
         public virtual DbSet<VARIEDADES> VARIEDADES { get; set; }
         public virtual DbSet<EMPRESAS> EMPRESAS { get; set; }
         public virtual DbSet<CLIENTES> CLIENTES { get; set; }
-        public virtual DbSet<CONCILIACION> CONCILIACION { get; set; }
         public virtual DbSet<CONTROLES_FLOR_NACIONAL> CONTROLES_FLOR_NACIONAL { get; set; }
         public virtual DbSet<TIPOS_FLORES> TIPOS_FLORES { get; set; }
         public virtual DbSet<ESTADOS> ESTADOS { get; set; }
@@ -55,6 +54,7 @@ namespace SysFloricola.Models
         public virtual DbSet<TAMANO_TALLOS> TAMANO_TALLOS { get; set; }
         public virtual DbSet<UNIDADES> UNIDADES { get; set; }
         public virtual DbSet<UNIDADES_TAMANIO_TIPO> UNIDADES_TAMANIO_TIPO { get; set; }
+        public virtual DbSet<CONCILIACION> CONCILIACION { get; set; }
     
         public virtual ObjectResult<spSelect_Bloque_variedades_Result> spSelect_Bloque_variedades(Nullable<int> blqCodigoI)
         {
@@ -433,6 +433,25 @@ namespace SysFloricola.Models
                 new ObjectParameter("PRECODIGO", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsert_Editado_Detalle_preenvio", dTECODIGOIParameter, dTPCANTIDADParameter, pRECODIGOParameter);
+        }
+    
+        public virtual ObjectResult<spSelect_conciliaciones_Result> spSelect_conciliaciones()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_conciliaciones_Result>("spSelect_conciliaciones");
+        }
+    
+        public virtual ObjectResult<spSelect_preenvios_conciliacion_Result> spSelect_preenvios_conciliacion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_preenvios_conciliacion_Result>("spSelect_preenvios_conciliacion");
+        }
+    
+        public virtual int spDelete_Conciliacion(Nullable<int> cNCCODIGOI)
+        {
+            var cNCCODIGOIParameter = cNCCODIGOI.HasValue ?
+                new ObjectParameter("CNCCODIGOI", cNCCODIGOI) :
+                new ObjectParameter("CNCCODIGOI", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spDelete_Conciliacion", cNCCODIGOIParameter);
         }
     }
 }

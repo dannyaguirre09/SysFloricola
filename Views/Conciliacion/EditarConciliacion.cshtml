@@ -1,0 +1,43 @@
+﻿@model SysFloricola.Models.CONCILIACION
+@{
+	Layout = null;
+}
+
+<div class="flex" id="flex">
+	<div class="contenido-modal" style="width: 650px; height:280px;">
+		<div class="modal-Titulo flex">
+			<h6 id="tituloModalEditar" class="text-white pt-2"></h6>
+			<span class="cerrarModal" onclick="cerrarModalEditar()" id="cerrarModal">&times;</span>
+		</div>
+		<div class="modal-Cuerpo">
+			@using (Html.BeginForm("EditarConciliacion", "Conciliacion", FormMethod.Post, new { onsubmit = "return validarObservacion()" }))
+			{
+				@Html.AntiForgeryToken()
+
+				<div class="form-horizontal pl-3 pr-3">
+					<div style="display:block; position:relative; height:140px; overflow-y:auto; overflow-x:hidden">
+						@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+						@Html.HiddenFor(model => model.CNCCODIGOI)
+						@Html.HiddenFor(model => model.CNCFECHA)
+						@Html.HiddenFor(model => model.CNCESTADO)
+						@Html.HiddenFor(model => model.PRECODIGOI)
+						<div class="row">
+							<div class="col-md-12">
+								<label class="control-label">Descripción</label>
+								@Html.TextAreaFor(model => model.CNCOBSERVACION,  new { @class = "form-control", @id = "txtObservacion" } )
+								<label id="observacion" hidden class="text-danger control-label">Ingrese una observación</label>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-md-12" style="text-align:right">
+							<input id="btnFormulario" type="submit" value="Guardar" class="btn btn-success" />
+							<input onclick="cerrarModalEditar()" type="button" value="Cancelar" class="btn btn-info" />
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</div>

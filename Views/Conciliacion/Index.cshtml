@@ -1,0 +1,179 @@
+﻿@model IEnumerable<SysFloricola.Models.spSelect_conciliaciones_Result>
+@{
+	ViewBag.Title = "Conciliaciones";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/EstilosModal.css" rel="stylesheet" />
+<link href="~/Content/jquery.dataTables.css" rel="stylesheet" />
+<h2 class="text-center">Administración de Conciliaciones</h2>
+
+<div class="row pt-2 pb-4">
+	<div class=" pl-5 pr-5 col-md-5 text-center">@Html.Partial("~/Views/Shared/_Flash.cshtml")</div> <br />
+	<div class="col-md-12 pr-5" style="text-align:right">
+		<a onclick="abrirModal()" style="cursor: pointer;" class="action-item text-black-50 " data-toggle="tooltip" title="Crear Conciliación">
+			<i class="fa fa-plus text-success" style="font-size: 16px;"></i> Crear Conciliación
+		</a>
+	</div>
+</div>
+
+<div class="row pt-2">
+	<div class="col-md-12 pl-5 pr-5" style="text-align:center">
+		<table class="table table-cards table-responsive-lg" id="tabla">
+			<thead style="background-color: #2A3F54" class="text-white">
+				<tr>
+					<th scope="col">
+						Número de Preenvío
+					</th>
+					<th scope="col">
+						Cliente
+					</th>
+					<th scope="col">
+						Fecha de Conciliación
+					</th>
+					<th scope="col">
+						Observación
+					</th>
+					<th scope="col">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Convert.ToInt32(item.PRENUMERO)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.CLNRAZONSOCIAL)
+						</td>
+						<td>
+							@item.CNCFECHA
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.CNCOBSERVACION)
+						</td>
+						<td class="text-center">
+							<div class="actions ml-3">
+								<a onclick="abrirModalEditar(@item.CNCCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item mr-2 text-info" data-toggle="tooltip" title="Editar Conciliación">
+									<i class="fa fa-edit"></i>
+								</a>
+								<a onclick="abrirModalEliminar(@item.CNCCODIGOI)" style="cursor: pointer; font-size:14px;" class="action-item text-danger mr-2" data-toggle="tooltip" title="Eliminar Conciliación">
+									<i class="fa fa-trash"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="myModal" id="modalCrear" name="modalCrear"></div>
+<div class="myModal" id="modalEditar" name="modalEditar"></div>
+<div class="myModal" id="modalEliminar" name="modalEliminar"></div>
+
+@section Scripts {
+	<script src="~/Scripts/jquery.dataTables.js"></script>
+	<script>
+		modalCrear = document.getElementById('modalCrear');
+	modalEditar = document.getElementById('modalEditar');
+	modalEliminar = document.getElementById('modalEliminar');
+
+		$(document).ready(function () {
+			$('.alert').fadeIn();
+			setTimeout(function () {
+				$(".alert").fadeOut();
+			}, 5000);
+
+			$('#tabla').DataTable({
+				"ordering": false,
+				"bInfo": false,
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ por página",
+					"zeroRecords": "No hay registros",
+					"infoEmpty": "No hay registros disponibles",
+					"search": "Buscar:",
+					"paginate": {
+						"previous": "Anterior",
+						"next": "Siguiente",
+					}
+				}
+			});
+
+		});
+
+	function abrirModal(id) {
+		var url = '/Conciliacion/ModalCrearConciliacion';
+            $.get(url, function (url) {
+                $("#modalCrear").html(url);
+                modalCrear.style.display = 'block';
+				var tituloModal = document.getElementById('tituloModalCrear');
+				tituloModal.textContent = "Crear Conciliación";
+                bloquearBarraDesplazamiento();
+            });
+	}
+
+		function abrirModalEditar(id) {
+			var url = '/Conciliacion/EditarConciliacion?id='+id;
+				$.get(url, function (url) {
+					$("#modalEditar").html(url);
+					modalEditar.style.display = 'block';
+					var tituloModal = document.getElementById('tituloModalEditar');
+					tituloModal.textContent = "Editar Conciliación";
+					bloquearBarraDesplazamiento();
+				});
+		}
+
+		function cerrarModal() {
+			$(".alert").fadeOut();
+            modalCrear.style.display = 'none';
+            activarBarraDesplazamiento();
+	}
+
+		function cerrarModalEditar() {
+			$(".alert").fadeOut();
+            modalEditar.style.display = 'none';
+            activarBarraDesplazamiento();
+		}
+
+		
+		function bloquearBarraDesplazamiento() {
+            $('body').css({ 'overflow': 'hidden' });
+            $(document).bind('scroll', function () {
+                window.scrollTo(0, 0);
+            });
+        }
+
+        function activarBarraDesplazamiento() {
+            $(document).unbind('scroll');
+            $('body').css({ 'overflow': 'visible' });
+			}
+
+		function validarObservacion() {
+			var identificacion = $('#txtObservacion').val();
+			if (identificacion.trim() == "") {
+				var elemento = document.getElementById("observacion");
+				elemento.hidden = false;
+				return false;
+			}
+		}
+
+	function abrirModalEliminar(id) {
+			var url = '/Conciliacion/Confirmacion?id=' + id;
+			$.get(url, function (url) {
+				$("#modalEliminar").html(url);
+				modalEliminar.style.display = 'block'
+				bloquearBarraDesplazamiento();
+			});
+			}
+
+	function cerrarModalConfirmacion() {
+            modalEliminar.style.display = 'none';
+            activarBarraDesplazamiento();
+		}
+
+
+	</script>
+}

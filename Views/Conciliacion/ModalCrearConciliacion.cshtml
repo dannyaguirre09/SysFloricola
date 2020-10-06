@@ -1,0 +1,161 @@
+﻿@model IEnumerable<SysFloricola.Models.spSelect_preenvios_conciliacion_Result>
+@{
+	Layout = null;
+}
+
+<div class="flex" id="flex">
+	<div class="contenido-modal" style="width: 900px; height:560px;">
+		<div class="modal-Titulo flex">
+			<h6 id="tituloModalCrear" class="text-white pt-2"></h6>
+			<span class="cerrarModal" onclick="cerrarModal()" id="cerrarModal">&times;</span>
+		</div>
+		<div class="modal-Cuerpo">
+			@using (Html.BeginForm("CrearConciliacion", "Conciliacion", FormMethod.Post, new { onsubmit = "return validar()" }))
+			{
+
+				<div class="form-horizontal pl-3 pr-3">
+					<div style="display:block; position:relative; height:410px; overflow-y:auto; overflow-x:hidden">
+						<table class="table table-cards table-responsive-lg" id="tablaPreenvios">
+							<thead style="background-color: #2A3F54" class="text-white">
+								<tr>
+									<th scope="col">
+										
+									</th>
+									<th scope="col">
+										Número de Preenvío
+									</th>
+									<th scope="col">
+										Cliente
+									</th>
+									<th scope="col">
+										Fecha de Preenvío
+									</th>
+									<th scope="col">
+										Observación
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									<tr>
+										<td>
+											<input name="@item.PRECODIGOI"  class="form-check casilla[]" type="checkbox"/>
+										</td>
+										<td>
+											@Convert.ToInt32(item.PRENUMERO)
+										</td>
+										<td>
+											@Html.DisplayFor(modelItem => item.CLNRAZONSOCIAL)
+										</td>
+										<td>
+											@item.PREFECHA.ToShortDateString()
+										</td>
+										<td>
+											<input  id="@item.PRECODIGOI" disabled required type="text" />
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+					<br />
+					<div class="row pt-3">
+						<div hidden id="advertencia" class="text-danger pl-5">Seleccione al menos un Preenvío</div>
+						<div class="col-md-12" style="text-align:right">
+							<input id="btnFormulario" type="submit" value="Guardar" class="btn btn-success" />
+							<input onclick="cerrarModal()" type="button" value="Cancelar" class="btn btn-info" />
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+<script>
+	var advertencia = document.getElementById('advertencia') 
+	$(document).ready(function () {
+			$('.alert').fadeIn();
+			setTimeout(function () {
+				$(".alert").fadeOut();
+			}, 5000);
+
+			$('#tablaPreenvios').DataTable({
+				"ordering": false,
+				"bInfo": false,
+				"aoColumnDefs": [
+				 { "bSearchable": false, "aTargets": [ 3, 4 ] }
+			   ],
+				"language": {
+					"lengthMenu": "Mostrar _MENU_ por página",
+					"zeroRecords": "No hay registros",
+					"infoEmpty": "No hay registros disponibles",
+					"search": "Buscar:",
+					"paginate": {
+						"previous": "Anterior",
+						"next": "Siguiente",
+					}
+				}
+			});
+	
+
+	});
+
+	$("input[type='checkbox']").change(function (e) {
+		if ($(this).is(":checked")) {
+			var id = $(this).closest('tr').closest('input').context.name
+			var cuadroTexto = document.getElementById(id);
+			cuadroTexto.disabled = false;
+		} else {
+			var id = $(this).closest('tr').closest('input').context.name
+			var cuadroTexto = document.getElementById(id);
+			cuadroTexto.value = '';
+			cuadroTexto.disabled = true;
+       }
+	});
+
+	function validar() {
+		var checkbox = document.getElementsByClassName('casilla[]');
+		var contador = 0;
+		for(var i=0; i< checkbox.length; i++) {
+			if(checkbox[i].checked)
+				contador++
+		}
+
+		if (contador == 0) {
+			advertencia.hidden = false;
+			return false;
+		}
+		else {
+			guardar();
+			return false;
+		}
+	}
+
+	async function guardar() {
+		var lista = []
+		var checkbox = document.getElementsByClassName('casilla[]');
+		for(var i=0; i< checkbox.length; i++) {
+			if (checkbox[i].checked) {
+				var conciliacion = {}
+				conciliacion.PRECODIGOI = checkbox[i].name;
+				var comentario = document.getElementById(checkbox[i].name).value;
+				conciliacion.CNCOBSERVACION = comentario;
+				lista.push(conciliacion);
+			}
+		}
+
+		await $.post('/Conciliacion/CrearConciliacion', {
+			listaConciliaciones: lista
+		}, function (data, status) {
+				console.log(data);
+			if (data.estado)
+				window.location.replace("/Conciliacion/Index?id=1");
+			else
+				window.location.replace("/Conciliacion/Index?id=2");
+        });
+		
+	}
+
+</script>

@@ -138,6 +138,7 @@
     <Compile Include="Controllers\BloqueVariedadesController.cs" />
     <Compile Include="Controllers\CausasController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\ConciliacionController.cs" />
     <Compile Include="Controllers\ControlFlorNacionalController.cs" />
     <Compile Include="Controllers\DetalleFlorClasificadaController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Models\CONCILIACION.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConciliacionDAL.cs" />
     <Compile Include="Models\CONTROLES_FLOR_NACIONAL.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
@@ -251,6 +253,9 @@
     <Compile Include="Models\spSelect_Bloque_variedades_Result.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spSelect_conciliaciones_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spSelect_detalle_items_editar_Result.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
@@ -264,6 +269,9 @@
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spSelect_listado_items_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSelect_preenvios_conciliacion_Result.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spSelect_preenvio_id_Result.cs">
@@ -2067,6 +2075,10 @@
     <Content Include="Views\Preenvio\ModalCliente.cshtml" />
     <Content Include="Views\Preenvio\ModalItems.cshtml" />
     <Content Include="Views\Preenvio\EditarPreenvio.cshtml" />
+    <Content Include="Views\Conciliacion\Index.cshtml" />
+    <Content Include="Views\Conciliacion\ModalCrearConciliacion.cshtml" />
+    <Content Include="Views\Conciliacion\EditarConciliacion.cshtml" />
+    <Content Include="Views\Conciliacion\Confirmacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -31,10 +31,8 @@
         <AssociationConnector Association="BDFloricolaModel.FK_FINCAS_RELATIONS_EMPRESAS" />
         <EntityTypeShape EntityType="BDFloricolaModel.CLIENTES" Width="1.5" PointX="15" PointY="1.5" />
         <AssociationConnector Association="BDFloricolaModel.FK_PREENVIO_RELATIONS_CLIENTES" />
-        <EntityTypeShape EntityType="BDFloricolaModel.CONCILIACION" Width="1.5" PointX="19.5" PointY="1.25" />
         <EntityTypeShape EntityType="BDFloricolaModel.CONTROLES_FLOR_NACIONAL" Width="1.5" PointX="14.25" PointY="8.125" />
         <EntityTypeShape EntityType="BDFloricolaModel.TIPOS_FLORES" Width="1.5" PointX="5.25" PointY="20.125" />
-        <AssociationConnector Association="BDFloricolaModel.FK_CONCILIACION_PREENVIOS" />
         <AssociationConnector Association="BDFloricolaModel.FK_CONTROLE_RELATIONS_TIPO_CAU" />
         <AssociationConnector Association="BDFloricolaModel.FK_CONTROLES_FLOR_NACIONAL_VARIEDADES" />
         <EntityTypeShape EntityType="BDFloricolaModel.ESTADOS" Width="1.5" PointX="13.125" PointY="1.75" />
@@ -65,6 +63,8 @@
         <AssociationConnector Association="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TAMANO_TALLOS" />
         <AssociationConnector Association="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES" />
         <AssociationConnector Association="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_UNIDADES" />
+        <EntityTypeShape EntityType="BDFloricolaModel.CONCILIACION" Width="1.5" PointX="19.5" PointY="1.25" />
+        <AssociationConnector Association="BDFloricolaModel.FK_CONCILIACION_PREENVIOS" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

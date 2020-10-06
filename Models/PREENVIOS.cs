@@ -17,8 +17,8 @@ namespace SysFloricola.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PREENVIOS()
         {
-            this.CONCILIACION = new HashSet<CONCILIACION>();
             this.DETALLES_PREENVIOS = new HashSet<DETALLES_PREENVIOS>();
+            this.CONCILIACION = new HashSet<CONCILIACION>();
         }
     
         public int PRECODIGOI { get; set; }
@@ -32,8 +32,8 @@ namespace SysFloricola.Models
     
         public virtual CLIENTES CLIENTES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CONCILIACION> CONCILIACION { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLES_PREENVIOS> DETALLES_PREENVIOS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CONCILIACION> CONCILIACION { get; set; }
     }
 }

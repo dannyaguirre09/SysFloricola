@@ -44,7 +44,7 @@
     <Key>
       <PropertyRef Name="CNCCODIGOI" />
     </Key>
-    <Property Name="CNCCODIGOI" Type="int" Nullable="false" />
+    <Property Name="CNCCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PRECODIGOI" Type="int" />
     <Property Name="CNCFECHA" Type="datetime" />
     <Property Name="CNCESTADO" Type="bit" />
@@ -247,6 +247,7 @@
     <Property Name="EPLCODIGOI" Type="int" Nullable="false" />
     <Property Name="USRLOGIN" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="USRPASSWORD" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="USRFOTO" Type="varbinary(max)" />
     <Property Name="USRESTADO" Type="bit" Nullable="false" />
     <Property Name="USRESTADOCAMBIO" Type="bit" />
   </EntityType>
@@ -657,6 +658,9 @@
     <Parameter Name="DTPCODIGOI" Type="int" Mode="In" />
     <Parameter Name="DTECANTIDAD" Type="int" Mode="In" />
   </Function>
+  <Function Name="spDelete_Conciliacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CNCCODIGOI" Type="int" Mode="In" />
+  </Function>
   <Function Name="spInsert_control_flor_nacional" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="TPCCODIGOI" Type="int" Mode="In" />
     <Parameter Name="VRDCODIGOI" Type="int" Mode="In" />
@@ -681,6 +685,7 @@
     <Parameter Name="DTPCANTIDAD" Type="int" Mode="In" />
     <Parameter Name="PRECODIGO" Type="int" Mode="In" />
   </Function>
+  <Function Name="spSelect_conciliaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="spSelect_detalle_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
     <Parameter Name="preestado" Type="int" Mode="In" />
@@ -706,6 +711,7 @@
   <Function Name="spSelect_preenvio_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
   </Function>
+  <Function Name="spSelect_preenvios_conciliacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="spSelect_tallos_unidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
     <Parameter Name="undCodigoI" Type="int" Mode="In" />

@@ -107,6 +107,7 @@
     <EntitySetMapping Name="USUARIOS">
       <EntityTypeMapping TypeName="BDFloricolaModel.USUARIOS">
         <MappingFragment StoreEntitySet="USUARIOS">
+          <ScalarProperty Name="USRFOTO" ColumnName="USRFOTO" />
           <ScalarProperty Name="USRCODIGOI" ColumnName="USRCODIGOI" />
           <ScalarProperty Name="EPLCODIGOI" ColumnName="EPLCODIGOI" />
           <ScalarProperty Name="USRLOGIN" ColumnName="USRLOGIN" />
@@ -157,17 +158,6 @@
           <ScalarProperty Name="CLNRUC" ColumnName="CLNRUC" />
           <ScalarProperty Name="ESTCODIGOI" ColumnName="ESTCODIGOI" />
           <ScalarProperty Name="CLNCODIGOI" ColumnName="CLNCODIGOI" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CONCILIACION">
-      <EntityTypeMapping TypeName="BDFloricolaModel.CONCILIACION">
-        <MappingFragment StoreEntitySet="CONCILIACION">
-          <ScalarProperty Name="CNCOBSERVACION" ColumnName="CNCOBSERVACION" />
-          <ScalarProperty Name="CNCESTADO" ColumnName="CNCESTADO" />
-          <ScalarProperty Name="CNCFECHA" ColumnName="CNCFECHA" />
-          <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
-          <ScalarProperty Name="CNCCODIGOI" ColumnName="CNCCODIGOI" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -457,5 +447,46 @@
     <FunctionImportMapping FunctionImportName="spUpdate_Preenvio" FunctionName="BDFloricolaModel.Store.spUpdate_Preenvio" />
     <FunctionImportMapping FunctionImportName="spActualizar_Stock" FunctionName="BDFloricolaModel.Store.spActualizar_Stock" />
     <FunctionImportMapping FunctionImportName="spInsert_Editado_Detalle_preenvio" FunctionName="BDFloricolaModel.Store.spInsert_Editado_Detalle_preenvio" />
+    <FunctionImportMapping FunctionImportName="spSelect_conciliaciones" FunctionName="BDFloricolaModel.Store.spSelect_conciliaciones">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_conciliaciones_Result">
+          <ScalarProperty Name="CNCCODIGOI" ColumnName="CNCCODIGOI" />
+          <ScalarProperty Name="CNCFECHA" ColumnName="CNCFECHA" />
+          <ScalarProperty Name="CNCESTADO" ColumnName="CNCESTADO" />
+          <ScalarProperty Name="CNCOBSERVACION" ColumnName="CNCOBSERVACION" />
+          <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+          <ScalarProperty Name="PREFECHA" ColumnName="PREFECHA" />
+          <ScalarProperty Name="PRENUMERO" ColumnName="PRENUMERO" />
+          <ScalarProperty Name="CLNCODIGOI" ColumnName="CLNCODIGOI" />
+          <ScalarProperty Name="CLNRUC" ColumnName="CLNRUC" />
+          <ScalarProperty Name="CLNRAZONSOCIAL" ColumnName="CLNRAZONSOCIAL" />
+          <ScalarProperty Name="CLNCONSIGNATARIO" ColumnName="CLNCONSIGNATARIO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spSelect_preenvios_conciliacion" FunctionName="BDFloricolaModel.Store.spSelect_preenvios_conciliacion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_preenvios_conciliacion_Result">
+          <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+          <ScalarProperty Name="PREFECHA" ColumnName="PREFECHA" />
+          <ScalarProperty Name="PRENUMERO" ColumnName="PRENUMERO" />
+          <ScalarProperty Name="CLNCODIGOI" ColumnName="CLNCODIGOI" />
+          <ScalarProperty Name="CLNRUC" ColumnName="CLNRUC" />
+          <ScalarProperty Name="CLNRAZONSOCIAL" ColumnName="CLNRAZONSOCIAL" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="CONCILIACION">
+      <EntityTypeMapping TypeName="BDFloricolaModel.CONCILIACION">
+        <MappingFragment StoreEntitySet="CONCILIACION">
+          <ScalarProperty Name="CNCOBSERVACION" ColumnName="CNCOBSERVACION" />
+          <ScalarProperty Name="CNCESTADO" ColumnName="CNCESTADO" />
+          <ScalarProperty Name="CNCFECHA" ColumnName="CNCFECHA" />
+          <ScalarProperty Name="PRECODIGOI" ColumnName="PRECODIGOI" />
+          <ScalarProperty Name="CNCCODIGOI" ColumnName="CNCCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spDelete_Conciliacion" FunctionName="BDFloricolaModel.Store.spDelete_Conciliacion" />
   </EntityContainerMapping>
 </Mapping>
