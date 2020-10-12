@@ -453,5 +453,44 @@ namespace SysFloricola.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spDelete_Conciliacion", cNCCODIGOIParameter);
         }
+    
+        public virtual ObjectResult<spSelect_usuario_Result> spSelect_usuario(string uSRLOGIN, string uSRPASSWORD)
+        {
+            var uSRLOGINParameter = uSRLOGIN != null ?
+                new ObjectParameter("USRLOGIN", uSRLOGIN) :
+                new ObjectParameter("USRLOGIN", typeof(string));
+    
+            var uSRPASSWORDParameter = uSRPASSWORD != null ?
+                new ObjectParameter("USRPASSWORD", uSRPASSWORD) :
+                new ObjectParameter("USRPASSWORD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_usuario_Result>("spSelect_usuario", uSRLOGINParameter, uSRPASSWORDParameter);
+        }
+    
+        public virtual ObjectResult<spSelect_usuario1_Result> spSelect_usuario1(string uSRLOGIN, string uSRPASSWORD)
+        {
+            var uSRLOGINParameter = uSRLOGIN != null ?
+                new ObjectParameter("USRLOGIN", uSRLOGIN) :
+                new ObjectParameter("USRLOGIN", typeof(string));
+    
+            var uSRPASSWORDParameter = uSRPASSWORD != null ?
+                new ObjectParameter("USRPASSWORD", uSRPASSWORD) :
+                new ObjectParameter("USRPASSWORD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_usuario1_Result>("spSelect_usuario1", uSRLOGINParameter, uSRPASSWORDParameter);
+        }
+    
+        public virtual int spActualizar_Password(Nullable<int> uSRCODIGOI, string uSRPASSWORD)
+        {
+            var uSRCODIGOIParameter = uSRCODIGOI.HasValue ?
+                new ObjectParameter("USRCODIGOI", uSRCODIGOI) :
+                new ObjectParameter("USRCODIGOI", typeof(int));
+    
+            var uSRPASSWORDParameter = uSRPASSWORD != null ?
+                new ObjectParameter("USRPASSWORD", uSRPASSWORD) :
+                new ObjectParameter("USRPASSWORD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spActualizar_Password", uSRCODIGOIParameter, uSRPASSWORDParameter);
+        }
     }
 }

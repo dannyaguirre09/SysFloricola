@@ -1,4 +1,5 @@
-﻿using SysFloricola.Models;
+﻿using SysFloricola.Filter;
+using SysFloricola.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,8 @@ using System.Web.UI.WebControls;
 
 namespace SysFloricola.Controllers
 {
-    public class EmpleadosController : Controller
+	[SecurityFilter]
+	public class EmpleadosController : Controller
     {
 		private EmpleadosDAL objEmpleadoDAL = new EmpleadosDAL();
         // GET: Empleados

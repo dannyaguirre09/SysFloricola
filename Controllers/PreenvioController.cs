@@ -1,4 +1,5 @@
-﻿using SysFloricola.Models;
+﻿using SysFloricola.Filter;
+using SysFloricola.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Web.Mvc;
 
 namespace SysFloricola.Controllers
 {
-    public class PreenvioController : Controller
+	[SecurityFilter]
+	public class PreenvioController : Controller
     {
 		private PreenvioDAL objDAL = new PreenvioDAL();
 

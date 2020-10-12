@@ -1,0 +1,82 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Iniciar Sesión | </title>
+
+	<link href="~/Vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- Font Awesome -->
+	<link href="~/Vendors/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+	<!-- NProgress -->
+	<link href="~/Vendors/nprogress/nprogress.css" rel="stylesheet" />
+
+	<link href="~/Vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" />
+
+	<link href="~/Vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+
+	<!-- Custom Theme Style -->
+	<link href="~/Content/css/custom.min.css" rel="stylesheet" />
+
+
+	<link href="~/Content/css/EstilosLogin.css" rel="stylesheet" />
+
+</head>
+<body class="login fondoLogin">
+	<div>
+		<a class="hiddenanchor" id="signup"></a>
+		<a class="hiddenanchor" id="signin"></a>
+		<div class="login_wrapper">
+			<div class="animate  login_form">
+				<section class="login_content">
+					<form method="post" action="~/Login/Index">
+						<h1 class="letraBlanca">Login</h1>
+						<div>
+							<input type="text" name="usuario" class="form-control" style="color:black" placeholder="Username" required="" />
+						</div>
+						<div>
+							<input type="password" name="password" class="form-control" style="color:black" placeholder="Password" required="" />
+						</div>
+						@Html.Partial("~/Views/Shared/_Flash.cshtml")
+						<div class="row pt-4">
+							<div class="col-md-12">
+								<div class="col-md-9">
+									<input type="submit" class="btn btn-success btn-block" value="Iniciar Sesión" />
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="separator">
+							<div class="clearfix"></div>
+							<br />
+							<div>
+								<h1><i class="fas fa-fan"></i> SYSFLORICOLA</h1>
+								<p>@DateTime.Now.Year All Rights Reserved</p>
+							</div>
+						</div>
+					</form>
+				</section>
+			</div>
+
+		</div>
+	</div>
+	<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.alert').fadeIn();
+			setTimeout(function () {
+				$(".alert").fadeOut();
+			}, 5000);
+		});
+	</script>
+</body>
+</html>

@@ -658,6 +658,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spActualizar_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USRCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="USRPASSWORD" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="spActualizar_Stock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DTECODIGOI" Type="int" Mode="In" />
           <Parameter Name="DTPCODIGOI" Type="int" Mode="In" />
@@ -724,6 +728,14 @@
         <Function Name="spSelect_tallos_unidad_tam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
           <Parameter Name="undCodigoI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USRLOGIN" Type="varchar" Mode="In" />
+          <Parameter Name="USRPASSWORD" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spSelect_usuario1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USRLOGIN" Type="varchar" Mode="In" />
+          <Parameter Name="USRPASSWORD" Type="varchar" Mode="In" />
         </Function>
         <Function Name="spUpdate_control_flor_nacional" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CFNCODIGOI" Type="int" Mode="In" />
@@ -1451,7 +1463,19 @@
             <End Role="CONCILIACION" EntitySet="CONCILIACION" />
           </AssociationSet>
           <FunctionImport Name="spDelete_Conciliacion">
-            <Parameter Name="CNCCODIGOI" Mode="In" Type="Int32" />
+          <Parameter Name="CNCCODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_usuario" ReturnType="Collection(BDFloricolaModel.spSelect_usuario_Result)">
+            <Parameter Name="USRLOGIN" Mode="In" Type="String" />
+            <Parameter Name="USRPASSWORD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_usuario1" ReturnType="Collection(BDFloricolaModel.spSelect_usuario1_Result)">
+            <Parameter Name="USRLOGIN" Mode="In" Type="String" />
+            <Parameter Name="USRPASSWORD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spActualizar_Password">
+            <Parameter Name="USRCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="USRPASSWORD" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="EMPRESAS">
@@ -2061,6 +2085,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="spSelect_usuario_Result">
+          <Property Type="String" Name="EPLAPELLIDOP" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EPLAPELLIDOM" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EPLNOMBRES" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="USRLOGIN" Nullable="false" MaxLength="150" />
+          <Property Type="Boolean" Name="USRESTADOCAMBIO" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spSelect_usuario1_Result">
+          <Property Type="String" Name="EPLAPELLIDOP" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EPLAPELLIDOM" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EPLNOMBRES" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="USRLOGIN" Nullable="false" MaxLength="150" />
+          <Property Type="Boolean" Name="USRESTADOCAMBIO" Nullable="true" />
+          <Property Type="Int32" Name="USRCODIGOI" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2554,6 +2593,30 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spDelete_Conciliacion" FunctionName="BDFloricolaModel.Store.spDelete_Conciliacion" />
+          <FunctionImportMapping FunctionImportName="spSelect_usuario" FunctionName="BDFloricolaModel.Store.spSelect_usuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_usuario_Result">
+                <ScalarProperty Name="EPLAPELLIDOP" ColumnName="EPLAPELLIDOP" />
+                <ScalarProperty Name="EPLAPELLIDOM" ColumnName="EPLAPELLIDOM" />
+                <ScalarProperty Name="EPLNOMBRES" ColumnName="EPLNOMBRES" />
+                <ScalarProperty Name="USRLOGIN" ColumnName="USRLOGIN" />
+                <ScalarProperty Name="USRESTADOCAMBIO" ColumnName="USRESTADOCAMBIO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_usuario1" FunctionName="BDFloricolaModel.Store.spSelect_usuario1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_usuario1_Result">
+                <ScalarProperty Name="EPLAPELLIDOP" ColumnName="EPLAPELLIDOP" />
+                <ScalarProperty Name="EPLAPELLIDOM" ColumnName="EPLAPELLIDOM" />
+                <ScalarProperty Name="EPLNOMBRES" ColumnName="EPLNOMBRES" />
+                <ScalarProperty Name="USRLOGIN" ColumnName="USRLOGIN" />
+                <ScalarProperty Name="USRESTADOCAMBIO" ColumnName="USRESTADOCAMBIO" />
+                <ScalarProperty Name="USRCODIGOI" ColumnName="USRCODIGOI" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spActualizar_Password" FunctionName="BDFloricolaModel.Store.spActualizar_Password" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

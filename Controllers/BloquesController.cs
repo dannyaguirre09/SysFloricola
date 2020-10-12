@@ -1,4 +1,5 @@
-﻿using SysFloricola.Models;
+﻿using SysFloricola.Filter;
+using SysFloricola.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace SysFloricola.Controllers
 {
+	[SecurityFilter]
     public class BloquesController : Controller
     {
 		private BloquesDAL objBloquesDAL = new BloquesDAL();

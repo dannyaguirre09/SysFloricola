@@ -653,6 +653,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="spActualizar_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="USRCODIGOI" Type="int" Mode="In" />
+    <Parameter Name="USRPASSWORD" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="spActualizar_Stock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DTECODIGOI" Type="int" Mode="In" />
     <Parameter Name="DTPCODIGOI" Type="int" Mode="In" />
@@ -719,6 +723,14 @@
   <Function Name="spSelect_tallos_unidad_tam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
     <Parameter Name="undCodigoI" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spSelect_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="USRLOGIN" Type="varchar" Mode="In" />
+    <Parameter Name="USRPASSWORD" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spSelect_usuario1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="USRLOGIN" Type="varchar" Mode="In" />
+    <Parameter Name="USRPASSWORD" Type="varchar" Mode="In" />
   </Function>
   <Function Name="spUpdate_control_flor_nacional" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CFNCODIGOI" Type="int" Mode="In" />

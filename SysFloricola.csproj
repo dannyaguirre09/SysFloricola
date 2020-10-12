@@ -58,9 +58,40 @@
       <HintPath>packages\Flash.Mvc5.1.0.0\lib\net46\Flash.Mvc5.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.JsonWebTokens.5.3.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Logging.5.3.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Protocols.5.3.0\lib\net461\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.5.3.0\lib\net461\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Tokens.5.3.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.4.1.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Security.4.1.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OpenIdConnect, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Security.OpenIdConnect.4.1.1\lib\net45\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.IdentityModel.Tokens.Jwt.5.3.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -147,6 +178,7 @@
     <Compile Include="Controllers\FincasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresoProduccionController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
     <Compile Include="Controllers\PreenvioController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
@@ -154,6 +186,8 @@
     <Compile Include="Controllers\TipoFloresController.cs" />
     <Compile Include="Controllers\UnidadesController.cs" />
     <Compile Include="Controllers\VariedadesController.cs" />
+    <Compile Include="Util\Encriptacion.cs" />
+    <Compile Include="Util\SecurityFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,6 +260,7 @@
     <Compile Include="Models\INGRESO_PRODUCCION.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginDAL.cs" />
     <Compile Include="Models\MODULOS.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
@@ -286,6 +321,12 @@
     <Compile Include="Models\spSelect_tallos_unidad_tam_Result.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spSelect_usuario1_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSelect_usuario_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spVerificar_control_flor_nacional_Result.cs">
       <DependentUpon>FloricolaBD.tt</DependentUpon>
     </Compile>
@@ -325,6 +366,7 @@
   <ItemGroup>
     <Content Include="Content\css\custom.css" />
     <Content Include="Content\css\custom.min.css" />
+    <Content Include="Content\css\EstilosLogin.css" />
     <Content Include="Content\css\EstilosModal.css" />
     <Content Include="Content\images\back_disabled.png" />
     <Content Include="Content\images\back_enabled.png" />
@@ -2079,6 +2121,8 @@
     <Content Include="Views\Conciliacion\ModalCrearConciliacion.cshtml" />
     <Content Include="Views\Conciliacion\EditarConciliacion.cshtml" />
     <Content Include="Views\Conciliacion\Confirmacion.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\CambiarPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

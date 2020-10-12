@@ -522,6 +522,18 @@
     <FunctionImport Name="spDelete_Conciliacion">
       <Parameter Name="CNCCODIGOI" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="spSelect_usuario" ReturnType="Collection(BDFloricolaModel.spSelect_usuario_Result)">
+      <Parameter Name="USRLOGIN" Mode="In" Type="String" />
+      <Parameter Name="USRPASSWORD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spSelect_usuario1" ReturnType="Collection(BDFloricolaModel.spSelect_usuario1_Result)">
+      <Parameter Name="USRLOGIN" Mode="In" Type="String" />
+      <Parameter Name="USRPASSWORD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spActualizar_Password">
+      <Parameter Name="USRCODIGOI" Mode="In" Type="Int32" />
+      <Parameter Name="USRPASSWORD" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="EMPRESAS">
     <Key>
@@ -1130,4 +1142,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="spSelect_usuario_Result">
+    <Property Type="String" Name="EPLAPELLIDOP" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="EPLAPELLIDOM" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EPLNOMBRES" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="USRLOGIN" Nullable="false" MaxLength="150" />
+    <Property Type="Boolean" Name="USRESTADOCAMBIO" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spSelect_usuario1_Result">
+    <Property Type="String" Name="EPLAPELLIDOP" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="EPLAPELLIDOM" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EPLNOMBRES" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="USRLOGIN" Nullable="false" MaxLength="150" />
+    <Property Type="Boolean" Name="USRESTADOCAMBIO" Nullable="true" />
+    <Property Type="Int32" Name="USRCODIGOI" Nullable="false" />
+  </ComplexType>
 </Schema>
