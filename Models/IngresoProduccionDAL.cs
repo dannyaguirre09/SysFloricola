@@ -33,16 +33,14 @@ namespace SysFloricola.Models
 				return new SelectList(db.VARIEDADES, "VRDCODIGOI", "VRDNOMBREC", id);
 		}
 
-		public bool Crear_Ingresos_Produccion(INGRESO_PRODUCCION obj, bool nuevo)
+		public bool Crear_Ingresos_Produccion(INGRESO_PRODUCCION obj, bool nuevo, string observacion)
 		{
 			bool respuesta = false;
 			if (nuevo)
 			{
 				using (var db = new BDFloricolaContext())
 				{
-					obj.INPFECHA = DateTime.Now;
-					db.INGRESO_PRODUCCION.Add(obj);
-					db.SaveChanges();
+					int res = db.spInsert_IngresoProduccion(observacion, obj.BLCCODIGOI, obj.VRDCODIGOI, obj.INPNUMMALLAS, obj.INPCANTIDADTALLOS);
 					respuesta = true;
 				}
 			}
@@ -68,8 +66,10 @@ namespace SysFloricola.Models
 		{
 			bool respuesta = false;
 			using (var db = new BDFloricolaContext())
-			{
+			{				
 				INGRESO_PRODUCCION bloque = db.INGRESO_PRODUCCION.Find(id);
+				CONTROL_PRODUCCION objControl = db.CONTROL_PRODUCCION.Find(bloque.CNPCODIGOI);
+				db.CONTROL_PRODUCCION.Remove(objControl);
 				db.INGRESO_PRODUCCION.Remove(bloque);
 				db.SaveChanges();
 				respuesta = true;

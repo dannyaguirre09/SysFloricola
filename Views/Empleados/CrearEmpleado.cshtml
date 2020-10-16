@@ -24,37 +24,37 @@
 								@Html.DropDownList("EMPCODIGOI", null, htmlAttributes: new { @class = "form-control" })
 							</div>
 							<div class="col-md-6">
-								@Html.LabelFor(model => model.EPLCEDULA, htmlAttributes: new { @class = "control-label " })
+								<label class="control-label">Cédula</label>
 								@Html.EditorFor(model => model.EPLCEDULA, new { htmlAttributes = new { @class = "form-control", @id = "txtCedula", @type = "number" } })
 								<label id="cedula" hidden class="text-danger control-label">Ingrese la cédula</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6  pt-2">
-								@Html.LabelFor(model => model.EPLAPELLIDOP, htmlAttributes: new { @class = "control-label " })
+								<label class="control-label">Primer Apellido</label>
 								@Html.EditorFor(model => model.EPLAPELLIDOP, new { htmlAttributes = new { @class = "form-control", @id = "txtApellido" } })
 								<label id="apellido" hidden class="text-danger control-label">Ingrese el apellido paterno</label>
 							</div>
 							<div class="form-group col-md-6 pt-2">
-								@Html.LabelFor(model => model.EPLAPELLIDOM, htmlAttributes: new { @class = "control-label " })
+								<label class="control-label">Segundo Apellido</label>
 								@Html.EditorFor(model => model.EPLAPELLIDOM, new { htmlAttributes = new { @class = "form-control" } })
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 pt-2">
-								@Html.LabelFor(model => model.EPLNOMBRES, htmlAttributes: new { @class = "control-label" })
+								<label class="control-label">Nombres</label>
 								@Html.EditorFor(model => model.EPLNOMBRES, new { htmlAttributes = new { @class = "form-control", @id = "txtNombre" } })
 								<label id="nombre" hidden class="text-danger control-label">Ingrese el nombre</label>
 							</div>
 							<div class="col-md-6 pt-2">
-								@Html.LabelFor(model => model.EPLDIRECCION, htmlAttributes: new { @class = "control-label" })
+								<label class="control-label">Dirección</label>
 								@Html.EditorFor(model => model.EPLDIRECCION, new { htmlAttributes = new { @class = "form-control", @id = "txtDireccion" } })
 								<label id="direccion" hidden class="text-danger control-label">Ingrese la dirección</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 pt-2">
-								@Html.LabelFor(model => model.EPLTELEFONO, htmlAttributes: new { @class = "control-label " })
+								<label class="control-label">Teléfono</label>
 								@Html.EditorFor(model => model.EPLTELEFONO, new { htmlAttributes = new { @class = "form-control" } })
 							</div>
 						</div>

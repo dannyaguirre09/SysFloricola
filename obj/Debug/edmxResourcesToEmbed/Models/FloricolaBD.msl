@@ -46,6 +46,8 @@
     <EntitySetMapping Name="MODULOS">
       <EntityTypeMapping TypeName="BDFloricolaModel.MODULOS">
         <MappingFragment StoreEntitySet="MODULOS">
+          <ScalarProperty Name="MODORDEN" ColumnName="MODORDEN" />
+          <ScalarProperty Name="MODCONTROLADOR" ColumnName="MODCONTROLADOR" />
           <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
           <ScalarProperty Name="MODDESCRIPCION" ColumnName="MODDESCRIPCION" />
           <ScalarProperty Name="MODURL" ColumnName="MODURL" />
@@ -203,19 +205,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="INGRESO_PRODUCCION">
-      <EntityTypeMapping TypeName="BDFloricolaModel.INGRESO_PRODUCCION">
-        <MappingFragment StoreEntitySet="INGRESO_PRODUCCION">
-          <ScalarProperty Name="INPCANTIDADTALLOS" ColumnName="INPCANTIDADTALLOS" />
-          <ScalarProperty Name="INPFECHA" ColumnName="INPFECHA" />
-          <ScalarProperty Name="INPNUMMALLAS" ColumnName="INPNUMMALLAS" />
-          <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
-          <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
-          <ScalarProperty Name="BLCCODIGOI" ColumnName="BLCCODIGOI" />
-          <ScalarProperty Name="INPCODIGOI" ColumnName="INPCODIGOI" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="spSelect_flor_numerotallos" FunctionName="BDFloricolaModel.Store.spSelect_flor_numerotallos">
       <ResultMapping>
         <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_flor_numerotallos_Result">
@@ -260,15 +249,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="CONTROL_PRODUCCION">
-      <EntityTypeMapping TypeName="BDFloricolaModel.CONTROL_PRODUCCION">
-        <MappingFragment StoreEntitySet="CONTROL_PRODUCCION">
-          <ScalarProperty Name="CNPOBSERVACION" ColumnName="CNPOBSERVACION" />
-          <ScalarProperty Name="CNPFECHA" ColumnName="CNPFECHA" />
-          <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DETALLE_FLOR_CLASIFICADA">
       <EntityTypeMapping TypeName="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA">
         <MappingFragment StoreEntitySet="DETALLE_FLOR_CLASIFICADA">
@@ -512,5 +492,50 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="spActualizar_Password" FunctionName="BDFloricolaModel.Store.spActualizar_Password" />
+    <FunctionImportMapping FunctionImportName="spSelect_Menu_Acceso" FunctionName="BDFloricolaModel.Store.spSelect_Menu_Acceso">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_Menu_Acceso_Result">
+          <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
+          <ScalarProperty Name="MODDESCRIPCION" ColumnName="MODDESCRIPCION" />
+          <ScalarProperty Name="MODURL" ColumnName="MODURL" />
+          <ScalarProperty Name="MODNIVEL" ColumnName="MODNIVEL" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spSelect_SubMenu" FunctionName="BDFloricolaModel.Store.spSelect_SubMenu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_SubMenu_Result">
+          <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
+          <ScalarProperty Name="MODDESCRIPCION" ColumnName="MODDESCRIPCION" />
+          <ScalarProperty Name="MODURL" ColumnName="MODURL" />
+          <ScalarProperty Name="MODNIVEL" ColumnName="MODNIVEL" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spSelect_permisos_controlador" FunctionName="BDFloricolaModel.Store.spSelect_permisos_controlador" />
+    <FunctionImportMapping FunctionImportName="spInsert_IngresoProduccion" FunctionName="BDFloricolaModel.Store.spInsert_IngresoProduccion" />
+    <EntitySetMapping Name="CONTROL_PRODUCCION">
+      <EntityTypeMapping TypeName="BDFloricolaModel.CONTROL_PRODUCCION">
+        <MappingFragment StoreEntitySet="CONTROL_PRODUCCION">
+          <ScalarProperty Name="CNPOBSERVACION" ColumnName="CNPOBSERVACION" />
+          <ScalarProperty Name="CNPFECHA" ColumnName="CNPFECHA" />
+          <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INGRESO_PRODUCCION">
+      <EntityTypeMapping TypeName="BDFloricolaModel.INGRESO_PRODUCCION">
+        <MappingFragment StoreEntitySet="INGRESO_PRODUCCION">
+          <ScalarProperty Name="INPCANTIDADTALLOS" ColumnName="INPCANTIDADTALLOS" />
+          <ScalarProperty Name="INPFECHA" ColumnName="INPFECHA" />
+          <ScalarProperty Name="INPNUMMALLAS" ColumnName="INPNUMMALLAS" />
+          <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
+          <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+          <ScalarProperty Name="BLCCODIGOI" ColumnName="BLCCODIGOI" />
+          <ScalarProperty Name="INPCODIGOI" ColumnName="INPCODIGOI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spSelect_NumeroPreenvio" FunctionName="BDFloricolaModel.Store.spSelect_NumeroPreenvio" />
   </EntityContainerMapping>
 </Mapping>

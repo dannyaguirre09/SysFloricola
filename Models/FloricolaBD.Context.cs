@@ -46,8 +46,6 @@ namespace SysFloricola.Models
         public virtual DbSet<TIPOS_FLORES> TIPOS_FLORES { get; set; }
         public virtual DbSet<ESTADOS> ESTADOS { get; set; }
         public virtual DbSet<BLOQUES_VARIEDADES> BLOQUES_VARIEDADES { get; set; }
-        public virtual DbSet<INGRESO_PRODUCCION> INGRESO_PRODUCCION { get; set; }
-        public virtual DbSet<CONTROL_PRODUCCION> CONTROL_PRODUCCION { get; set; }
         public virtual DbSet<DETALLE_FLOR_CLASIFICADA> DETALLE_FLOR_CLASIFICADA { get; set; }
         public virtual DbSet<DETALLES_PREENVIOS> DETALLES_PREENVIOS { get; set; }
         public virtual DbSet<PROCESO_CLASIFICACION> PROCESO_CLASIFICACION { get; set; }
@@ -55,6 +53,8 @@ namespace SysFloricola.Models
         public virtual DbSet<UNIDADES> UNIDADES { get; set; }
         public virtual DbSet<UNIDADES_TAMANIO_TIPO> UNIDADES_TAMANIO_TIPO { get; set; }
         public virtual DbSet<CONCILIACION> CONCILIACION { get; set; }
+        public virtual DbSet<CONTROL_PRODUCCION> CONTROL_PRODUCCION { get; set; }
+        public virtual DbSet<INGRESO_PRODUCCION> INGRESO_PRODUCCION { get; set; }
     
         public virtual ObjectResult<spSelect_Bloque_variedades_Result> spSelect_Bloque_variedades(Nullable<int> blqCodigoI)
         {
@@ -491,6 +491,63 @@ namespace SysFloricola.Models
                 new ObjectParameter("USRPASSWORD", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spActualizar_Password", uSRCODIGOIParameter, uSRPASSWORDParameter);
+        }
+    
+        public virtual ObjectResult<spSelect_Menu_Acceso_Result> spSelect_Menu_Acceso(Nullable<int> uSRCODIGOI)
+        {
+            var uSRCODIGOIParameter = uSRCODIGOI.HasValue ?
+                new ObjectParameter("USRCODIGOI", uSRCODIGOI) :
+                new ObjectParameter("USRCODIGOI", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_Menu_Acceso_Result>("spSelect_Menu_Acceso", uSRCODIGOIParameter);
+        }
+    
+        public virtual ObjectResult<spSelect_SubMenu_Result> spSelect_SubMenu(Nullable<int> mODCODIGOI)
+        {
+            var mODCODIGOIParameter = mODCODIGOI.HasValue ?
+                new ObjectParameter("MODCODIGOI", mODCODIGOI) :
+                new ObjectParameter("MODCODIGOI", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_SubMenu_Result>("spSelect_SubMenu", mODCODIGOIParameter);
+        }
+    
+        public virtual ObjectResult<string> spSelect_permisos_controlador(Nullable<int> codigoUsuario)
+        {
+            var codigoUsuarioParameter = codigoUsuario.HasValue ?
+                new ObjectParameter("CodigoUsuario", codigoUsuario) :
+                new ObjectParameter("CodigoUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spSelect_permisos_controlador", codigoUsuarioParameter);
+        }
+    
+        public virtual int spInsert_IngresoProduccion(string cNPOBSERVACION, Nullable<int> bLCCODIGOI, Nullable<int> vRDCODIGOI, Nullable<int> iNPNUMMALLAS, Nullable<int> iNPCANTIDADTALLOS)
+        {
+            var cNPOBSERVACIONParameter = cNPOBSERVACION != null ?
+                new ObjectParameter("CNPOBSERVACION", cNPOBSERVACION) :
+                new ObjectParameter("CNPOBSERVACION", typeof(string));
+    
+            var bLCCODIGOIParameter = bLCCODIGOI.HasValue ?
+                new ObjectParameter("BLCCODIGOI", bLCCODIGOI) :
+                new ObjectParameter("BLCCODIGOI", typeof(int));
+    
+            var vRDCODIGOIParameter = vRDCODIGOI.HasValue ?
+                new ObjectParameter("VRDCODIGOI", vRDCODIGOI) :
+                new ObjectParameter("VRDCODIGOI", typeof(int));
+    
+            var iNPNUMMALLASParameter = iNPNUMMALLAS.HasValue ?
+                new ObjectParameter("INPNUMMALLAS", iNPNUMMALLAS) :
+                new ObjectParameter("INPNUMMALLAS", typeof(int));
+    
+            var iNPCANTIDADTALLOSParameter = iNPCANTIDADTALLOS.HasValue ?
+                new ObjectParameter("INPCANTIDADTALLOS", iNPCANTIDADTALLOS) :
+                new ObjectParameter("INPCANTIDADTALLOS", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsert_IngresoProduccion", cNPOBSERVACIONParameter, bLCCODIGOIParameter, vRDCODIGOIParameter, iNPNUMMALLASParameter, iNPCANTIDADTALLOSParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> spSelect_NumeroPreenvio()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("spSelect_NumeroPreenvio");
         }
     }
 }

@@ -24,7 +24,10 @@
 						Fecha
 					</th>
 					<th scope="col">
-						Número
+						Número Preenvío
+					</th>
+					<th scope="col">
+						Cliente
 					</th>
 					<th scope="col">
 						AWB
@@ -44,6 +47,9 @@
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.PRENUMERO)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.CLIENTES.CLNRAZONSOCIAL)
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.PREAWB)

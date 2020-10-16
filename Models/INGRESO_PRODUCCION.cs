@@ -17,13 +17,13 @@ namespace SysFloricola.Models
         public int INPCODIGOI { get; set; }
         public int BLCCODIGOI { get; set; }
         public Nullable<int> VRDCODIGOI { get; set; }
-        public Nullable<int> CNPCODIGOI { get; set; }
+        public int CNPCODIGOI { get; set; }
         public int INPNUMMALLAS { get; set; }
         public Nullable<System.DateTime> INPFECHA { get; set; }
         public int INPCANTIDADTALLOS { get; set; }
     
         public virtual BLOQUES BLOQUES { get; set; }
-        public virtual VARIEDADES VARIEDADES { get; set; }
         public virtual CONTROL_PRODUCCION CONTROL_PRODUCCION { get; set; }
+        public virtual VARIEDADES VARIEDADES { get; set; }
     }
 }

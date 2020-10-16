@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresoProduccionController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
     <Compile Include="Controllers\PreenvioController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
@@ -186,6 +187,13 @@
     <Compile Include="Controllers\TipoFloresController.cs" />
     <Compile Include="Controllers\UnidadesController.cs" />
     <Compile Include="Controllers\VariedadesController.cs" />
+    <Compile Include="Models\MenuDAL.cs" />
+    <Compile Include="Models\spSelect_Menu_Acceso_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSelect_SubMenu_Result.cs">
+      <DependentUpon>FloricolaBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Util\Encriptacion.cs" />
     <Compile Include="Util\SecurityFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -2126,6 +2134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

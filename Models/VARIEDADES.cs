@@ -19,8 +19,8 @@ namespace SysFloricola.Models
         {
             this.CONTROLES_FLOR_NACIONAL = new HashSet<CONTROLES_FLOR_NACIONAL>();
             this.BLOQUES_VARIEDADES = new HashSet<BLOQUES_VARIEDADES>();
-            this.INGRESO_PRODUCCION = new HashSet<INGRESO_PRODUCCION>();
             this.DETALLE_FLOR_CLASIFICADA = new HashSet<DETALLE_FLOR_CLASIFICADA>();
+            this.INGRESO_PRODUCCION = new HashSet<INGRESO_PRODUCCION>();
         }
     
         public int VRDCODIGOI { get; set; }
@@ -34,8 +34,8 @@ namespace SysFloricola.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BLOQUES_VARIEDADES> BLOQUES_VARIEDADES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INGRESO_PRODUCCION> INGRESO_PRODUCCION { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_FLOR_CLASIFICADA> DETALLE_FLOR_CLASIFICADA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INGRESO_PRODUCCION> INGRESO_PRODUCCION { get; set; }
     }
 }

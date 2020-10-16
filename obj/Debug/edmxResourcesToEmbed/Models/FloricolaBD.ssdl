@@ -54,7 +54,7 @@
     <Key>
       <PropertyRef Name="CNPCODIGOI" />
     </Key>
-    <Property Name="CNPCODIGOI" Type="int" Nullable="false" />
+    <Property Name="CNPCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CNPFECHA" Type="datetime" Nullable="false" />
     <Property Name="CNPOBSERVACION" Type="varchar" MaxLength="150" />
   </EntityType>
@@ -139,7 +139,7 @@
     <Property Name="INPCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BLCCODIGOI" Type="int" Nullable="false" />
     <Property Name="VRDCODIGOI" Type="int" />
-    <Property Name="CNPCODIGOI" Type="int" />
+    <Property Name="CNPCODIGOI" Type="int" Nullable="false" />
     <Property Name="INPNUMMALLAS" Type="int" Nullable="false" />
     <Property Name="INPFECHA" Type="datetime" />
     <Property Name="INPCANTIDADTALLOS" Type="int" Nullable="false" />
@@ -152,6 +152,8 @@
     <Property Name="MODDESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="MODURL" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="MODNIVEL" Type="int" />
+    <Property Name="MODCONTROLADOR" Type="varchar" MaxLength="50" />
+    <Property Name="MODORDEN" Type="int" />
   </EntityType>
   <EntityType Name="MODULOS_PERFILES">
     <Key>
@@ -498,7 +500,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
-    <End Role="CONTROL_PRODUCCION" Type="Self.CONTROL_PRODUCCION" Multiplicity="0..1" />
+    <End Role="CONTROL_PRODUCCION" Type="Self.CONTROL_PRODUCCION" Multiplicity="1" />
     <End Role="INGRESO_PRODUCCION" Type="Self.INGRESO_PRODUCCION" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CONTROL_PRODUCCION">
@@ -655,7 +657,7 @@
   </Association>
   <Function Name="spActualizar_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="USRCODIGOI" Type="int" Mode="In" />
-    <Parameter Name="USRPASSWORD" Type="varchar" Mode="In" />
+    <Parameter Name="USRPASSWORD" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="spActualizar_Stock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DTECODIGOI" Type="int" Mode="In" />
@@ -689,6 +691,13 @@
     <Parameter Name="DTPCANTIDAD" Type="int" Mode="In" />
     <Parameter Name="PRECODIGO" Type="int" Mode="In" />
   </Function>
+  <Function Name="spInsert_IngresoProduccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CNPOBSERVACION" Type="varchar" Mode="In" />
+    <Parameter Name="BLCCODIGOI" Type="int" Mode="In" />
+    <Parameter Name="VRDCODIGOI" Type="int" Mode="In" />
+    <Parameter Name="INPNUMMALLAS" Type="int" Mode="In" />
+    <Parameter Name="INPCANTIDADTALLOS" Type="int" Mode="In" />
+  </Function>
   <Function Name="spSelect_conciliaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="spSelect_detalle_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
@@ -709,6 +718,13 @@
   <Function Name="spSelect_listado_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
   </Function>
+  <Function Name="spSelect_Menu_Acceso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="USRCODIGOI" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spSelect_NumeroPreenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spSelect_permisos_controlador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CodigoUsuario" Type="int" Mode="In" />
+  </Function>
   <Function Name="spSelect_preenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
   </Function>
@@ -716,6 +732,9 @@
     <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
   </Function>
   <Function Name="spSelect_preenvios_conciliacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spSelect_SubMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MODCODIGOI" Type="int" Mode="In" />
+  </Function>
   <Function Name="spSelect_tallos_unidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
     <Parameter Name="undCodigoI" Type="int" Mode="In" />

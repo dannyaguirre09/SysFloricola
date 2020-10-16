@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SysFloricola.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,10 +17,20 @@ namespace SysFloricola.Filter
 				string controller = filterContext.RouteData.GetRequiredString("controller");
 				string action = filterContext.RouteData.GetRequiredString("action");
 				string nombreUsuario = (string)HttpContext.Current.Session["Usuario"];
+				
 				if (string.IsNullOrEmpty(nombreUsuario))
 				{
 					filterContext.HttpContext.Response.Redirect("/login");
 				}
+				else
+				{
+					int codigoUsuario = (int)HttpContext.Current.Session["CodigoUsuario"];
+					if (!new MenuDAL().Posee_Permisos(codigoUsuario, controller))
+					{
+						filterContext.HttpContext.Response.Redirect("/");
+					}
+				}
+
 			}
 			catch (Exception)
 			{

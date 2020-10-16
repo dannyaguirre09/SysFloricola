@@ -59,7 +59,7 @@
           <Key>
             <PropertyRef Name="CNPCODIGOI" />
           </Key>
-          <Property Name="CNPCODIGOI" Type="int" Nullable="false" />
+          <Property Name="CNPCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CNPFECHA" Type="datetime" Nullable="false" />
           <Property Name="CNPOBSERVACION" Type="varchar" MaxLength="150" />
         </EntityType>
@@ -144,7 +144,7 @@
           <Property Name="INPCODIGOI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BLCCODIGOI" Type="int" Nullable="false" />
           <Property Name="VRDCODIGOI" Type="int" />
-          <Property Name="CNPCODIGOI" Type="int" />
+          <Property Name="CNPCODIGOI" Type="int" Nullable="false" />
           <Property Name="INPNUMMALLAS" Type="int" Nullable="false" />
           <Property Name="INPFECHA" Type="datetime" />
           <Property Name="INPCANTIDADTALLOS" Type="int" Nullable="false" />
@@ -157,6 +157,8 @@
           <Property Name="MODDESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MODURL" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MODNIVEL" Type="int" />
+          <Property Name="MODCONTROLADOR" Type="varchar" MaxLength="50" />
+          <Property Name="MODORDEN" Type="int" />
         </EntityType>
         <EntityType Name="MODULOS_PERFILES">
           <Key>
@@ -503,7 +505,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
-          <End Role="CONTROL_PRODUCCION" Type="Self.CONTROL_PRODUCCION" Multiplicity="0..1" />
+          <End Role="CONTROL_PRODUCCION" Type="Self.CONTROL_PRODUCCION" Multiplicity="1" />
           <End Role="INGRESO_PRODUCCION" Type="Self.INGRESO_PRODUCCION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CONTROL_PRODUCCION">
@@ -660,7 +662,7 @@
         </Association>
         <Function Name="spActualizar_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="USRCODIGOI" Type="int" Mode="In" />
-          <Parameter Name="USRPASSWORD" Type="varchar" Mode="In" />
+          <Parameter Name="USRPASSWORD" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="spActualizar_Stock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DTECODIGOI" Type="int" Mode="In" />
@@ -694,6 +696,13 @@
           <Parameter Name="DTPCANTIDAD" Type="int" Mode="In" />
           <Parameter Name="PRECODIGO" Type="int" Mode="In" />
         </Function>
+        <Function Name="spInsert_IngresoProduccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CNPOBSERVACION" Type="varchar" Mode="In" />
+          <Parameter Name="BLCCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="VRDCODIGOI" Type="int" Mode="In" />
+          <Parameter Name="INPNUMMALLAS" Type="int" Mode="In" />
+          <Parameter Name="INPCANTIDADTALLOS" Type="int" Mode="In" />
+        </Function>
         <Function Name="spSelect_conciliaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spSelect_detalle_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
@@ -714,6 +723,13 @@
         <Function Name="spSelect_listado_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
         </Function>
+        <Function Name="spSelect_Menu_Acceso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USRCODIGOI" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSelect_NumeroPreenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spSelect_permisos_controlador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CodigoUsuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="spSelect_preenvio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
         </Function>
@@ -721,6 +737,9 @@
           <Parameter Name="PRECODIGOI" Type="int" Mode="In" />
         </Function>
         <Function Name="spSelect_preenvios_conciliacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spSelect_SubMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MODCODIGOI" Type="int" Mode="In" />
+        </Function>
         <Function Name="spSelect_tallos_unidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tpfCodigoI" Type="int" Mode="In" />
           <Parameter Name="undCodigoI" Type="int" Mode="In" />
@@ -1000,6 +1019,8 @@
           <NavigationProperty Name="MODULOS1" Relationship="Self.FK_MODULOS_MODULOS" FromRole="MODULOS" ToRole="MODULOS1" />
           <NavigationProperty Name="MODULOS2" Relationship="Self.FK_MODULOS_MODULOS" FromRole="MODULOS1" ToRole="MODULOS" />
           <NavigationProperty Name="MODULOS_PERFILES" Relationship="Self.FK_MODULOS_PERFILES_MODULOS" FromRole="MODULOS" ToRole="MODULOS_PERFILES" />
+          <Property Name="MODCONTROLADOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MODORDEN" Type="Int32" />
         </EntityType>
         <EntityType Name="MODULOS_PERFILES">
           <Key>
@@ -1092,8 +1113,8 @@
           <Property Name="VRDESTADO" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CONTROLES_FLOR_NACIONAL" Relationship="BDFloricolaModel.FK_CONTROLES_FLOR_NACIONAL_VARIEDADES" FromRole="VARIEDADES" ToRole="CONTROLES_FLOR_NACIONAL" />
           <NavigationProperty Name="BLOQUES_VARIEDADES" Relationship="BDFloricolaModel.FK_BLOQUES_VARIEDADES_VARIEDADES" FromRole="VARIEDADES" ToRole="BLOQUES_VARIEDADES" />
-          <NavigationProperty Name="INGRESO_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1" FromRole="VARIEDADES" ToRole="INGRESO_PRODUCCION" />
           <NavigationProperty Name="DETALLE_FLOR_CLASIFICADA" Relationship="BDFloricolaModel.FK_DETALLE_FLOR_CLASIFICADA_VARIEDADES" FromRole="VARIEDADES" ToRole="DETALLE_FLOR_CLASIFICADA" />
+          <NavigationProperty Name="INGRESO_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1" FromRole="VARIEDADES" ToRole="INGRESO_PRODUCCION" />
           </EntityType>
         <Association Name="FK_BLOQUES_RELATIONS_FINCAS">
           <End Role="FINCAS" Type="Self.FINCAS" Multiplicity="1" />
@@ -1285,15 +1306,6 @@
             <End Role="VARIEDADES" EntitySet="VARIEDADES" />
             <End Role="BLOQUES_VARIEDADES" EntitySet="BLOQUES_VARIEDADES" />
           </AssociationSet>
-          <EntitySet Name="INGRESO_PRODUCCION" EntityType="BDFloricolaModel.INGRESO_PRODUCCION" />
-          <AssociationSet Name="FK_INGRESO_PRODUCCION_BLOQUES" Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_BLOQUES">
-            <End Role="BLOQUES" EntitySet="BLOQUES" />
-            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INGRESO_PRODUCCION_VARIEDADES1" Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1">
-            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
-            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
-          </AssociationSet>
           <FunctionImport Name="spSelect_flor_numerotallos" ReturnType="Collection(BDFloricolaModel.spSelect_flor_numerotallos_Result)">
           <Parameter Name="tpfCodigoI" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1318,17 +1330,12 @@
             <Parameter Name="UNDCODIGOI" Mode="In" Type="Int32" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="CONTROL_PRODUCCION" EntityType="BDFloricolaModel.CONTROL_PRODUCCION" />
           <EntitySet Name="DETALLE_FLOR_CLASIFICADA" EntityType="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA" />
           <EntitySet Name="DETALLES_PREENVIOS" EntityType="BDFloricolaModel.DETALLES_PREENVIOS" />
           <EntitySet Name="PROCESO_CLASIFICACION" EntityType="BDFloricolaModel.PROCESO_CLASIFICACION" />
           <EntitySet Name="TAMANO_TALLOS" EntityType="BDFloricolaModel.TAMANO_TALLOS" />
           <EntitySet Name="UNIDADES" EntityType="BDFloricolaModel.UNIDADES" />
           <EntitySet Name="UNIDADES_TAMANIO_TIPO" EntityType="BDFloricolaModel.UNIDADES_TAMANIO_TIPO" />
-          <AssociationSet Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
-            <End Role="CONTROL_PRODUCCION" EntitySet="CONTROL_PRODUCCION" />
-            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
-          </AssociationSet>
           <AssociationSet Name="FK_CONTROLE_RELATIONS_PROCESO_" Association="BDFloricolaModel.FK_CONTROLE_RELATIONS_PROCESO_">
             <End Role="PROCESO_CLASIFICACION" EntitySet="PROCESO_CLASIFICACION" />
             <End Role="CONTROLES_FLOR_NACIONAL" EntitySet="CONTROLES_FLOR_NACIONAL" />
@@ -1477,6 +1484,37 @@
             <Parameter Name="USRCODIGOI" Mode="In" Type="Int32" />
             <Parameter Name="USRPASSWORD" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="spSelect_Menu_Acceso" ReturnType="Collection(BDFloricolaModel.spSelect_Menu_Acceso_Result)">
+          <Parameter Name="USRCODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_SubMenu" ReturnType="Collection(BDFloricolaModel.spSelect_SubMenu_Result)">
+          <Parameter Name="MODCODIGOI" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSelect_permisos_controlador" ReturnType="Collection(String)">
+          <Parameter Name="CodigoUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsert_IngresoProduccion">
+            <Parameter Name="CNPOBSERVACION" Mode="In" Type="String" />
+            <Parameter Name="BLCCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="VRDCODIGOI" Mode="In" Type="Int32" />
+            <Parameter Name="INPNUMMALLAS" Mode="In" Type="Int32" />
+            <Parameter Name="INPCANTIDADTALLOS" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CONTROL_PRODUCCION" EntityType="BDFloricolaModel.CONTROL_PRODUCCION" />
+          <EntitySet Name="INGRESO_PRODUCCION" EntityType="BDFloricolaModel.INGRESO_PRODUCCION" />
+          <AssociationSet Name="FK_INGRESO_PRODUCCION_BLOQUES" Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_BLOQUES">
+            <End Role="BLOQUES" EntitySet="BLOQUES" />
+            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
+            <End Role="CONTROL_PRODUCCION" EntitySet="CONTROL_PRODUCCION" />
+            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INGRESO_PRODUCCION_VARIEDADES1" Association="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1">
+            <End Role="VARIEDADES" EntitySet="VARIEDADES" />
+            <End Role="INGRESO_PRODUCCION" EntitySet="INGRESO_PRODUCCION" />
+          </AssociationSet>
+          <FunctionImport Name="spSelect_NumeroPreenvio" ReturnType="Collection(Decimal)" />
           </EntityContainer>
         <EntityType Name="EMPRESAS">
           <Key>
@@ -1670,45 +1708,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="INGRESO_PRODUCCION">
-          <Key>
-            <PropertyRef Name="INPCODIGOI" />
-          </Key>
-          <Property Name="INPCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BLCCODIGOI" Type="Int32" Nullable="false" />
-          <Property Name="VRDCODIGOI" Type="Int32" />
-          <Property Name="CNPCODIGOI" Type="Int32" />
-          <Property Name="INPNUMMALLAS" Type="Int32" Nullable="false" />
-          <Property Name="INPFECHA" Type="DateTime" Precision="3" />
-          <Property Name="INPCANTIDADTALLOS" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BLOQUES" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_BLOQUES" FromRole="INGRESO_PRODUCCION" ToRole="BLOQUES" />
-          <NavigationProperty Name="VARIEDADES" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1" FromRole="INGRESO_PRODUCCION" ToRole="VARIEDADES" />
-          <NavigationProperty Name="CONTROL_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" FromRole="INGRESO_PRODUCCION" ToRole="CONTROL_PRODUCCION" />
-        </EntityType>
-        <Association Name="FK_INGRESO_PRODUCCION_BLOQUES">
-          <End Type="BDFloricolaModel.BLOQUES" Role="BLOQUES" Multiplicity="1" />
-          <End Type="BDFloricolaModel.INGRESO_PRODUCCION" Role="INGRESO_PRODUCCION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BLOQUES">
-              <PropertyRef Name="BLQCODIGOI" />
-            </Principal>
-            <Dependent Role="INGRESO_PRODUCCION">
-              <PropertyRef Name="BLCCODIGOI" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INGRESO_PRODUCCION_VARIEDADES1">
-          <End Type="BDFloricolaModel.VARIEDADES" Role="VARIEDADES" Multiplicity="0..1" />
-          <End Type="BDFloricolaModel.INGRESO_PRODUCCION" Role="INGRESO_PRODUCCION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VARIEDADES">
-              <PropertyRef Name="VRDCODIGOI" />
-            </Principal>
-            <Dependent Role="INGRESO_PRODUCCION">
-              <PropertyRef Name="VRDCODIGOI" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="spSelect_flor_numerotallos_Result">
           <Property Type="String" Name="TPFDESCRIPCION" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="UNDDESCRIPCION" Nullable="false" MaxLength="20" />
@@ -1736,15 +1735,6 @@
           <Property Type="DateTime" Name="DTEFECHAINGRESO" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="DTECANTIDAD" Nullable="false" />
         </ComplexType>
-        <EntityType Name="CONTROL_PRODUCCION">
-          <Key>
-            <PropertyRef Name="CNPCODIGOI" />
-          </Key>
-          <Property Name="CNPCODIGOI" Type="Int32" Nullable="false" />
-          <Property Name="CNPFECHA" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CNPOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="INGRESO_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" FromRole="CONTROL_PRODUCCION" ToRole="INGRESO_PRODUCCION" />
-        </EntityType>
         <EntityType Name="DETALLE_FLOR_CLASIFICADA">
           <Key>
             <PropertyRef Name="DTECODIGOI" />
@@ -1818,18 +1808,6 @@
           <NavigationProperty Name="TIPOS_FLORES" Relationship="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_TIPOS_FLORES" FromRole="UNIDADES_TAMANIO_TIPO" ToRole="TIPOS_FLORES" />
           <NavigationProperty Name="UNIDADES" Relationship="BDFloricolaModel.FK_UNIDADES_TAMANIO_TIPO_UNIDADES" FromRole="UNIDADES_TAMANIO_TIPO" ToRole="UNIDADES" />
         </EntityType>
-        <Association Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
-          <End Type="BDFloricolaModel.CONTROL_PRODUCCION" Role="CONTROL_PRODUCCION" Multiplicity="0..1" />
-          <End Type="BDFloricolaModel.INGRESO_PRODUCCION" Role="INGRESO_PRODUCCION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CONTROL_PRODUCCION">
-              <PropertyRef Name="CNPCODIGOI" />
-            </Principal>
-            <Dependent Role="INGRESO_PRODUCCION">
-              <PropertyRef Name="CNPCODIGOI" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CONTROLE_RELATIONS_PROCESO_">
           <End Type="BDFloricolaModel.PROCESO_CLASIFICACION" Role="PROCESO_CLASIFICACION" Multiplicity="1" />
           <End Type="BDFloricolaModel.CONTROLES_FLOR_NACIONAL" Role="CONTROLES_FLOR_NACIONAL" Multiplicity="*" />
@@ -2100,6 +2078,78 @@
           <Property Type="Boolean" Name="USRESTADOCAMBIO" Nullable="true" />
           <Property Type="Int32" Name="USRCODIGOI" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="spSelect_Menu_Acceso_Result">
+          <Property Type="Int32" Name="MODCODIGOI" Nullable="false" />
+          <Property Type="String" Name="MODDESCRIPCION" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MODURL" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="MODNIVEL" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spSelect_SubMenu_Result">
+          <Property Type="Int32" Name="MODCODIGOI" Nullable="false" />
+          <Property Type="String" Name="MODDESCRIPCION" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MODURL" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="MODNIVEL" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CONTROL_PRODUCCION">
+          <Key>
+            <PropertyRef Name="CNPCODIGOI" />
+          </Key>
+          <Property Name="CNPCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CNPFECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CNPOBSERVACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="INGRESO_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" FromRole="CONTROL_PRODUCCION" ToRole="INGRESO_PRODUCCION" />
+        </EntityType>
+        <EntityType Name="INGRESO_PRODUCCION">
+          <Key>
+            <PropertyRef Name="INPCODIGOI" />
+          </Key>
+          <Property Name="INPCODIGOI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BLCCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="VRDCODIGOI" Type="Int32" />
+          <Property Name="CNPCODIGOI" Type="Int32" Nullable="false" />
+          <Property Name="INPNUMMALLAS" Type="Int32" Nullable="false" />
+          <Property Name="INPFECHA" Type="DateTime" Precision="3" />
+          <Property Name="INPCANTIDADTALLOS" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BLOQUES" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_BLOQUES" FromRole="INGRESO_PRODUCCION" ToRole="BLOQUES" />
+          <NavigationProperty Name="CONTROL_PRODUCCION" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION" FromRole="INGRESO_PRODUCCION" ToRole="CONTROL_PRODUCCION" />
+          <NavigationProperty Name="VARIEDADES" Relationship="BDFloricolaModel.FK_INGRESO_PRODUCCION_VARIEDADES1" FromRole="INGRESO_PRODUCCION" ToRole="VARIEDADES" />
+        </EntityType>
+        <Association Name="FK_INGRESO_PRODUCCION_BLOQUES">
+          <End Type="BDFloricolaModel.BLOQUES" Role="BLOQUES" Multiplicity="1" />
+          <End Type="BDFloricolaModel.INGRESO_PRODUCCION" Role="INGRESO_PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BLOQUES">
+              <PropertyRef Name="BLQCODIGOI" />
+            </Principal>
+            <Dependent Role="INGRESO_PRODUCCION">
+              <PropertyRef Name="BLCCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INGRESO_PRODUCCION_CONTROL_PRODUCCION">
+          <End Type="BDFloricolaModel.CONTROL_PRODUCCION" Role="CONTROL_PRODUCCION" Multiplicity="1" />
+          <End Type="BDFloricolaModel.INGRESO_PRODUCCION" Role="INGRESO_PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTROL_PRODUCCION">
+              <PropertyRef Name="CNPCODIGOI" />
+            </Principal>
+            <Dependent Role="INGRESO_PRODUCCION">
+              <PropertyRef Name="CNPCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INGRESO_PRODUCCION_VARIEDADES1">
+          <End Type="BDFloricolaModel.VARIEDADES" Role="VARIEDADES" Multiplicity="0..1" />
+          <End Type="BDFloricolaModel.INGRESO_PRODUCCION" Role="INGRESO_PRODUCCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VARIEDADES">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Principal>
+            <Dependent Role="INGRESO_PRODUCCION">
+              <PropertyRef Name="VRDCODIGOI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2151,6 +2201,8 @@
           <EntitySetMapping Name="MODULOS">
             <EntityTypeMapping TypeName="BDFloricolaModel.MODULOS">
               <MappingFragment StoreEntitySet="MODULOS">
+                <ScalarProperty Name="MODORDEN" ColumnName="MODORDEN" />
+                <ScalarProperty Name="MODCONTROLADOR" ColumnName="MODCONTROLADOR" />
                 <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
                 <ScalarProperty Name="MODDESCRIPCION" ColumnName="MODDESCRIPCION" />
                 <ScalarProperty Name="MODURL" ColumnName="MODURL" />
@@ -2308,19 +2360,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="INGRESO_PRODUCCION">
-            <EntityTypeMapping TypeName="BDFloricolaModel.INGRESO_PRODUCCION">
-              <MappingFragment StoreEntitySet="INGRESO_PRODUCCION">
-                <ScalarProperty Name="INPCANTIDADTALLOS" ColumnName="INPCANTIDADTALLOS" />
-                <ScalarProperty Name="INPFECHA" ColumnName="INPFECHA" />
-                <ScalarProperty Name="INPNUMMALLAS" ColumnName="INPNUMMALLAS" />
-                <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
-                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
-                <ScalarProperty Name="BLCCODIGOI" ColumnName="BLCCODIGOI" />
-                <ScalarProperty Name="INPCODIGOI" ColumnName="INPCODIGOI" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spSelect_flor_numerotallos" FunctionName="BDFloricolaModel.Store.spSelect_flor_numerotallos">
             <ResultMapping>
               <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_flor_numerotallos_Result">
@@ -2365,15 +2404,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CONTROL_PRODUCCION">
-            <EntityTypeMapping TypeName="BDFloricolaModel.CONTROL_PRODUCCION">
-              <MappingFragment StoreEntitySet="CONTROL_PRODUCCION">
-                <ScalarProperty Name="CNPOBSERVACION" ColumnName="CNPOBSERVACION" />
-                <ScalarProperty Name="CNPFECHA" ColumnName="CNPFECHA" />
-                <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_FLOR_CLASIFICADA">
             <EntityTypeMapping TypeName="BDFloricolaModel.DETALLE_FLOR_CLASIFICADA">
               <MappingFragment StoreEntitySet="DETALLE_FLOR_CLASIFICADA">
@@ -2617,6 +2647,51 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spActualizar_Password" FunctionName="BDFloricolaModel.Store.spActualizar_Password" />
+          <FunctionImportMapping FunctionImportName="spSelect_Menu_Acceso" FunctionName="BDFloricolaModel.Store.spSelect_Menu_Acceso">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_Menu_Acceso_Result">
+                <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
+                <ScalarProperty Name="MODDESCRIPCION" ColumnName="MODDESCRIPCION" />
+                <ScalarProperty Name="MODURL" ColumnName="MODURL" />
+                <ScalarProperty Name="MODNIVEL" ColumnName="MODNIVEL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_SubMenu" FunctionName="BDFloricolaModel.Store.spSelect_SubMenu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDFloricolaModel.spSelect_SubMenu_Result">
+                <ScalarProperty Name="MODCODIGOI" ColumnName="MODCODIGOI" />
+                <ScalarProperty Name="MODDESCRIPCION" ColumnName="MODDESCRIPCION" />
+                <ScalarProperty Name="MODURL" ColumnName="MODURL" />
+                <ScalarProperty Name="MODNIVEL" ColumnName="MODNIVEL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_permisos_controlador" FunctionName="BDFloricolaModel.Store.spSelect_permisos_controlador" />
+          <FunctionImportMapping FunctionImportName="spInsert_IngresoProduccion" FunctionName="BDFloricolaModel.Store.spInsert_IngresoProduccion" />
+          <EntitySetMapping Name="CONTROL_PRODUCCION">
+            <EntityTypeMapping TypeName="BDFloricolaModel.CONTROL_PRODUCCION">
+              <MappingFragment StoreEntitySet="CONTROL_PRODUCCION">
+                <ScalarProperty Name="CNPOBSERVACION" ColumnName="CNPOBSERVACION" />
+                <ScalarProperty Name="CNPFECHA" ColumnName="CNPFECHA" />
+                <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INGRESO_PRODUCCION">
+            <EntityTypeMapping TypeName="BDFloricolaModel.INGRESO_PRODUCCION">
+              <MappingFragment StoreEntitySet="INGRESO_PRODUCCION">
+                <ScalarProperty Name="INPCANTIDADTALLOS" ColumnName="INPCANTIDADTALLOS" />
+                <ScalarProperty Name="INPFECHA" ColumnName="INPFECHA" />
+                <ScalarProperty Name="INPNUMMALLAS" ColumnName="INPNUMMALLAS" />
+                <ScalarProperty Name="CNPCODIGOI" ColumnName="CNPCODIGOI" />
+                <ScalarProperty Name="VRDCODIGOI" ColumnName="VRDCODIGOI" />
+                <ScalarProperty Name="BLCCODIGOI" ColumnName="BLCCODIGOI" />
+                <ScalarProperty Name="INPCODIGOI" ColumnName="INPCODIGOI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spSelect_NumeroPreenvio" FunctionName="BDFloricolaModel.Store.spSelect_NumeroPreenvio" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

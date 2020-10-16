@@ -17,10 +17,13 @@ namespace SysFloricola.Controllers
 		
 		public ActionResult Index()
         {
-            return View();
+			List<spSelect_Menu_Acceso_Result> lista = new List<spSelect_Menu_Acceso_Result>();
+			return View();
         }
 
-        public ActionResult About()
+
+
+		public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 

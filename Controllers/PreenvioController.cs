@@ -29,8 +29,16 @@ namespace SysFloricola.Controllers
 
 		public ActionResult Preenvio()
 		{
-			ViewBag.Fecha = DateTime.Now.ToShortDateString();
-			return View();
+			try
+			{
+				ViewBag.Fecha = DateTime.Now.ToShortDateString();
+				ViewBag.NumeroPreenvio = objDAL.Obtener_Numero_Preenvio();
+				return View();
+			}
+			catch (Exception)
+			{
+				return RedirectToAction("Error", "Home");
+			}
 		}
 
 		[HttpPost]

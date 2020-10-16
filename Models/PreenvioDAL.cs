@@ -14,7 +14,7 @@ namespace SysFloricola.Models
 			List<PREENVIOS> lista = new List<PREENVIOS>();
 			using (BDFloricolaContext db = new BDFloricolaContext())
 			{
-				lista = db.PREENVIOS.OrderByDescending(x => x.PREFECHA).ToList();
+				lista = db.PREENVIOS.Include(x => x.CLIENTES).OrderByDescending(x => x.PREFECHA).ToList();
 			}
 			return lista;
 		}
@@ -148,6 +148,18 @@ namespace SysFloricola.Models
 			using (BDFloricolaContext db = new BDFloricolaContext())
 				lista = db.spSelect_listado_items(preCodigoI).ToList();
 			return lista;
+		}
+
+		public int Obtener_Numero_Preenvio()
+		{
+			int respuesta = 0;
+			using (BDFloricolaContext db = new BDFloricolaContext())
+			{
+				var numeros  = db.spSelect_NumeroPreenvio().ToList();
+				foreach (var item in numeros)
+					respuesta = Convert.ToInt32(item);
+			}
+			return respuesta;
 		}
 
 	}

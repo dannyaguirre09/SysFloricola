@@ -37,17 +37,17 @@ namespace SysFloricola.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult CrearIngresoProduccion(INGRESO_PRODUCCION objBloques)
+		public ActionResult CrearIngresoProduccion(INGRESO_PRODUCCION objBloques, string observacion ="")
 		{
 			try
 			{
 				bool respuesta;
 				string mensaje = "Registro creado correctamente";
 				if (objBloques.INPCODIGOI == 0)
-					respuesta = objBloquesDAL.Crear_Ingresos_Produccion(objBloques, true);
+					respuesta = objBloquesDAL.Crear_Ingresos_Produccion(objBloques, true, observacion);
 				else
 				{
-					respuesta = objBloquesDAL.Crear_Ingresos_Produccion(objBloques, false);
+					respuesta = objBloquesDAL.Crear_Ingresos_Produccion(objBloques, false, observacion);
 					mensaje = "Registro editado correctamente";
 				}
 				if (respuesta)

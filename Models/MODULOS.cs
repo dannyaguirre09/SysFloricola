@@ -25,6 +25,8 @@ namespace SysFloricola.Models
         public string MODDESCRIPCION { get; set; }
         public string MODURL { get; set; }
         public Nullable<int> MODNIVEL { get; set; }
+        public string MODCONTROLADOR { get; set; }
+        public Nullable<int> MODORDEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MODULOS> MODULOS1 { get; set; }
